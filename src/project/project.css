@@ -1,0 +1,27 @@
+.project
+{
+    border: 1px solid black;
+    /* box-sizing: border-box; */
+    height: 300rpm;
+    margin: 10px;
+    /* padding :20px; */
+    /* max-width:300rem; */
+}.h4{
+    padding:20px;
+    padding-right: 20rem;
+}
+
+.input{
+    padding: 20px;
+    padding-right: 20rem;
+    margin:40rem;
+}
+.card-n{
+    margin-inline: 200rem;
+    size:500rpm;
+
+}
+.col{
+    margin-left: 10rem;
+    object-fit: fill;
+}
