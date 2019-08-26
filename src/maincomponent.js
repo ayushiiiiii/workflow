@@ -6,17 +6,38 @@ import HttpService from './services/http-service';
 import Dashboard from './dashboard/dashboard';
 import Insidedashboard from './insidedashboard';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { PROJECTS } from './shared/projects';
 
 
 
 class Main extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            Loggedin: false,
+            projects: null
+        }
+        this.auth=this.auth.bind(this);
+    }
+    auth({uname, password}){
+        if(uname ==="Ayushi"&& password ==="12345" ){
+            // localStorage.setItem("token","qwertyuiop")
+            this.setState({
+                Loggedin: true
+            })
+        }
+    }
+    componentDidMount(){
+        this.setState({projects: PROJECTS});
+    }
     render(){
+        
         return(
         <div>
           <Switch>
-              <Route path='/dashboard' component={() => <Insidedashboard />} />
-              <Route path='/home' component={() => <Dashboard />} />
-              <Route path='/login' component={() => <Login />} />
+              <Route exact path='/dashboard' component={() => <Insidedashboard Loggedin={this.state.Loggedin} />} />
+              <Route exact path='/home' component={() => <Dashboard Loggedin={this.state.Loggedin} projects={this.state.projects} />} />
+              <Route exact path='/login' component={() => <Login Loggedin={this.state.Loggedin} auth={this.auth} />} />
               <Redirect to='/login' />
           </Switch>
         </div>

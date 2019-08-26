@@ -5,7 +5,7 @@ import Progress from './progress'
 class Project extends Component{
     render(){
         return(
-        <div className="col-12 col-sm-6 col-md-4">
+        <div className="col-12 col-sm-6 col-md-3">
             <div className="card project">
                 <div className="card-header">
                     <h4 className="card-title">{this.props.title}</h4>
@@ -29,8 +29,9 @@ class Project extends Component{
                                 <td>Days</td>
                             </tr>
                         </table>
-                        <Progress/>
+                        <Progress percentage="80"/>
                         <br/>
+                        <button type="submit">Details</button>
                         </div>
                  </div>
             </div>

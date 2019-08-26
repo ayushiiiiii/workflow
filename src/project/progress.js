@@ -16,7 +16,7 @@ class Progress extends Component{
                 <span className="progress-right">
                     <span className="progress-bar"></span>
                 </span>
-                <div className="progress-value">90%</div>
+                <div className="progress-value">{this.props.percentage}</div>
             </div>
         </div>
     </div>

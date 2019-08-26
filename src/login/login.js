@@ -1,46 +1,59 @@
 import React, {Component} from 'react';
 import './login.css';
-import login from '../login_icon.png';
-import { withRouter } from 'react-router-dom';
+import login from '../new_login.png';
+import { withRouter , Redirect} from 'react-router-dom';
+
 
 class Login extends Component{
     constructor(props){
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.onChange =this.onChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);       
     }
+onChange(e){
+    this.setState({
+        [e.target.name]: e.target.value
+})
+}
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log("Works");
-        this.props.history.push('/home')
+        const uname=this.refs.uname.value;
+        const password=this.refs.password.value;
+        this.props.auth({uname, password});
     }
     render(){
-        return(
+        if (this.props.Loggedin){
+            return <Redirect to ="/home"></Redirect>
+        }
+        else{
+        return(<div className="back">
+            <div className="container login-card ">
         <form onSubmit={this.handleSubmit} method="post">  
-        <div className="container">
-            <br/>
-            <br/>
+        <div className="container ">
+
         <div className="imgcontainer">
         <img src={login} alt="login_image"></img>
         </div>
         <br/>
-        <br/>
         <div className="container">
         
-        <label for="uname"><b>Username </b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required></input>
+        <label for="uname"><b>Username </b></label><br/>
+        {/* <input type="text" placeholder="Enter Username" name="uname" value={this.state.uname} onChange={this.onChange} required></input> */}
+        <input type="text" ref="uname" placeholder="Enter Username" name="uname" required></input>
         <br/>
-        <label for="psw"><b>Password </b></label>
-       <input type="password" placeholder="Enter Password" name="psw" required></input>
+        <label for="password"><b>Password </b></label><br/>
+       {/* <input type="password" placeholder="Enter Password" name="password"  value={this.state.password} onChange={this.onChange} required></input> */}
+       <input type="password" ref="password" placeholder="Enter Password" name="password" required></input>
         <br/>
         <button type="submit">Login</button>
      
       </div>
     </div>
    </form>
-   
+   </div>
+</div>
 
-        );
+        )};
     }
 }
 

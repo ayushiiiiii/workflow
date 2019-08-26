@@ -27,10 +27,10 @@ http.getProducts().then(products =>{
 render(){
   const Projects = [];
   for(let i=0;i<9;i++){
-    Projects.push(<Project  title="Mechanical Design &Review" />);
+    Projects.push(<Project  title="Mechanical Design & Review" />);
   }
     return (
-    <div className="container">
+    <div >
       <Navbar/>
 
     <div className=" App-main">
