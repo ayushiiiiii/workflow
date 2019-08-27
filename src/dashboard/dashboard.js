@@ -30,7 +30,7 @@ render(){
       {cardss}
 
       </div>
-     </div>
+      </div>     
      </div>
   
   );
