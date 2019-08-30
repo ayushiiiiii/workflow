@@ -6,7 +6,6 @@ import App from './popup';
 import Addpop from'./add';
 import Navbar from '../project/navbar';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 class Folders extends Component{
  
   render()

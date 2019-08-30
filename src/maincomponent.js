@@ -28,11 +28,13 @@ class Main extends Component{
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
-            crossDomain: true,
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({username: uname, password: password})
         })
-        // .then((result) => result.json())
+        .then((result) => result.json())
         .then((result) => {
             console.log(result);
             if(result.success){
