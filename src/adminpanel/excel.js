@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
-import './popup.css';
-import Add from '../add.png';
+import React, {Component } from 'react';
+import './excel.css';
 
-class Popup extends React.Component {
-    render() {
-      return (
-        <div className='popup'>
-          <div className='popup_inner'>
-            <h1>{this.props.text}</h1>
-            <form className="ex">
+
+class TaskForm extends Component{
+    render()
+    {
+        return(
+            <div className="container" > <nav className="navbar navbar-expand-sm bg-light justify-content-center">
+
+            <center> <h1>Title{this.props.title}</h1> </center>
+            </nav>
+    
+                <form className="ex">
                 <table className="tabledata">
                              <br/>
                             <tr><td>Major Tasks </td><td><input type="text"></input></td><td>    </td>
@@ -26,45 +29,11 @@ class Popup extends React.Component {
                     <br/>
                     <button type="submit">Add</button>
                 </form>
+            </div>
 
 
-          <button onClick={this.props.closePopup}>close me</button>
-          </div>
-        </div>
-      );
+        );
+       
     }
-  }
-  class Addtask extends React.Component {
-    constructor() {
-      super();
-      this.state = {
-        showPopup: false
-      };
-    }
-    togglePopup() {
-      this.setState({
-        showPopup: !this.state.showPopup
-      });
-    }
-    render() {
-      return (
-        <div className='app'>
-          <button onClick={this.togglePopup.bind(this)}> Issues</button>
-
-          {this.state.showPopup ? 
-            <Popup
-              text="Issues"
-              closePopup={this.togglePopup.bind(this)}
-            />
-            : null
-          }
-
-        </div>
-      );
-    }
-  };
-  
-  
-  
-  
-  export default Addtask;
+}
+export default TaskForm;

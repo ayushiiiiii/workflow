@@ -21,9 +21,19 @@ render(){
     return (
     <div >
       <nav className="navbar navbar-expand-sm bg-light justify-content-center">
-
-        <center> <h1>Project list </h1> </center>
+          <center> <h1>Project list </h1> </center>
+          
+          < Link to='/app'> <button type="submit" className="btnnav" > Application data</button></ Link>
+          
+          
+            <button type="submit" className="btnnav"> Solution</button>
+        
+          
+            <button type="submit" className="btnnav"> Project Management</button>
+         
       </nav>
+    
+
 
     <div className=" App-main">
       <div className="row">
@@ -32,7 +42,6 @@ render(){
       </div>
       </div>     
      </div>
-  
   );
 }
 }

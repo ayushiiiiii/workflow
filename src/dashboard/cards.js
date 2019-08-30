@@ -15,14 +15,18 @@ class Cards extends Component{
                     <div className="card-text">
                         <table>
                             <tr>
-                                <td>Machine</td><td><input type="text"  value={this.props.project.machine} /></td></tr>
-                               <tr><td>Mdsno</td><td><input type="text" value={this.props.project.mdsno} /></td>
+                             <td><b>MACHINE</b></td><td><span>{this.props.project.machine} </span></td></tr>
+                             <tr><td><b>MDSNO</b></td><td><span>{this.props.project.mdsno}</span></td>
                             </tr><tr>
-                                <td>delivery</td><td><input type="text" size="4" value={this.props.project.delivery} /></td></tr>
-                                <tr><td>short_name</td><td><input type="text" size="4" value={this.props.project.short_name} /></td>
+                                <td><b>DELIVERY</b></td><td><span>{this.props.project.delivery}</span></td></tr>
+                                <tr><td><b>SHORT NAME</b></td><td><span>{this.props.project.short_name} </span></td>
+                            </tr>
+                            <tr><td><b>START DATE</b></td><td><span>{this.props.project.start_date} </span></td>
+                            </tr>
+                            <tr><td><b>FAT DATE</b></td><td><span>{this.props.project.fat_date } </span></td>
                             </tr>
                         </table>
-                         <Progress percentage="70"/>
+                         <Progress percentage={this.props.project.percentage}/>
                     <Link to="/dashboard"><button type="Submit">More details</button></Link> 
                     </div>
                 </div>

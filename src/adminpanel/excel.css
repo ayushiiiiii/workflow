@@ -1,0 +1,19 @@
+table>th{
+    position: fixed;
+  top: 0;
+  width: 100%;
+}
+table>td{
+    border: 1px solid black;
+}
+.ex{
+    background: white;
+}
+.ex>td{
+    align-content:left;
+}
+.tabledata{
+    align-content: center;
+        border-collapse: separate;
+        border-spacing: 50px 0;
+      }

@@ -28,7 +28,7 @@ onChange(e){
         else{
         return(<div className="back">
             <div className="container login-card ">
-        <form onSubmit={this.handleSubmit} method="post">  
+        <form className="log" onSubmit={this.handleSubmit} method="post">  
         <div className="container ">
 
         <div className="imgcontainer">
@@ -37,11 +37,11 @@ onChange(e){
         <br/>
         <div className="container">
         
-        <label for="uname"><b>Username </b></label><br/>
+        <label value="uname"><b>Username </b></label><br/>
         {/* <input type="text" placeholder="Enter Username" name="uname" value={this.state.uname} onChange={this.onChange} required></input> */}
         <input type="text" ref="uname" placeholder="Enter Username" name="uname" required></input>
         <br/>
-        <label for="password"><b>Password </b></label><br/>
+        <label value="password"><b>Password </b></label><br/>
        {/* <input type="password" placeholder="Enter Password" name="password"  value={this.state.password} onChange={this.onChange} required></input> */}
        <input type="password" ref="password" placeholder="Enter Password" name="password" required></input>
         <br/>

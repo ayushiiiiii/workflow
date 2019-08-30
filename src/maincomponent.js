@@ -10,7 +10,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { PROJECTS } from './shared/projects';
 import { Issues } from './shared/projects';
 import Addpop from'./dashboard/add';
-
+import Formm from './adminpanel/excel';
+import Projectform from './adminpanel/projecttask';
+import { baseUrl } from './baseurl';
 
 
 class Main extends Component{
@@ -20,20 +22,41 @@ class Main extends Component{
             Loggedin: false,
             projects: null,
             issues:null,
+            token: null
         }
         this.auth=this.auth.bind(this);
     }
     auth({uname, password}){
-        if(uname ==="Ayushi"&& password ==="12345" ){
-            // localStorage.setItem("token","qwertyuiop")
-            this.setState({
-                Loggedin: true
-            })
-        }
+        fetch(baseUrl+'users/login',{
+            crossDomain: true,
+            method: 'POST',
+            body: JSON.stringify({username: uname, password: password})
+        })
+        // .then((result) => result.json())
+        .then((result) => {
+            console.log(result);
+            if(result.success){
+                this.setState({
+                    Loggedin: true,
+                    token: result.token
+                });
+                localStorage.setItem('token', result.token);
+            }
+        });
     }
     componentDidMount(){
         this.setState({projects: PROJECTS});
-        this.setState({issues: Issues});
+        let token = localStorage.getItem('token');
+        if(token!=null){
+            fetch(baseUrl+'users',{
+                headers: {
+                    'Authorization': 'Bearer '+token
+                }
+            })
+            .then((result) => {
+                this.setState({Loggedin: true});
+            });
+        }
     }
     render(){
         
@@ -44,6 +67,8 @@ class Main extends Component{
               <Route exact path='/home' component={() => <Dashboard Loggedin={this.state.Loggedin} projects={this.state.projects} />} />
               <Route exact path='/app' component={() => <Appdata issues={this.state.issues} />} />
               <Route exact path='/filespop' component={() => <Addpop  />} />
+              <Route exact path='/sheet' component={() => <Formm />} />
+              <Route exact path='/project' component={() => <Projectform />} />
               <Route exact path='/login' component={() => <Login Loggedin={this.state.Loggedin} auth={this.auth} />} />
               <Redirect to='/login' />
           </Switch>

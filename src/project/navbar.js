@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import './navbar.css';
-
+import {Link} from 'react-router-dom';
 class Navbar extends Component{
     render(){
         return( 
 <div>
         <ul className="nav" ><table>
           
-          <tr><td>Start Date</td><td><input type="text" size="6" /></td>
-          <td>End Date</td><td><input type="text" size="6" /></td>
-          <td>Project Name</td><td><input type="text" size="6" /></td>
-          <td>Current Name</td><td><input type="text" size="6" /></td>
+          <tr><td>Start Date</td><td><span></span> </td>
+          <td>End Date</td><td><span></span></td>
+          <td>Project Name</td><td><span></span></td>
+          <td>Current Name</td><td><span></span></td>
           <td>Location</td>
-          <td></td>
+          
           </tr>
         </table>
         
