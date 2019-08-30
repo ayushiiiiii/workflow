@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './dashboard.css';
 import HttpService from '../services/http-service';
 import Cards  from './cards';
-import styled from 'styled-components';
 import Login from '../login/login';
 import {Link ,Redirect} from 'react-router-dom';
 
