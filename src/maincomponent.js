@@ -6,11 +6,10 @@ import HttpService from './services/http-service';
 import Dashboard from './dashboard/dashboard';
 import Appdata from './dashboard/appdata';
 import Insidedashboard from './insidedashboard';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
 import { PROJECTS } from './shared/projects';
 import { Issues } from './shared/projects';
 import Addpop from'./dashboard/add';
-import Formm from './adminpanel/excel';
 import Projectform from './adminpanel/projecttask';
 import { baseUrl } from './baseurl';
 
@@ -87,7 +86,6 @@ class Main extends Component{
               <Route exact path='/home' component={() => <Dashboard Loggedin={this.state.Loggedin} projects={this.state.projects} />} />
               <Route exact path='/app' component={() => <Appdata issues={this.state.issues} />} />
               <Route exact path='/filespop' component={() => <Addpop  />} />
-              <Route exact path='/addProject/addTask' component={() => <Formm />} />
               <Route exact path='/addProject' component={() => <Projectform />} />
               <Route exact path='/login' component={() => <Login Loggedin={this.state.Loggedin} auth={this.auth} />} />
               <Redirect to='/login' />
