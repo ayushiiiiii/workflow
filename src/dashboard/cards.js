@@ -13,7 +13,8 @@ class Cards extends Component{
                 </div>
                 <div className="card-body">
                     <div className="card-text">
-                        <table>
+                        <table className="tabledata">
+                            <tbody>
                             <tr>
                              <td><b>MACHINE</b></td><td><span>{this.props.project.machine} </span></td></tr>
                              <tr><td><b>MDSNO</b></td><td><span>{this.props.project.mdsno}</span></td>
@@ -25,9 +26,10 @@ class Cards extends Component{
                             </tr>
                             <tr><td><b>FAT DATE</b></td><td><span>{this.props.project.fat_date } </span></td>
                             </tr>
+                            </tbody>
                         </table>
-                         <Progress percentage={this.props.project.percentage}/>
-                    <Link to="/dashboard"><button type="Submit">More details</button></Link> 
+                         <Progress percentage={this.props.completion}/>
+                    <Link to={"/home/"+this.props.project._id}><button type="Submit">More details</button></Link> 
                     </div>
                 </div>
             </div>

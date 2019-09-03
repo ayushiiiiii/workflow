@@ -6,6 +6,7 @@ import HttpService from './services/http-service';
 import Navbar from './project/navbar';
 import Progress from './project/progress';
 import Login from './login/login';
+import { baseUrl } from './baseurl';
 
 
 const http= new HttpService();
@@ -23,26 +24,31 @@ http.getProducts().then(products =>{
 
 })
 }
-
+componentDidMount(){
+  
+}
 render(){
   const Projects = [];
-  for(let i=0;i<9;i++){
-    Projects.push(<Project  title="Mechanical Design & Review" />);
-  }
+  if(this.props.project){
+    for(let i=0;i<this.props.project.tasks.length;i++){
+      Projects.push(<Project  task={this.props.project.tasks[i]} />);
+    }
     return (
-    <div >
-      <Navbar/>
-
-    <div className=" App-main">
-      <div className="row">
-      {Projects}
-      
-    </div>  
-      </div>
-     </div>
-     
+      <div >
+        <Navbar start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
   
-  );
+      <div className=" App-main">
+        <div className="row">
+        {Projects}
+        
+      </div>  
+        </div>
+       </div>
+       
+    
+    );
+  }
+  return(<div></div>);
 }
 }
 

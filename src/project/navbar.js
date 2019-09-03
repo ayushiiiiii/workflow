@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './navbar.css';
 import {Link} from 'react-router-dom';
-class Navbar extends Component{
-    render(){
-        return( 
+function Navbar(props){
+    return( 
 <div>
-        <ul className="nav" ><table>
-          
-          <tr><td>Start Date</td><td><span></span> </td>
-          <td>End Date</td><td><span></span></td>
-          <td>Project Name</td><td><span></span></td>
-          <td>Current Name</td><td><span></span></td>
-          <td>Location</td>
-          
-          </tr>
-        </table>
-        
-        </ul>
-      </div>
-        );
-    }
+    <ul className="nav" ><table className="tabledata"><tbody>
+    <tr><td><b>Project Name</b></td><td><span>{props.project_name}</span></td>
+      <td><b>Start Date</b></td><td><span>{props.start_date}</span> </td>
+      <td><b>End Date</b></td><td><span>{props.end_date}</span></td>
+      
+      <td><b>Location</b></td><td><span>{props.location}</span></td>
+      
+      </tr>
+      </tbody>
+    </table>
+    
+    </ul>
+  </div>
+    );
 }
 
 export default Navbar;

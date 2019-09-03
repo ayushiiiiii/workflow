@@ -15,7 +15,9 @@ render(){
   }
   const cardss = [];
   for(let i=0;i<this.props.projects.length;i++){
-    cardss.push(<Cards title={this.props.projects[i].name} project= {this.props.projects[i]} />);
+    let sum = 0;
+    this.props.projects[i].tasks.forEach(task => {sum += task.completion*task.weightage/100;});
+    cardss.push(<Cards title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
   }
     return (
     <div >

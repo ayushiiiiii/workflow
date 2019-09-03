@@ -20,11 +20,12 @@ class Main extends Component{
         super(props);
         this.state = {
             Loggedin: false,
-            projects: null,
+            projects: [],
             issues:null,
             token: null
         }
         this.auth=this.auth.bind(this);
+        this.getProjects = this.getProjects.bind(this);
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
@@ -36,18 +37,32 @@ class Main extends Component{
         })
         .then((result) => result.json())
         .then((result) => {
-            console.log(result);
             if(result.success){
                 this.setState({
                     Loggedin: true,
                     token: result.token
                 });
                 localStorage.setItem('token', result.token);
+                this.getProjects();
             }
         });
     }
+    getProjects(){
+        fetch(baseUrl+'projects',{
+            method:"GET",
+            headers:{
+                'Authorization': 'Bearer '+this.state.token,
+                'Content-Type': 'application/json'
+            
+            },
+        })
+        .then((projects) => projects.json())
+        .then((projects)=>{
+            this.setState({projects: projects})
+        });
+    }
     componentDidMount(){
-        this.setState({projects: PROJECTS});
+        // this.setState({projects: PROJECTS});
         let token = localStorage.getItem('token');
         if(token!=null){
             fetch(baseUrl+'users',{
@@ -56,21 +71,24 @@ class Main extends Component{
                 }
             })
             .then((result) => {
-                this.setState({Loggedin: true});
+                if(result.ok){
+                    this.setState({Loggedin: true, token: token});
+                    this.getProjects();
+                }
             });
-        }
+        }      
     }
     render(){
         
         return(
         <div>
           <Switch>
-              <Route exact path='/dashboard' component={() => <Insidedashboard Loggedin={this.state.Loggedin} />} />
+              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard projectId={match.params.projectId} Loggedin={this.state.Loggedin} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
               <Route exact path='/home' component={() => <Dashboard Loggedin={this.state.Loggedin} projects={this.state.projects} />} />
               <Route exact path='/app' component={() => <Appdata issues={this.state.issues} />} />
               <Route exact path='/filespop' component={() => <Addpop  />} />
-              <Route exact path='/sheet' component={() => <Formm />} />
-              <Route exact path='/project' component={() => <Projectform />} />
+              <Route exact path='/addProject/addTask' component={() => <Formm />} />
+              <Route exact path='/addProject' component={() => <Projectform />} />
               <Route exact path='/login' component={() => <Login Loggedin={this.state.Loggedin} auth={this.auth} />} />
               <Redirect to='/login' />
           </Switch>
