@@ -82,4 +82,13 @@ input[type=text], input[type=password] {
     }
 
   
-  
+  .icon{
+    position:fixed;
+    top:45%;
+    left:45%;
+    width:50%;
+  }
+  .ic{
+    display: inline-block;
+
+  }

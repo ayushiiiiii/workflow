@@ -16,6 +16,4 @@ render(){
     );
 }
 }
-
-
 export default App;

@@ -7,6 +7,7 @@ import Navbar from './project/navbar';
 import Progress from './project/progress';
 import Login from './login/login';
 import { baseUrl } from './baseurl';
+import {Link} from 'react-router-dom';
 
 
 const http= new HttpService();
@@ -28,15 +29,24 @@ componentDidMount(){
   
 }
 render(){
-  const Projects = [];
+  let Projects = [];
   if(this.props.project){
     for(let i=0;i<this.props.project.tasks.length;i++){
-      Projects.push(<Project  task={this.props.project.tasks[i]} />);
+      Projects.push(<Project key={i} task={this.props.project.tasks[i]} />);
     }
     return (
-      <div >
+      <div className="container-fluid">
         <Navbar start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
-  
+          <div> 
+          < Link to='/app'> <button type="submit"  className="btnnav " > Application data</button></ Link>
+          
+          
+          <button type="submit"  className="btnnav "> Solution</button>
+      
+        
+          <button type="submit"  className="btnnav "> Project Management</button>
+       
+          </div>
       <div className=" App-main">
         <div className="row">
         {Projects}

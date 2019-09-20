@@ -22,13 +22,19 @@ onChange(e){
         this.props.auth({uname, password});
     }
     render(){
+        if(this.props.isLoginLoading==true){
+            return(<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>);
+        }
         if (this.props.Loggedin){
-            return <Redirect to ="/home"></Redirect>
+            if(this.props.user.type.name=="Review"){
+                return <Redirect to="/admin"></Redirect>
+            }
+            else return <Redirect to ="/home"></Redirect>
         }
         else{
         return(<div className="back">
             <div className="container login-card ">
-        <form className="log" onSubmit={this.handleSubmit} method="post">  
+        <form className="log" onSubmit={this.handleSubmit}>  
         <div className="container ">
 
         <div className="imgcontainer">

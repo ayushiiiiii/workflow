@@ -19,11 +19,11 @@ class TaskForm extends Component{
             weightage: this.refs.weightage.value,
             start_date: this.refs.start_date.value,
             end_date: this.refs.end_date.value,
-            duration : this.refs.duration.value,
             completion: this.refs.completion.value,
             actual_start: this.refs.actual_start.value,
             actual_end_date: this.refs.actual_end_date.value,
-            actual_weightage: this.refs.actual_weightage.value
+            actual_weightage: this.refs.actual_weightage.value,
+            members: []
         }
         this.props.addTask({task: task});
        
@@ -31,25 +31,27 @@ class TaskForm extends Component{
     
     render()
     {
+        console.log(this.props.location);
         return(
             <div className="container" > <nav className="navbar navbar-expand-sm bg-light justify-content-center">
 
             <center> <h1>Title{this.props.title}</h1> </center>
-            </nav>
+            </nav><br/>
     
-                <form className="ex" onSubmit={this.handleSubmit} method="post">
+            <form className="ex dis form-group" onSubmit={this.handleSubmit} method="post">
                 <table className="tabledata">
                     <tbody>
-                            <tr><td value="major_tasks">Major Tasks </td><td><input type="text" ref="major_task"></input></td><td>    </td>
-                          <td value="weightage">Weightage </td><td><input type="text" ref="weightage"></input></td></tr>
-                           <tr><td value="start_date">Start date(planned)</td><td><input type="date" ref="start_date"></input></td><td>  </td>
-                            <td value="end_date">End date(planned)</td><td><input type="date" ref="end_date"></input></td></tr>
-                            <tr><td value="duration">Scheduled duration(days) </td><td><input type="text" ref="duration"></input></td><td> </td>
-                           <td value="actual_start">actual start Date</td><td><input type="date" ref="actual_start"></input></td></tr>
-                           <tr><td value="completion">Y% completion</td><td><input type="text" ref="completion"></input></td><td> </td>
-                            <td value="review_date">Review Date</td><td><input type="date" ref="review_date"></input></td></tr>
-                            <tr><td value="actual_end_date">Actual end date</td><td><input type="date" ref="actual_end_date"></input></td><td> </td>
-                            <td value="actual_weightage">Actual weightage= G*B</td><td><input type="text" ref="actual_weightage"></input></td></tr>
+                    <br/>
+                            <tr><td value="major_tasks">Major Tasks </td><td><input type="text" ref="major_task" required></input></td><td>    </td>
+                          <td value="weightage">Weightage </td><td><input type="text" ref="weightage" required></input></td></tr><br/>
+                           <tr><td value="start_date">Start date(planned)</td><td><input type="date" ref="start_date" required></input></td><td>  </td>
+                            <td value="end_date">End date(planned)</td><td><input type="date" ref="end_date" required></input></td></tr><br/>
+                            <tr><td value="duration">Scheduled duration(days) </td><td><input type="text" ref="duration" required></input></td><td> </td>
+                           <td value="actual_start">actual start Date</td><td><input type="date" ref="actual_start" required></input></td></tr><br/>
+                           <tr><td value="completion">Y% completion</td><td><input type="text" ref="completion" required></input></td><td> </td>
+                            <td value="review_date">Review Date</td><td><input type="date" ref="review_date" required></input></td></tr><br/>
+                            <tr><td value="actual_end_date">Actual end date</td><td><input type="date" ref="actual_end_date" required></input></td><td> </td>
+                            <td value="actual_weightage">Actual weightage= G*B</td><td><input type="text" ref="actual_weightage" required></input></td></tr><br/>
                         </tbody>
                     </table>
                     <br/>

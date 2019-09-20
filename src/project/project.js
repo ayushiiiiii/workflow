@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './project.css';
-import Progress from './progress'
+import Progress from './progress';
 
 class Project extends Component{
     constructor(props){
@@ -11,13 +11,12 @@ class Project extends Component{
         let start_date = new Date(this.props.task.start_date);
         return(
         <div className="col-12 col-sm-6 col-md-3">
-            <div className="card project">
+            <div className="card project text-center">
                 <div className="card-header">
                     <h4 className="card-title">{this.props.task.name}</h4>
                 </div>
-                <div className="card-body">
-                    <div className="card-text">
-                        <table className="tabledata">
+                <br/>
+<center><table className="table-responsive table table-striped text-center ">
                             <tbody>
                             <tr>
                                 <th>Start</th>
@@ -35,14 +34,13 @@ class Project extends Component{
                                 <td>Days</td>
                             </tr>
                             </tbody>
-                        </table>
+                        </table></center>
                         <Progress percentage={this.props.task.completion}/>
                         <br/>
-                        <button type="submit">Details</button>
+                        <button className="btn" type="submit">Details</button>
                         </div>
                  </div>
-            </div>
-            </div>
+           
         );
     }
 }

@@ -1,27 +1,4 @@
 .project
 {
     border: 1px solid black;
-    /* box-sizing: border-box; */
-    height: 150rpm;
-    margin: 10px;
-    /* padding :20px; */
-    max-width:200rem;
-    object-fit: fill;
-}.h4{
-    padding:20px;
-    padding-right: 20rem;
 }
-
-/*.input{
-    padding: 20px;
-    padding-right: 20rem;
-}
-.card-n{
-    margin-inline: 200rem;
-    /*size:300rpm;
-
-}
-.col{
-    margin-left: 10rem;
-    object-fit: fill;
-}*/

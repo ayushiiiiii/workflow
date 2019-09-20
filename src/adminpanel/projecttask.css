@@ -1,0 +1,35 @@
+.dis{
+    display: block;
+    text-align: center;
+      }
+      .dis>table{
+          display: block;
+          text-align: center;
+      }
+form{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    background:grey;
+
+    
+}
+input[type=text], input[type=password],input[type=date],select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  .dis {
+    border: 3px solid #f1f1f1;
+    padding: 10px;
+    float: center;
+    width: 90%;
+    }
+
+.dis>button[type=button]{
+    float:right;
+}

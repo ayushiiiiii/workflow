@@ -6,7 +6,7 @@ import Formm from './excel';
 import Ad from '../pluss.png';
 
 
-class ProjectForm extends Component{
+class Editproject extends Component{
     constructor(props)
     {
         super(props);
@@ -29,19 +29,15 @@ class ProjectForm extends Component{
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        var project={
-            name:this.refs.project_name.value,
-            mdsno: this.refs.project_number.value,
-            short_name:this.refs.short_name.value,
-            location: this.refs.location.value,
-            machine:this.refs.machine.value,
-            start_date :this.refs.start_date.value,
-            fat_date:this.refs.fat_date.value,
-            actual_end:this.refs.actual_date.value,
-            active: (this.refs.fat_date.value=="true"?true:false),
-            tasks: this.state.tasks
-        }
-        this.props.postProject({project: project});
+        const project_name=this.refs.project_name.value;
+        const project_number=this.refs.project_number.value;
+        const short_name=this.refs.short_name.value;
+        const location=this.refs.location.value;
+        const start_date =this.refs.start_date.value;
+        const fat_date=this.refs.fat_date.value;
+        const actual_date=this.refs.actual_date.value;
+        const active_inactive=this.refs.fat_date.value;
+        const completed=this.refs.fat_date.value;
     }
     addTask({task}){
         this.setState({tasks: [...this.state.tasks, task], addTask: false});
@@ -73,26 +69,26 @@ render(){
                     <tbody>
                         <br/>
                 <tr>
-                <td value="project_number" className="control-label "><b>Project Number</b></td><td><input type="text" ref="project_number" required></input></td>
-                <td value="project_name" className="control-label "><b>Project Name</b></td><td><input type="text" ref="project_name" required></input></td>
+                <td value="project_number" className="control-label "><b>Project Number</b></td><td><input type="text" ref="project_number"></input></td>
+                <td value="project_name" className="control-label "><b>Project Name</b></td><td><input type="text" ref="project_name"></input></td>
                 </tr> <br/>
                 <tr>
-                <td value="short_name" className="control-label" ><b>Short Name</b></td><td><input type="text" ref="short_name" required></input></td>
-                <td value="location"  className="control-label"><b>Location</b></td><td><input type="text" ref="location" required></input></td>
+                <td value="short_name" className="control-label" ><b>Short Name</b></td><td><input type="text" ref="short_name"></input></td>
+                <td value="location"  className="control-label"><b>Location</b></td><td><input type="text" ref="location"></input></td>
                 </tr> <br/>
                 <tr>
-                <td value="start_date"  className="control-label"><b>start date</b></td><td><input type="date" ref="start_date" required></input></td>
-                <td value="fat_date"  className="control-label"><b>Fat Date</b></td><td><input type="date" ref="fat_date" required></input></td>
+                <td value="start_date"  className="control-label"><b>start date</b></td><td><input type="date" ref="start_date"></input></td>
+                <td value="fat_date"  className="control-label"><b>Fat Date</b></td><td><input type="date" ref="fat_date"></input></td>
                 </tr> <br/>
                 <tr>
-                <td value="actual_date"  className="control-label"><b>Actual Date</b></td><td><input type="date" ref="actual_date" required></input></td>
-                <td value="active_inactive"  className="control-label"><b>Active/Inactive</b></td><td><select className="dropdown" required>
-                            <option value="true" selected>Active</option>
-                            <option value="false">Inactive</option></select ></td> 
+                <td value="actual_date"  className="control-label"><b>Actual Date</b></td><td><input type="date" ref="actual_date"></input></td>
+                <td value="active_inactive"  className="control-label"><b>Active/Inactive</b></td><td><select className="dropdown">
+                            <option value="UserOperator" selected>Active</option>
+                            <option value="DataEntry">Inactive</option></select></td> 
                 </tr> <br/>
                
                 <tr>
-                <td value="machine" className="control-label"><b>Machine</b></td><td><input type="text" ref="machine" required></input></td>
+                <td value="completed" className="control-label"><b>%completed</b></td><td><input type="text" ref="completed"></input></td>
                 <td value="task_completed"><b>Add Task </b><button type="button" src={Ad} className="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onClick={() => this.setState({addTask: true})}><img src={Ad}></img></button>
  </td>
                 <td>
@@ -113,4 +109,4 @@ render(){
     }
 }
 
-export default ProjectForm;
+export default Editproject;

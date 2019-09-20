@@ -17,27 +17,22 @@ render(){
   for(let i=0;i<this.props.projects.length;i++){
     let sum = 0;
     this.props.projects[i].tasks.forEach(task => {sum += task.completion*task.weightage/100;});
-    cardss.push(<Cards title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
+    cardss.push(<Cards key={i} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
   }
     return (
-    <div >
-      <nav className="navbar navbar-expand-sm bg-light justify-content-center">
+    <div className="container-fluid">
+      <nav className="navbar navbar-expand-sm bg-light justify-content-center ">&nbsp;&nbsp;&nbsp;&nbsp;
           <center> <h1>Project list </h1> </center>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
-          < Link to='/app'> <button type="submit" className="btnnav" > Application data</button></ Link>
           
-          
-            <button type="submit" className="btnnav"> Solution</button>
-        
-          
-            <button type="submit" className="btnnav"> Project Management</button>
-         
       </nav>
     
 
 
     <div className=" App-main">
       <div className="row">
+        {this.props.isProjectsLoading?<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>:null}
       {cardss}
 
       </div>
