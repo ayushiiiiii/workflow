@@ -18,9 +18,6 @@ handleCheckChange(){
   this.setState({showCards: !this.state.showCards});
 }
 render(){
-  if(this.props.Loggedin == false){
-    return <Redirect to ="/login"/>
-  }
   const cardss = [];
   const list = [];
   for(let i=0;i<this.props.projects.length;i++){
@@ -34,7 +31,7 @@ render(){
       <nav className="navbar navbar-expand-sm bg-light justify-content-center ">&nbsp;&nbsp;&nbsp;&nbsp;
           <center> <h1>Project list </h1> </center>
           <div className="toggle">
-            <h7>Show Cards</h7><br/>
+            <span>Show Cards</span><br/>
             <label className="switch">
               <input type="checkbox" onChange={this.handleCheckChange}/>
               <span className="slider round"></span>

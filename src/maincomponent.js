@@ -62,10 +62,11 @@ class Main extends Component{
         });
     }
     addUser({user}){
-        fetch(baseUrl+'users/signup',{
+        fetch(baseUrl+'users/adduser',{
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+this.state.token
             },
             body: JSON.stringify(user)
         })
@@ -136,12 +137,22 @@ class Main extends Component{
         }      
     }
     render(){
-        
+        if(this.state.isLoginLoading==true){
+            return(<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>);
+        }
+        if (!this.state.Loggedin){
+            return(
+                <Switch>
+                    <Route exact path='/login' component={() => <Login auth={this.auth} user={this.state.user} />} />
+                    <Redirect to='/login' />
+                </Switch>
+            );
+        }
         return(
         <div>
           <Switch>
               <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard projectId={match.params.projectId} Loggedin={this.state.Loggedin} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
-              <Route exact path='/home' component={() => <Dashboard Loggedin={this.state.Loggedin} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
+              <Route exact path='/home' component={() => <Dashboard projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
               <Route exact path='/app' component={() => <Appdata issues={this.state.issues} />} />
               <Route exact path='/filespop' component={() => <Addpop  />} />
               <Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />
@@ -153,8 +164,7 @@ class Main extends Component{
               <Route exact path='/complete' component={() => <Complete />} />
               <Route exact path='/access' component={()=> <UAccess/> }/>
               <Route exact path='/list' component={()=> <List/> }/>
-              <Route exact path='/login' component={() => <Login Loggedin={this.state.Loggedin} auth={this.auth} user={this.state.user} isLoginLoading={this.state.isLoginLoading} />} />
-              <Redirect to='/login' />
+              <Redirect to={this.state.user.type.name=="Review"?'/admin':'/home'} />
           </Switch>
         </div>
         );
