@@ -1,67 +1,43 @@
-import React ,{Component} from 'react';
-import Cards from './cards';
+import React from 'react';
+import Progress from   '../project/progress';
+import { Link } from 'react-router-dom';
 
+function List(props){;
+    return(
+        <div className="card">
+            <div className="card-header" id={"heading"+props.index}>
+            <h2 className="mb-0">
+                <button className="btn btn-link" type="button" data-toggle="collapse" data-target={"#collapse"+props.index} aria-expanded="true" aria-controls={"collapse"+props.index}>
+                    {props.title}
+                </button>
+            </h2>
+            </div>
 
-class List extends Component{
-    render(){
-            const cardss = [];
-            // for(let i=0 ;i<this.props.projects.length; si++){
-            //     let sum = 0;
-            //     this.props.projects[i].tasks.forEach(task => {sum += task.completion*task.weightage/100;});
-            //     cardss.push(<Cards key={i} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
-            // }
-        return(
-            <div >
-                <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link text-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Project 1
-                        </button>
-                    </h2>
-                    </div>
-
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                    {/* cardss.push(<Cards key={i} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />); */}
-
-                    </div>
-                    </div>
+            <div id={"collapse"+props.index} className="collapse" aria-labelledby={"heading"+props.index} data-parent="#projectsAccordion">
+            <div className="card-body">
+            <div className="card-text container-fluid">
+                <center> <table className=" table-responsive table table-striped text-center table-condensed">
+                    <tbody>
+                    <tr>
+                        <td><b>MACHINE</b></td><td><span>{props.project.machine} </span></td></tr>
+                        <tr><td><b>MDSNO</b></td><td><span>{props.project.mdsno}</span></td>
+                    </tr><tr>
+                        <td><b>LOCATION</b></td><td><span>{props.project.location}</span></td></tr>
+                        <tr><td><b>SHORT NAME</b></td><td><span>{props.project.short_name} </span></td>
+                    </tr>
+                    <tr><td><b>START DATE</b></td><td><span>{props.project.start_date} </span></td>
+                    </tr>
+                    <tr><td><b>FAT DATE</b></td><td><span>{props.project.fat_date } </span></td>
+                    </tr>
+                    </tbody>
+                </table></center>
+                    <Progress percentage={props.completion}/>
+                    <Link to={"/home/"+props.project._id}><button type="Submit">More details</button></Link> 
                 </div>
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Project 2
-                        </button>
-                    </h2>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Project 3
-                        </button>
-                    </h2>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                    </div>
-                </div>
-                </div>
-                </div>
-                
-                            );
-                        }
-                    }
+            </div>
+            </div>
+        </div>
+    );
+}
 
  export default List;   
