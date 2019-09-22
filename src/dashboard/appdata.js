@@ -42,7 +42,7 @@ class Folders extends Component{
        <br/>
     <div className="row">
         <div className="col-6 col-sm-6 col-md-6 " >
-            <textarea rows="20" cols="80">List of files</textarea>
+          <textarea rows="20" cols="80"> File System</textarea>
         </div>
         <div className=" col-6 col-sm-6 col-md-6 ">
            <textarea rows="20" cols="80"> Comments</textarea>
