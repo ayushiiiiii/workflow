@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import logo, { ReactComponent } from './logo.svg';
 import './App.css';
 import Project from './project/project';
 import HttpService from './services/http-service';
 import Navbar from './project/navbar';
-import Progress from './project/progress';
-import Login from './login/login';
-import { baseUrl } from './baseurl';
 import {Link} from 'react-router-dom';
 
 
@@ -38,7 +34,7 @@ render(){
       <div className="container-fluid">
         <Navbar start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
           <div> 
-          < Link to='/app'> <button type="submit"  className="btnnav " > Application data</button></ Link>
+          <Link to={'/home/'+this.props.projectId+'/app'}> <button type="submit"  className="btnnav " > Application data</button></ Link>
           
           
           <button type="submit"  className="btnnav "> Solution</button>

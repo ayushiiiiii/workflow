@@ -148,7 +148,7 @@ class Main extends Component{
           <Switch>
               <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard projectId={match.params.projectId} Loggedin={this.state.Loggedin} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
               <Route exact path='/home' component={() => <Dashboard projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
-              <Route exact path='/app' component={() => <Appdata issues={this.state.issues} />} />
+              <Route exact path='/home/:projectId/app' component={({match}) => <Appdata projectId={match.params.projectId} token={this.state.token} />} />
               <Route exact path='/filespop' component={() => <Addpop  />} />
               <Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />
               <Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />
@@ -159,7 +159,6 @@ class Main extends Component{
               <Route exact path='/complete' component={() => <Complete />} />
               <Route exact path='/access' component={()=> <UAccess/> }/>
               <Route exact path='/list' component={()=> <List/> }/>
-              <Route exact path='/files' component={()=> <FileSystem /> }/>
               <Redirect to={this.state.user.type.name=="Review"?'/admin':'/home'} />
           </Switch>
         </div>
