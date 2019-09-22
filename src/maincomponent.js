@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import './insidedashboard.css';
-import Project from './project/project';
 import Login from './login/login';
-import HttpService from './services/http-service';
 import Dashboard from './dashboard/dashboard';
 import Appdata from './dashboard/appdata';
 import Insidedashboard from './insidedashboard';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
-import { PROJECTS } from './shared/projects';
-import { Issues } from './shared/projects';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Addpop from'./dashboard/add';
 import Projectform from './adminpanel/projecttask';
 import Admin from './adminpanel/adminpage';
@@ -16,12 +12,11 @@ import { baseUrl } from './baseurl';
 import Sign from './adminpanel/signup';
 import Editp from './adminpanel/editproject';
 import Edittask from './adminpanel/edittask';
-import stringify from 'json-stringify-safe';
 import Com from './adminpanel/comments';
 import Complete from './adminpanel/completion';
 import UAccess from './adminpanel/useraccess';
 import List from './dashboard/listproject';
-
+import FileSystem from './filesystem/filesystem';
 
 class Main extends Component{
     constructor(props){
@@ -164,6 +159,7 @@ class Main extends Component{
               <Route exact path='/complete' component={() => <Complete />} />
               <Route exact path='/access' component={()=> <UAccess/> }/>
               <Route exact path='/list' component={()=> <List/> }/>
+              <Route exact path='/files' component={()=> <FileSystem /> }/>
               <Redirect to={this.state.user.type.name=="Review"?'/admin':'/home'} />
           </Switch>
         </div>
