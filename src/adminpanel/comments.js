@@ -39,7 +39,7 @@ class Comment extends Component{
                                     </div>
                                     <li><div className="comment-box comment-head">
                                     <h6 className="comment-name by-author">{/* <a href="http://creaticode.com/blog">Agustin Ortiz</a>*/}</h6> 
-                                            <span>hace 20 minutos</span>
+                                            <span>User_name</span>
                                             <i className="fa fa-reply"></i>
                                             <i className="fa fa-heart"></i>
                                             <div>

@@ -47,6 +47,7 @@ render(){
       
         
           <Link to={'/home/'+this.props.projectId+'/file-system/Project Management'}> <button type="submit"  className="btnnav "> Project Management</button></Link>
+         <Link to={'/complete'} ><button type="submit"  className="btnnav "> Edit Completion</button></Link>
        
           </div>
        </div>
