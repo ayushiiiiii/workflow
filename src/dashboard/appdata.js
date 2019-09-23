@@ -6,63 +6,72 @@ import App from './popup';
 import Addpop from'./add';
 import Navbar from '../project/navbar';
 import {Link} from 'react-router-dom';
+import { baseUrl } from '../baseurl';
+import FileSystem from '../filesystem/filesystem';
+
+const FileWindow = ({fileId, fileError}) => {
+  console.log(fileId);
+  console.log(fileError);
+  if(fileId=='' && !fileError){
+    return(<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>);
+  }else if(fileError){
+    return(<textarea rows="20" cols="80" defaultValue="File Not Found"></textarea>);
+  }else{
+    return(<FileSystem fileId={fileId} ></FileSystem>);
+  }
+}
+
 class Folders extends Component{
-  // constructor(props){
-  //   super(props);
-  //   this.state={
-  //    list:[]
-  //   }
-  // } 
-    // onChangeHandle=event=>{
-    //   const reader = newFileReader();
-    //   reader.readAsArrayBuffer(event.target.files[0]);
-    //   console.log(Buffer.from(rea))
-    //   //  axios({
-    // //    method:'post',
-    // //    url:'http://localhost:1337/',
-    // //    data:event.target.files[0],
-    // //    config:{headers:{'Content-Type':'mul'}}
-    // //  })
-    // }  
-    // onClickUpload(){
-      
-      
-    // }
-  render()
-    {
-      
-      const fol = [];
-        for(let i=0;i<12;i++){
-          fol.push(<Image/>);
-        }
-         return(<div>
-             <div>
-                 <Navbar/>
-       </div> 
-       <br/>
-    <div className="row">
-        <div className="col-6 col-sm-6 col-md-6 " >
-          <textarea rows="20" cols="80"> File System</textarea>
-        </div>
-        <div className=" col-6 col-sm-6 col-md-6 ">
-           <textarea rows="20" cols="80"> Comments</textarea>
-        </div>
-        <div>
-        <form ref='uploadForm' id='uploadForm' action='http://localhost:1337/upload' method='post' encType="multipart/form-data">
-            <input type="file" name="file" onChange={this.onChangeHandle}/>
-            <input type='submit' value='Upload!' onClick={this.onClickUpload} />
-            </form>
-            </div>
-        </div>
-        </div>
-        
-         
-         
-          
-         );
-
-
+  constructor(props){
+    super(props);
+    this.state={
+      fileId: '',
+      fileError: false
     }
+  }
+  componentDidMount(){
+    fetch(baseUrl+'resolve',{
+      method: "POST",
+      headers:{
+          'Authorization': 'Bearer '+this.props.token,
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({path: "data/"+this.props.projectId})
+    }).then(() => {
+      return fetch(baseUrl+'files/files/Lw/children');
+    }).then(items => items.json())
+    .then(items => {
+      items.items.forEach(item => {
+        if(item.name==this.props.projectId){
+          this.setState({fileId: item.id});
+          return false;
+        }
+      });
+      if(this.state.fileId=='') this.setState({fileError: true});
+    },(err) => console.log(err));
+  }
+  render(){
+    const fol = [];
+    for(let i=0;i<12;i++){
+      fol.push(<Image/>);
+    }
+    return(
+      <div>
+        <div>
+          <Navbar/>
+        </div> 
+        <br/>
+          <div className="row">
+            <div className="col-12" >
+              <FileWindow fileId={this.state.fileId} fileError={this.state.fileError} />
+            </div>
+            <div className=" col-6 col-sm-6 col-md-6 ">
+              <textarea rows="20" cols="80" defaultValue="Comments"></textarea>
+            </div>
+          </div>
+        </div>
+    );
+  }
 }
 
 export default Folders;

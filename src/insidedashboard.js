@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import logo, { ReactComponent } from './logo.svg';
 import './App.css';
 import Project from './project/project';
 import HttpService from './services/http-service';
 import Navbar from './project/navbar';
-import Progress from './project/progress';
-import Login from './login/login';
-import { baseUrl } from './baseurl';
 import {Link} from 'react-router-dom';
 
 
