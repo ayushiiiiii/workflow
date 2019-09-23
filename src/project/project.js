@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './project.css';
 import Progress from './progress';
+import { Link } from 'react-router-dom';
 
 class Project extends Component{
     constructor(props){
@@ -37,7 +38,7 @@ class Project extends Component{
                         </table></center>
                         <Progress percentage={this.props.task.completion}/>
                         <br/>
-                        <button className="btn" type="submit">Details</button>
+                        <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button className="btn" type="submit">Details</button></Link>
                         </div>
                  </div>
            
