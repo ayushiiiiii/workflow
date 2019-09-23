@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import './appdata.css';
 import Image from './imgcomp';
-import Add from '../add.png';
-import App from './popup';
-import Addpop from'./add';
 import Navbar from '../project/navbar';
-import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseurl';
 import FileSystem from '../filesystem/filesystem';
 
@@ -34,20 +30,37 @@ class Folders extends Component{
           'Authorization': 'Bearer '+this.props.token,
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify({path: "data/"+this.props.projectId})
+      body: JSON.stringify({path: "data/"+this.props.projectId+"/"+this.props.folder})
     })
     .then(() => fetch(baseUrl+'files/files'))
     .then(root => root.json())
     .then(root => fetch(baseUrl+'files/files/'+root.id+'/children'))
+    .then(projects => projects.json())
+    .then(projects => {
+      let projectId='';
+      projects.items.forEach(project => {
+        if(project.name==this.props.projectId){
+          projectId=project.id;
+          return false;
+        }
+      })
+      if(projectId==''){
+        let err = new Error('Project Not found!');
+        err.status=404;
+        return err;
+      }else return fetch(baseUrl+'files/files/'+projectId+'/children');
+    })
     .then(items => items.json())
     .then(items => {
       items.items.forEach(item => {
-        if(item.name==this.props.projectId){
+        if(item.name==this.props.folder){
           this.setState({fileId: item.id});
           return false;
         }
       });
-      if(this.state.fileId=='') this.setState({fileError: true});
+      if(this.state.fileId==''){
+        this.setState({fileError: true});
+      }
     },(err) => console.log(err));
   }
   render(){
@@ -58,15 +71,12 @@ class Folders extends Component{
     return(
       <div>
         <div>
-          <Navbar/>
+        <Navbar start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
         </div> 
         <br/>
           <div className="row">
             <div className="col-12" >
               <FileWindow fileId={this.state.fileId} fileError={this.state.fileError} />
-            </div>
-            <div className=" col-6 col-sm-6 col-md-6 ">
-              <textarea rows="20" cols="80" defaultValue="Comments"></textarea>
             </div>
           </div>
         </div>

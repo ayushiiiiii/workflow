@@ -40,13 +40,13 @@ render(){
         
       </div>  
         </div>
-        <Link to={'/home/'+this.props.projectId+'/app'}> <button type="submit"  className="btnnav " > Application data</button></ Link>
+        <Link to={'/home/'+this.props.projectId+'/file-system/Application Data'}><button type="submit"  className="btnnav " > Application data</button></ Link>
           
           <div className="col-sm-12 col-12 col-md-12">
-          <button type="submit"  className="btnnav "> Solution</button>
+          <Link to={'/home/'+this.props.projectId+'/file-system/Solution'}> <button type="submit"  className="btnnav "> Solution</button></Link>
       
         
-          <button type="submit"  className="btnnav "> Project Management</button>
+          <Link to={'/home/'+this.props.projectId+'/file-system/Project Management'}> <button type="submit"  className="btnnav "> Project Management</button></Link>
        
           </div>
        </div>
