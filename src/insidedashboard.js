@@ -47,6 +47,7 @@ render(){
       
         
           <button type="submit"  className="btnnav "> Project Management</button>
+         <Link to={'/complete'} ><button type="submit"  className="btnnav "> Edit Completion</button></Link>
        
           </div>
        </div>
