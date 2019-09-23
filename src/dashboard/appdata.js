@@ -10,8 +10,6 @@ import { baseUrl } from '../baseurl';
 import FileSystem from '../filesystem/filesystem';
 
 const FileWindow = ({fileId, fileError}) => {
-  console.log(fileId);
-  console.log(fileError);
   if(fileId=='' && !fileError){
     return(<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>);
   }else if(fileError){
@@ -37,9 +35,11 @@ class Folders extends Component{
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({path: "data/"+this.props.projectId})
-    }).then(() => {
-      return fetch(baseUrl+'files/files/Lw/children');
-    }).then(items => items.json())
+    })
+    .then(() => fetch(baseUrl+'files/files'))
+    .then(root => root.json())
+    .then(root => fetch(baseUrl+'files/files/'+root.id+'/children'))
+    .then(items => items.json())
     .then(items => {
       items.items.forEach(item => {
         if(item.name==this.props.projectId){

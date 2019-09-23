@@ -40,7 +40,7 @@ render(){
         
       </div>  
         </div>
-        < Link to='/app'> <button type="submit"  className="btnnav " > Application data</button></ Link>
+        <Link to={'/home/'+this.props.projectId+'/app'}> <button type="submit"  className="btnnav " > Application data</button></ Link>
           
           <div className="col-sm-12 col-12 col-md-12">
           <button type="submit"  className="btnnav "> Solution</button>
