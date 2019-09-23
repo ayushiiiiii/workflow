@@ -33,22 +33,22 @@ render(){
     return (
       <div className="container-fluid">
         <Navbar start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
-          <div> 
-          <Link to={'/home/'+this.props.projectId+'/app'}> <button type="submit"  className="btnnav " > Application data</button></ Link>
           
-          
-          <button type="submit"  className="btnnav "> Solution</button>
-      
-        
-          <button type="submit"  className="btnnav "> Project Management</button>
-       
-          </div>
       <div className=" App-main">
         <div className="row">
         {Projects}
         
       </div>  
         </div>
+        < Link to='/app'> <button type="submit"  className="btnnav " > Application data</button></ Link>
+          
+          <div className="col-sm-12 col-12 col-md-12">
+          <button type="submit"  className="btnnav "> Solution</button>
+      
+        
+          <button type="submit"  className="btnnav "> Project Management</button>
+       
+          </div>
        </div>
        
     

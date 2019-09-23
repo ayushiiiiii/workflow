@@ -4,25 +4,25 @@ body {
 	padding: 0;
 	background-color: $main-bg;
 }
-ul {
+.ulll>ul {
 	margin: 0;
 	padding: 5em;}
-	ul>li {
+	.ulll.ul>li {
 		list-style: none;
 		padding:80em;}
 
-		ul>li>a {
+		.ulll>ul>li>a {
 			
 			color: blue;
 			text-decoration: none;
 			-webkit-transition: background-color .5s;
 			-o-transition: background-color .5s;
 			transition: background-color .5s, color .5s;}
-			ul>li>a >&:hover {
+			.ulll>ul>li>a >&:hover {
 				background-color: $light-green;
 				color: $deep-purple;
 			}
-			ul>li>a >.contact {
+			.ulll>ul>li>a >.contact {
 				border: 1px solid white;
 			}
 
@@ -44,11 +44,11 @@ ul {
 nav > table >td {padding:10px;}
 
 @media all and (max-width: 500px) {
-	ul {
+	.ulll>ul {
 		padding: 0;}
-		ul>li {
+		.ulll>ul>li {
 			width: 100%;}
-			li>a {
+			.ulll>li>a {
 				display: block;
 				text-align: center;
 			}
