@@ -19,6 +19,7 @@ a {
 
 ul {
    list-style-type: none;
+   padding: 5em;
 }
 
 body {
@@ -46,6 +47,7 @@ body {
 
 .comments-list {
    position: relative;
+   float:right;
 }
 
 /**
@@ -139,6 +141,7 @@ body {
    content: '';
    width: 0;
    height: 0;
+   padding: 5em;
    display: block;
    clear: both;
 }

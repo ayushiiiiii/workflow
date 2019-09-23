@@ -7,7 +7,7 @@ function Navbar(props){
     return( 
 <div className="container-fluid">
   <nav className="navbar navbar-fixed-top navbar-expand-sm bg-light justify-content-center">
-    <ul className="nav navbar-nav" ><table className="tabledata table-responsive"><tbody>
+    <ul className="nav navbar-nav ulll" ><table className="tabledata table-responsive"><tbody>
     <tr><td><b>Project Name</b></td><td><span>{props.project_name}</span></td>
       <td><b>Start Date</b></td><td><span>{start_date.toDateString().slice(4)}</span> </td>
       <td><b>End Date</b></td><td><span>{end_date.toDateString().slice(4)}</span></td>
