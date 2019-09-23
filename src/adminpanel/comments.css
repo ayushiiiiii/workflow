@@ -12,6 +12,16 @@
     box-sizing: border-box;
 }
 
+.fo{
+   background:white;
+}
+.butn{
+   background-color: #4CAF50;
+   border: none;
+   color: white;
+}
+
+
 a {
     color: #03658c;
     text-decoration: none;

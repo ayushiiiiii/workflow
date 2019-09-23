@@ -43,8 +43,9 @@ class Comment extends Component{
                                             <i className="fa fa-reply"></i>
                                             <i className="fa fa-heart"></i>
                                             <div>
-                                        <form className="form-group">
-                                            <textarea className="comment-content comment-box " >  Enter your comment here</textarea>                                          
+                                        <form className="form-group fo">
+                                            <textarea className="comment-content comment-box " >  Enter your comment here</textarea>   
+                                            <button type="button" className="btn btn-primary " >Add comment</button>                                       
                                         </form></div></div>
                                         
                                     </li>
