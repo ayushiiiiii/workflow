@@ -34,6 +34,7 @@ class Main extends Component{
         this.getProjects = this.getProjects.bind(this);
         this.postProject = this.postProject.bind(this);
         this.addUser = this.addUser.bind(this);
+        this.editTasks = this.editTasks.bind(this);
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
@@ -109,6 +110,19 @@ class Main extends Component{
             this.setState({projects: [...this.state.projects, project]})
         }).catch((err) => console.log(err));
     }
+    editTasks({projectId, tasks}){
+        fetch(baseUrl+'projects/'+projectId,{
+            method: "PUT",
+            headers:{
+                'Authorization': 'Bearer '+this.state.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({tasks: tasks})
+        }).then(project => project.json())
+        .then(project => {
+            this.setState({project: project});
+        }).catch(err => console.log(err));
+    }
     componentDidMount(){
         // this.setState({projects: PROJECTS});
         let token = localStorage.getItem('token');
@@ -156,7 +170,7 @@ class Main extends Component{
               <Route exact path='/editproject' component={() => <Editp />} />
               <Route exact path='/edittask' component={() => <Edittask />} />
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
-              <Route exact path='/complete' component={() => <Complete />} />
+              <Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks} />} />
               <Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>
               <Route exact path='/list' component={()=> <List/> }/>
               <Route exact path='/disable' component={()=> <Disable />}/>
