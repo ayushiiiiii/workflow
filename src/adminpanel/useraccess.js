@@ -1,17 +1,92 @@
 import React ,{Component} from 'react';
+import Switch from 'react-toggle-switch'
+import { baseUrl } from '../baseurl';
+import "../../node_modules/react-toggle-switch/dist/css/switch.min.css";
 
 class UserA extends Component{
     constructor(props){
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);       
+        this.state = {
+            usertypes: [
+                {
+                    name: 'User Operator',
+                    location_enable: true,
+                    location_view: true,
+                    upload: true,
+                    comments: true,
+                    chat: true,
+                    data_entry: true,
+                    chat: true,
+                    download: true,
+                    offer_details: true
+                },
+                {
+                    name: 'Data Entry',
+                    location_enable: true,
+                    location_view: true,
+                    upload: true,
+                    comments: true,
+                    chat: true,
+                    data_entry: true,
+                    chat: true,
+                    download: true,
+                    offer_details: true
+                },
+                {
+                    name: 'Review',
+                    location_enable: true,
+                    location_view: true,
+                    upload: true,
+                    comments: true,
+                    chat: true,
+                    data_entry: true,
+                    chat: true,
+                    download: true,
+                    offer_details: true
+                },
+                {
+                    name: 'GB',
+                    location_enable: true,
+                    location_view: true,
+                    upload: true,
+                    comments: true,
+                    chat: true,
+                    data_entry: true,
+                    chat: true,
+                    download: true,
+                    offer_details: true
+                }
+            ],
+            disable: true
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);  
+        this.handleClick = this.handleClick.bind(this);     
+    }
+    componentDidMount(){
+        fetch(baseUrl+'usertypes')
+        .then(usertypes => usertypes.json())
+        .then(usertypes => {
+            this.setState({usertypes: usertypes});
+        });
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        const uname=this.refs.uname.value;
-        const password=this.refs.password.value;
-        this.props.auth({uname, password});
+        fetch(baseUrl+'usertypes',{
+            method: "PUT",
+            headers: {
+                'Authorization': 'Bearer '+this.props.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({usertypes: this.state.usertypes})
+        }).then(types => types.json()).then(types => {
+            this.setState({disable: true});
+        });
     }
-    
+    handleClick(index, property){
+        let temp = this.state.usertypes;
+        temp[index][property]=!temp[index][property];
+        this.setState({usertypes: temp, disable: false});
+    }
     render(){
         return(
                 <div className="container">
@@ -28,168 +103,72 @@ class UserA extends Component{
                         </tr>
                         <tr>
                             <td>Location Enable</td>
-                             <td> <select ref="location A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="location B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="location C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="location D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            </tr>
+                            <td><Switch onClick={() => this.handleClick(0,'location_enable')} on={this.state.usertypes[0].location_enable}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'location_enable')} on={this.state.usertypes[1].location_enable}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'location_enable')} on={this.state.usertypes[2].location_enable}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'location_enable')} on={this.state.usertypes[3].location_enable}/></td>
+                        </tr>
                         
                             <tr>
-                            <td>Location view</td>
-                             <td> <select ref="View A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="View B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="View C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="View D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            </tr>
-                        
-                            <tr>
-                            <td>Location Enable</td>
-                             <td> <select ref="location A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="location B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="location C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="location D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
+                            <td>Location View</td>
+                            <td><Switch onClick={() => this.handleClick(0,'location_view')} on={this.state.usertypes[0].location_view}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'location_view')} on={this.state.usertypes[1].location_view}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'location_view')} on={this.state.usertypes[2].location_view}/></td>
+                            <td><Switch onClick={() => this.handleClick(3,'location_view')} on={this.state.usertypes[3].location_view}/></td>
                             </tr>
                         
                             <tr>
                             <td>Upload</td>
-                             <td> <select ref="upload A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="upload B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="upload C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="upload D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
+                            <td><Switch onClick={() => this.handleClick(0,'upload')} on={this.state.usertypes[0].upload}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'upload')} on={this.state.usertypes[1].upload}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'upload')} on={this.state.usertypes[2].upload}/></td>
+                            <td><Switch onClick={() => this.handleClick(3,'upload')} on={this.state.usertypes[3].upload}/></td>
                             </tr>
                         
                             <tr>
                             <td>Comments</td>
-                             <td> <select ref="comment A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="comment B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="comment C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="comment D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
+                            <td><Switch onClick={() => this.handleClick(0,'comments')} on={this.state.usertypes[0].comments}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'comments')} on={this.state.usertypes[1].comments}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'comments')} on={this.state.usertypes[2].comments}/></td>
+                            <td><Switch onClick={() => this.handleClick(3,'comments')} on={this.state.usertypes[3].comments}/></td>
                             </tr>
                         
                             <tr>
                             <td>Data Entry</td>
-                             <td> <select ref="data A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="data B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="data C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="data D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
+                            <td><Switch onClick={() => this.handleClick(0,'data_entry')} on={this.state.usertypes[0].data_entry}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'data_entry')} on={this.state.usertypes[1].data_entry}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'data_entry')} on={this.state.usertypes[2].data_entry}/></td>
+                            <td><Switch onClick={() => this.handleClick(3,'data_entry')} on={this.state.usertypes[3].data_entry}/></td>
                             </tr>
                         
                             <tr>
                             <td>Chat</td>
-                             <td> <select ref="chat A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="chat B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="chat C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="chat D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
+                            <td><Switch onClick={() => this.handleClick(0,'chat')} on={this.state.usertypes[0].chat}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'chat')} on={this.state.usertypes[1].chat}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'chat')} on={this.state.usertypes[2].chat}/></td>
+                            <td><Switch onClick={() => this.handleClick(3,'chat')} on={this.state.usertypes[3].chat}/></td>
                             </tr>
                         
                             <tr>
                             <td>Download</td>
-                             <td> <select ref="download A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="download B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="download C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="download D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
+                            <td><Switch onClick={() => this.handleClick(0,'download')} on={this.state.usertypes[0].download}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'download')} on={this.state.usertypes[1].download}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'download')} on={this.state.usertypes[2].download}/></td>
+                            <td><Switch onClick={() => this.handleClick(3,'download')} on={this.state.usertypes[3].download}/></td>
                             </tr>
                         
                             <tr>
                             <td>Offer Details</td>
-                             <td> <select ref="offer A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="offer  B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="offer C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="offer D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            </tr>
-                        
-                            <tr>
-                            <td>Print</td>
-                             <td> <select ref="print A" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="print B" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="print C" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
-                            <td> <select ref="print D" className="dropdown">
-                            <option value="yes " selected>Yes </option>
-                            <option value="no">No </option>  </select></td>
+                            <td><Switch onClick={() => this.handleClick(0,'offer_details')} on={this.state.usertypes[0].offer_details}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'offer_details')} on={this.state.usertypes[1].offer_details}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'offer_details')} on={this.state.usertypes[2].offer_details}/></td>
+                            <td><Switch onClick={() => this.handleClick(3,'offer_details')} on={this.state.usertypes[3].offer_details}/></td>
                             </tr>
 
                     </table>
 
                         </div><br/>
-                        <button type="submit">Submit</button>
+                        <button type="submit" className="btn btn-primary" disabled={this.state.disable}>Apply</button>
                         <br/>
                                         
                  </form>
