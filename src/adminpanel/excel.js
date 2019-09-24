@@ -1,11 +1,17 @@
 import React, {Component } from 'react';
 import './excel.css';
+import Ad from '../pluss.png';
 
 
 class TaskForm extends Component{
     constructor(props){
+        
         super(props);
+        this.state={
+        members: []
+    }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.addMembers = this.addMembers.bind(this);
     }
     onChange(e){
             this.setState({
@@ -22,16 +28,28 @@ class TaskForm extends Component{
             completion: this.refs.completion.value,
             actual_start: this.refs.actual_start.value,
             actual_end_date: this.refs.actual_end_date.value,
-            actual_weightage: this.refs.actual_weightage.value,
-            members: []
+            members: this.state.members
         }
         this.props.addTask({task: task});
        
     }
+    addMembers(e){
+        e.preventDefault();
+        this.setState({members: [this.refs.member.value, ...this.state.members]});
+        this.refs.member.value='';
+    }
     
     render()
-    {
-        console.log(this.props.location);
+    {       if(!this.state.addMembers){
+                let members = [];
+                const returnMembers = () => {
+                    for(let i=0;i<this.state.members.length;i++){
+                        members.push(<li key={i}>{this.state.members[i].member} <span className="btn btn-danger btn-sm rounded-circle" onClick={() => this.removeTask(this.state.tasks[i])}>&#x2715;</span></li>);
+                    }
+                    return members;
+                }
+        
+
         return(
             <div className="container" > <nav className="navbar navbar-expand-sm bg-light justify-content-center">
 
@@ -51,7 +69,7 @@ class TaskForm extends Component{
                            <tr><td value="completion">Y% completion</td><td><input type="text" ref="completion" required></input></td><td> </td>
                             <td value="review_date">Review Date</td><td><input type="date" ref="review_date" required></input></td></tr><br/>
                             <tr><td value="actual_end_date">Actual end date</td><td><input type="date" ref="actual_end_date" required></input></td><td> </td>
-                            <td value="actual_weightage">Actual weightage= G*B</td><td><input type="text" ref="actual_weightage" required></input></td></tr><br/>
+                            <td value="actual_weightage">Add Members</td><td><input type="email" ref="member" className="form-control"></input></td><td><a href={void(0)} src={Ad} className="btn btn-primary glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"  Onclick={this.addMembers}><img src={Ad}></img>Add</a></td></tr><br/>
                         </tbody>
                     </table>
                     <br/>
@@ -61,7 +79,7 @@ class TaskForm extends Component{
 
 
         );
-       
+        }
     }
 }
 

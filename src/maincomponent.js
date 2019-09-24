@@ -16,6 +16,7 @@ import Com from './adminpanel/comments';
 import Complete from './adminpanel/completion';
 import UAccess from './adminpanel/useraccess';
 import List from './dashboard/listproject';
+import Disable from './dashboard/disablecard';
 
 class Main extends Component{
     constructor(props){
@@ -158,6 +159,7 @@ class Main extends Component{
               <Route exact path='/complete' component={() => <Complete />} />
               <Route exact path='/access' component={()=> <UAccess/> }/>
               <Route exact path='/list' component={()=> <List/> }/>
+              <Route exact path='/disable' component={()=> <Disable />}/>
               <Redirect to={this.state.user.type.name=="Review"?'/admin':'/home'} />
           </Switch>
         </div>

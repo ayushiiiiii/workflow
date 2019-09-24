@@ -1,6 +1,9 @@
 import React from 'react';
 import Progress from   '../project/progress';
 import { Link } from 'react-router-dom';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 
 function List(props){;
     return(
@@ -31,7 +34,9 @@ function List(props){;
                     </tr>
                     </tbody>
                 </table></center>
-                    <Progress percentage={props.completion}/>
+                <div className="col-sm-2 text-center">
+                    <CircularProgressbar value={props.completion} text={`${props.completion}%` } />;
+                    </div>
                     <Link to={"/home/"+props.project._id}><button type="Submit">More details</button></Link> 
                 </div>
             </div>

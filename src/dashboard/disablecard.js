@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './project.css';
+import '../project/project.css';
 import { Link } from 'react-router-dom';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -27,9 +27,9 @@ class Project extends Component{
                                 <th>Actual</th>
                             </tr>
                             <tr>
-                                <td><span>{start_date.toDateString().slice(4)}</span></td>
-                                <td><span>{this.props.task.expected_completion}</span></td>
-                                <td><span>{this.props.task.actual_end_date}</span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
                             </tr>
                             <tr>
                                 <td>Date </td>
