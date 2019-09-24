@@ -11,7 +11,9 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
+.commentForm{
+   padding-bottom: 50px;
+}
 .fo{
    background:white;
 }
@@ -245,9 +247,7 @@ body {
    border-radius: 0 0 4px 4px;
 }
 
-.comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
-.comment-box .comment-name.by-author:after {
-   content: 'autor';
+.comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {
    background: #03658c;
    color: #FFF;
    font-size: 12px;
@@ -257,6 +257,9 @@ body {
    -webkit-border-radius: 3px;
    -moz-border-radius: 3px;
    border-radius: 3px;
+}
+.comment-box .comment-name.by-author:after {
+   
 }
 
 /** =====================

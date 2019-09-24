@@ -16,7 +16,6 @@ import Com from './adminpanel/comments';
 import Complete from './adminpanel/completion';
 import UAccess from './adminpanel/useraccess';
 import List from './dashboard/listproject';
-import FileSystem from './filesystem/filesystem';
 import Disable from './dashboard/disablecard';
 
 class Main extends Component{
@@ -147,16 +146,16 @@ class Main extends Component{
         return(
         <div>
           <Switch>
-              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard projectId={match.params.projectId} Loggedin={this.state.Loggedin} project={this.state.projects.filter(project =>oject => project._id==match.params.projectId)[0]} />} />
+              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard projectId={match.params.projectId} Loggedin={this.state.Loggedin} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
               <Route exact path='/home' component={() => <Dashboard projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
-              <Route exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project =>oject => project._id==match.params.projectId)[0]} />} />
+              <Route exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
               <Route exact path='/filespop' component={() => <Addpop  />} />
               <Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />
               <Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />
               <Route exact path='/admin' component={() => <Admin />} />
               <Route exact path='/editproject' component={() => <Editp />} />
               <Route exact path='/edittask' component={() => <Edittask />} />
-              <Route exact path='/comments' component={() => <Com />} />
+              <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
               <Route exact path='/complete' component={() => <Complete />} />
               <Route exact path='/access' component={()=> <UAccess/> }/>
               <Route exact path='/list' component={()=> <List/> }/>
