@@ -8374,6 +8374,11 @@ react-sortable-hoc@0.6.8:
     lodash "^4.12.0"
     prop-types "^15.5.7"
 
+react-toggle-switch@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-toggle-switch/-/react-toggle-switch-3.0.4.tgz#87e516e2bbc421ce4998b8eb28b29457db180724"
+  integrity sha512-eM2Izl0qNrdFZlmRwpXPpUjaYVISHVy8dxCN9l6eRZ7KpmrDsIGInDpoSRU2QPs596+Al+udOArdXX5wCRg0Gg==
+
 react-virtualized@9.12.0:
   version "9.12.0"
   resolved "https://registry.yarnpkg.com/react-virtualized/-/react-virtualized-9.12.0.tgz#1b4d3e5ab197ed1d832df8e6688b1b18f725b6c5"

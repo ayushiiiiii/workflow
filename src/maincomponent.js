@@ -157,7 +157,7 @@ class Main extends Component{
               <Route exact path='/edittask' component={() => <Edittask />} />
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
               <Route exact path='/complete' component={() => <Complete />} />
-              <Route exact path='/access' component={()=> <UAccess/> }/>
+              <Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>
               <Route exact path='/list' component={()=> <List/> }/>
               <Route exact path='/disable' component={()=> <Disable />}/>
               <Redirect to={this.state.user.type.name=="Review"?'/admin':'/home'} />
