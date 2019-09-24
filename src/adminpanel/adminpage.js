@@ -18,7 +18,7 @@ class Admin extends Component{
     </nav>
     <br/>
     <div className="row">
-        <Link to="./app" className="col-sm-3" ><button><img src={fold}></img><h3>Add folder</h3></button></Link>
+        <Link to="./access" className="col-sm-3" ><button><img src={fold}></img><h3>Add folder</h3></button></Link>
         <p className="col-sm-1"></p>       
         <Link to="./signup"  className="col-sm-3"><button><img src={login}></img><h3>Add User</h3></button></Link>
         <p className="col-sm-1"></p>  

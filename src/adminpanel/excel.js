@@ -35,7 +35,7 @@ class TaskForm extends Component{
     }
     addMembers(e){
         e.preventDefault();
-        if(this.refs.member.value=='') return;
+        if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.refs.member.value))) return;
         this.setState({members: [this.refs.member.value, ...this.state.members]});
         this.refs.member.value='';
     }
