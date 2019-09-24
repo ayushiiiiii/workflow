@@ -52,6 +52,18 @@ class ProjectForm extends Component{
         this.setState({tasks: arr});
     }
         
+    removeField(){
+            this.refs.project_name.value=''
+            this.refs.project_number.value=''
+            this.refs.short_name.value=''
+            this.refs.location.value=''
+            this.refs.machine.value=''
+            this.refs.start_date.value=''
+            this.refs.fat_date.value=''
+            this.refs.actual_date.value=''
+            this.refs.fat_date.value=''
+            this.state.tasks=''
+    }
 render(){
         if(!this.state.addTask){
             let tasks = [];

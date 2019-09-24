@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import './dashboard.css';
-import Progress from   '../project/progress';
 import { Link } from 'react-router-dom';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 class Cards extends Component{
+    constructor(props){
+        super(props);
+    }
     render(){
+        const percentage="50"
         return(
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project ">
@@ -28,7 +33,11 @@ class Cards extends Component{
                             </tr>
                             </tbody>
                         </table></center>
-                         <Progress percentage={this.props.completion}/>
+
+                        
+                    <div className="col-sm-6">
+                    <CircularProgressbar value={this.props.completion} text={`${this.props.completion}%`} />;
+                    </div>
                     <Link to={"/home/"+this.props.project._id}><button type="Submit">More details</button></Link> 
                     </div>
                 </div>
