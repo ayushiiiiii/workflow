@@ -170,7 +170,7 @@ class Main extends Component{
               <Route exact path='/editproject' component={() => <Editp />} />
               <Route exact path='/edittask' component={() => <Edittask />} />
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
-              <Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks} />} />
+              <Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks:[]} />} />
               <Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>
               <Route exact path='/list' component={()=> <List/> }/>
               <Route exact path='/disable' component={()=> <Disable />}/>

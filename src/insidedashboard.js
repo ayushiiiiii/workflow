@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './dashboard/dashboard.css';
 import Project from './project/project';
 import HttpService from './services/http-service';
 import Navbar from './project/navbar';

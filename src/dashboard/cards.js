@@ -9,7 +9,6 @@ class Cards extends Component{
         super(props);
     }
     render(){
-        const percentage="50"
         return(
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project ">
@@ -36,7 +35,7 @@ class Cards extends Component{
 
                         
                     <div className="col-sm-6">
-                    <CircularProgressbar value={this.props.completion} text={`${this.props.completion}%`} />;
+                    <CircularProgressbar value={this.props.completion} text={`${this.props.completion}%`} />
                     </div>
                     <Link to={"/home/"+this.props.project._id}><button type="Submit">More details</button></Link> 
                     </div>

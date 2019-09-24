@@ -32,7 +32,7 @@ render(){
           <center> <h1>Project list </h1> </center>
           <div className="toggle">
             <span>Show Cards</span><br/>
-            <label className="switch">
+            <label className="switchs">
               <input type="checkbox" onChange={this.handleCheckChange}/>
               <span className="slider round"></span>
             </label>
