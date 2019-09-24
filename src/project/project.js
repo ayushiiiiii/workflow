@@ -41,9 +41,11 @@ class Project extends Component{
                         <div className="col-6">
                         <CircularProgressbar value={this.props.task.completion} text={`${this.props.task.completion}%`} />;
                         </div>
-                        <br/>
-                        <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button className="btn" type="submit">Details</button></Link>
-                        </div>
+                        <br/><div className="row text-center wraper bbb">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button className="btn" type="submit">Folders</button></Link>
+                        <Link to={'/home/'+this.props.projectId+'/'+this.props.task._id+'/comments'}><button className="btn" type="submit">Comments</button></Link>
+                        </div></div>
                  </div>
            
         );
