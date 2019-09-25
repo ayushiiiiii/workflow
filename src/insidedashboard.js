@@ -4,6 +4,7 @@ import Project from './project/project';
 import HttpService from './services/http-service';
 import Navbar from './project/navbar';
 import {Link} from 'react-router-dom';
+import Disable from './dashboard/disablecard';
 
 
 class App extends Component {
@@ -26,7 +27,7 @@ render(){
       <div className=" App-main">
         <div className="row">
         {Projects}
-        
+        <Disable projectId={this.props.projectId} task={this.props.project.tasks[0]}/>
       </div>  
         </div>
         <Link to={'/home/'+this.props.projectId+'/file-system/Application Data'}><button type="submit"  className="btnnav " > Application data</button></ Link>

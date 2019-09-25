@@ -18,6 +18,7 @@ class Project extends Component{
                 <div className="card-header">
                     <h4 className="card-title">{this.props.task.name}</h4>
                 </div>
+                <div className="card-body">
                 <br/>
 <center><table className="table-responsive table table-striped text-center ">
                             <tbody>
@@ -39,9 +40,9 @@ class Project extends Component{
                             </tbody>
                         </table></center>
                         <div className="col-6">
-                        <CircularProgressbar value={this.props.task.completion} text={`${this.props.task.completion}%`} />;
-                        </div>
-                        <br/><div className="row text-center wraper bbb">
+                        <CircularProgressbar value={this.props.task.completion} text={`${this.props.task.completion}%`} />
+                        </div></div>
+                        <br/><div className="row text-center wraper bbb card-footer">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button className="btn" type="submit">Folders</button></Link>
                         <Link to={'/home/'+this.props.projectId+'/'+this.props.task._id+'/comments'}><button className="btn" type="submit">Comments</button></Link>
