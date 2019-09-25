@@ -5,7 +5,6 @@ import Ad from '../pluss.png';
 
 class TaskForm extends Component{
     constructor(props){
-        
         super(props);
         this.state={
         members: []
