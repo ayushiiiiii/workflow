@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './dashboard/dashboard.css';
 import Project from './project/project';
 import HttpService from './services/http-service';
 import Navbar from './project/navbar';
@@ -36,7 +36,7 @@ render(){
       
         
           <Link to={'/home/'+this.props.projectId+'/file-system/Project Management'}> <button type="submit"  className="btnnav "> Project Management</button></Link>
-         <Link to={'/complete'} ><button type="submit"  className="btnnav "> Edit Completion</button></Link>
+         <Link to={'/home/'+this.props.projectId+'/complete'} ><button type="submit"  className="btnnav "> Edit Completion</button></Link>
        
           </div>
        </div>
