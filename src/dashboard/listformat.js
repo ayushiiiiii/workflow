@@ -35,7 +35,7 @@ function List(props){;
                     </tbody>
                 </table></center>
                 <div className="col-sm-2 text-center">
-                    <CircularProgressbar value={props.completion} text={`${props.completion}%` } />;
+                    <CircularProgressbar value={props.completion} text={`${props.completion}%` } />
                     </div>
                     <Link to={"/home/"+props.project._id}><button type="Submit">More details</button></Link> 
                 </div>

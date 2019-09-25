@@ -9,16 +9,40 @@ import Disable from './dashboard/disablecard';
 
 class App extends Component {
   constructor(props){
-     super(props);
+    super(props);
  }
-componentDidMount(){
-  
-}
 render(){
-  let Projects = [];
+  let Projects = [], Disables = [];
   if(this.props.project){
     for(let i=0;i<this.props.project.tasks.length;i++){
       Projects.push(<Project key={i} projectId={this.props.projectId} task={this.props.project.tasks[i]} />);
+    }
+    let temp = {
+      "Mechanical Design": false,
+      "Electrical Design": false,
+      "Mechanical Parts Ordering": false,
+      "Electrical Parts Ordering": false,
+      "Mechanical assy": false,
+      "Electrical assy": false,
+      "Total Assembly": false,
+      "Programming": false,
+      "Testing and internal trial": false,
+      "FAT & review point": false,
+      "Installation Commissioning": false,
+      "Handover and Closure": false
+    };
+    let disables=[];
+    this.props.project.tasks.forEach(task => {
+      temp[task.name]=true;
+    });
+    console.log(temp);
+    for(let key in temp){
+      if(!temp[key]){
+        disables.push(key);
+      }
+    }
+    for(let i=0;i<disables.length;i++){
+      Disables.push(<Disable task={disables[i]}/>);
     }
     return (
       <div className="container-fluid">
@@ -27,7 +51,7 @@ render(){
       <div className=" App-main">
         <div className="row">
         {Projects}
-        <Disable projectId={this.props.projectId} task={this.props.project.tasks[0]}/>
+        {Disables}
       </div>  
         </div>
         <Link to={'/home/'+this.props.projectId+'/file-system/Application Data'}><button type="submit"  className="btnnav " > Application data</button></ Link>

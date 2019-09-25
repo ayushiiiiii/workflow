@@ -17,7 +17,7 @@ class  Disable extends Component{
         <div className="col-12 col-sm-6 col-md-3 ">
             <div className="card project text-center ">
                 <div className="card-header ">
-                    <h4 className="card-title">{this.props.task.name}</h4>
+                    <h4 className="card-title">{this.props.task}</h4>
                 </div>
                 <div className="card-body bodyy">
                 <br/>
@@ -29,9 +29,9 @@ class  Disable extends Component{
                                 <th>Actual</th>
                             </tr>
                             <tr>
-                                <td><span></span></td>
-                                <td><span></span></td>
-                                <td><span></span></td>
+                                <td><span>--/--/----</span></td>
+                                <td><span>--/--/----</span></td>
+                                <td><span>--</span></td>
                             </tr>
                             <tr>
                                 <td>Date </td>
@@ -41,7 +41,7 @@ class  Disable extends Component{
                             </tbody>
                         </table></center>
                         <div className="col-6">
-                        <CircularProgressbar value={this.props.task.completion} text={`${this.props.task.completion}%`} />
+                        <CircularProgressbar value={0} text={`0%`} />
                         </div>
                         <br/>
                     </div><div className="card-footer">
