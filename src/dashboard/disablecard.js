@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import '../project/project.css';
-import { Link } from 'react-router-dom';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { buildStyles } from 'react-circular-progressbar';
 import './disabledcard.css';
 import Ad from '../pluss.png';
 
@@ -15,8 +13,8 @@ class  Disable extends Component{
         this.state={
         members: []
     }
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.addMembers = this.addMembers.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.addMembers = this.addMembers.bind(this);
     }
     onChange(e){
         this.setState({
@@ -26,17 +24,16 @@ class  Disable extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
         const task = {
-            name: this.refs.major_task.value,
-            weightage: this.refs.weightage.value,
-            start_date: this.refs.start_date.value,
-            end_date: this.refs.end_date.value,
-            completion: this.refs.completion.value,
-            actual_start: this.refs.actual_start.value,
-            actual_end_date: this.refs.actual_end_date.value,
+            name: this.props.task,
+            weightage: this.refs["weightage"+this.props.task.split(' ').join('-')].value,
+            start_date: this.refs["start_date"+this.props.task.split(' ').join('-')].value,
+            end_date: this.refs["end_date"+this.props.task.split(' ').join('-')].value,
+            actual_start: this.refs["actual_start"+this.props.task.split(' ').join('-')].value,
+            actual_end_date: this.refs["actual_end_date"+this.props.task.split(' ').join('-')].value,
+            review_data: this.refs["review_date"+this.props.task.split(' ').join('-')].value,
             members: this.state.members
         }
-        this.props.addTask({task: task});
-       
+        this.props.addTask({projectId: this.props.projectId, task: task});
     }
    
     addMembers(e){
@@ -59,7 +56,6 @@ class  Disable extends Component{
                 }
                 return members;
             }
-        let start_date = new Date(this.props.task.start_date);
         return(
         <div className="col-12 col-sm-6 col-md-3 ">
             <div className="card project text-center ">
@@ -78,7 +74,7 @@ class  Disable extends Component{
                             <tr>
                                 <td><span>--/--/----</span></td>
                                 <td><span>--/--/----</span></td>
-                                <td><span>--</span></td>
+                                <td><span>--/--/----</span></td>
                             </tr>
                             <tr>
                                 <td>Date </td>
@@ -92,35 +88,36 @@ class  Disable extends Component{
                         </div>
                         <br/>
                     </div><div className="card-footer">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" className="btn btn-primary" data-toggle="modal" data-target={'#'+this.props.task.split(' ').join('-')}>
                 Add Now
                 </button>
                 </div>
 
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                <div className="modal fade" id={this.props.task.split(' ').join('-')} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">{this.props.task}</h5>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form  id="myform" onSubmit={this.handleSubmit} method="post" className="form-group fo">
-                            <hr/>
-                            <label htmlfor="start_date">Start date(planned)</label>
-                            <input type="date" ref="start_date" required></input>
-                            <label htmlfor="end_date">End date(planned)</label>
-                            <input type="date" ref="end_date" required></input>
-                            <label  htmlfor="duration">actual start Date</label>
-                            <input type="date" ref="actual_start" required></input>
-                            <label htmlfor=" review_date">Review Date</label>
-                            <input type="date" ref="review_date" required></input>
-                            <label htmlfor="actual_end_date">Actual end date</label>
-                            <input type="date" ref="actual_end_date" required></input>
-                            <label htmlfor="members">Add Members</label>
+                    <div className="modal-body">
+                        <form method="post" className="form-group fo">
+                            <label>Weightage</label>
+                            <input type="text" ref={"weightage"+this.props.task.split(' ').join('-')} />
+                            <label htmlFor="start_date">Start date(planned)</label>
+                            <input type="date" ref={"start_date"+this.props.task.split(' ').join('-')} required></input>
+                            <label htmlFor="end_date">End date(planned)</label>
+                            <input type="date" ref={"end_date"+this.props.task.split(' ').join('-')} required></input>
+                            <label  htmlFor="duration">actual start Date</label>
+                            <input type="date" ref={"actual_start"+this.props.task.split(' ').join('-')} required></input>
+                            <label htmlFor=" review_date">Review Date</label>
+                            <input type="date" ref={"review_date"+this.props.task.split(' ').join('-')} required></input>
+                            <label htmlFor="actual_end_date">Actual end date</label>
+                            <input type="date" ref={"actual_end_date"+this.props.task.split(' ').join('-')} required></input>
+                            <label htmlFor="members">Add Members</label>
                             <input type="email" ref="member" className="form-control"></input>
                              <a href={void(0)} src={Ad} className="btn btn-primary glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"  onClick={this.addMembers}><img src={Ad}></img>Add</a>
 
@@ -128,9 +125,9 @@ class  Disable extends Component{
 
                         </form>
                     </div>
-                    <div class="modal-footer">
+                    <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="button" className="btn btn-primary" form='myform' value='Save Changes' />
+                        <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.handleSubmit}>Save Changes</button>
                     </div>
                     </div>
                 </div>

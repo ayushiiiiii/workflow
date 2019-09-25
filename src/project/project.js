@@ -12,6 +12,7 @@ class Project extends Component{
     }
     render(){
         let start_date = new Date(this.props.task.start_date);
+        let actual_end_date = new Date(this.props.task.actual_end_date);
         return(
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project text-center">
@@ -30,7 +31,7 @@ class Project extends Component{
                             <tr>
                                 <td><span>{start_date.toDateString().slice(4)}</span></td>
                                 <td><span>{this.props.task.expected_completion}</span></td>
-                                <td><span>{this.props.task.actual_end_date}</span></td>
+                                <td><span>{actual_end_date.toDateString().slice(4)}</span></td>
                             </tr>
                             <tr>
                                 <td>Date </td>

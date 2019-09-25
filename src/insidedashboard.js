@@ -35,14 +35,13 @@ render(){
     this.props.project.tasks.forEach(task => {
       temp[task.name]=true;
     });
-    console.log(temp);
     for(let key in temp){
       if(!temp[key]){
         disables.push(key);
       }
     }
     for(let i=0;i<disables.length;i++){
-      Disables.push(<Disable task={disables[i]}/>);
+      Disables.push(<Disable projectId={this.props.projectId} addTask={this.props.addTask} task={disables[i]}/>);
     }
     return (
       <div className="container-fluid">
