@@ -5,13 +5,60 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { buildStyles } from 'react-circular-progressbar';
 import './disabledcard.css';
+import Ad from '../pluss.png';
+
+
 
 class  Disable extends Component{
     constructor(props){
         super(props);
-
+        this.state={
+        members: []
+    }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.addMembers = this.addMembers.bind(this);
+    }
+    onChange(e){
+        this.setState({
+            [e.target.project_name]: e.target.value
+    })
+}
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const task = {
+            name: this.refs.major_task.value,
+            weightage: this.refs.weightage.value,
+            start_date: this.refs.start_date.value,
+            end_date: this.refs.end_date.value,
+            completion: this.refs.completion.value,
+            actual_start: this.refs.actual_start.value,
+            actual_end_date: this.refs.actual_end_date.value,
+            members: this.state.members
+        }
+        this.props.addTask({task: task});
+       
+    }
+   
+    addMembers(e){
+        e.preventDefault();
+        if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.refs.member.value))) return;
+        this.setState({members: [this.refs.member.value, ...this.state.members]});
+        this.refs.member.value='';
+    }
+    removeMembers(member){
+        let arr = [...this.state.members];
+        arr.splice(this.state.members.indexOf(member),1);
+        this.setState({members: arr});
     }
     render(){
+        if(!this.state.addMembers){
+            let members = [];
+            const returnMembers = () => {
+                for(let i=0;i<this.state.members.length;i++){
+                    members.push(<li key={i}>{this.state.members[i]} <span className="btn btn-danger btn-sm rounded-circle" onClick={() => this.removeMembers(this.state.members[i])}>&#x2715;</span></li>);
+                }
+                return members;
+            }
         let start_date = new Date(this.props.task.start_date);
         return(
         <div className="col-12 col-sm-6 col-md-3 ">
@@ -45,10 +92,8 @@ class  Disable extends Component{
                         </div>
                         <br/>
                     </div><div className="card-footer">
-                        <button type="submit" className="btn btn-primary" >Add</button>
-                     
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
+                Add Now
                 </button>
                 </div>
 
@@ -63,11 +108,29 @@ class  Disable extends Component{
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <form  id="myform" onSubmit={this.handleSubmit} method="post" className="form-group fo">
+                            <hr/>
+                            <label htmlfor="start_date">Start date(planned)</label>
+                            <input type="date" ref="start_date" required></input>
+                            <label htmlfor="end_date">End date(planned)</label>
+                            <input type="date" ref="end_date" required></input>
+                            <label  htmlfor="duration">actual start Date</label>
+                            <input type="date" ref="actual_start" required></input>
+                            <label htmlfor=" review_date">Review Date</label>
+                            <input type="date" ref="review_date" required></input>
+                            <label htmlfor="actual_end_date">Actual end date</label>
+                            <input type="date" ref="actual_end_date" required></input>
+                            <label htmlfor="members">Add Members</label>
+                            <input type="email" ref="member" className="form-control"></input>
+                             <a href={void(0)} src={Ad} className="btn btn-primary glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"  onClick={this.addMembers}><img src={Ad}></img>Add</a>
+
+                          {returnMembers() }
+
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <input type="button" className="btn btn-primary" form='myform' value='Save Changes' />
                     </div>
                     </div>
                 </div>
@@ -78,6 +141,6 @@ class  Disable extends Component{
         );
     }
 }
+}
 
-
- export default Disable;
+ export default Disable
