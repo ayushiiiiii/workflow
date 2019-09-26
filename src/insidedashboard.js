@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './dashboard/dashboard.css';
 import Project from './project/project';
-import HttpService from './services/http-service';
 import Navbar from './project/navbar';
 import {Link} from 'react-router-dom';
 import Disable from './dashboard/disablecard';

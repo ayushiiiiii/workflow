@@ -5,8 +5,6 @@ import 'react-circular-progressbar/dist/styles.css';
 import './disabledcard.css';
 import Ad from '../pluss.png';
 
-
-
 class  Disable extends Component{
     constructor(props){
         super(props);
@@ -19,8 +17,8 @@ class  Disable extends Component{
     onChange(e){
         this.setState({
             [e.target.project_name]: e.target.value
-    })
-}
+        })
+    }
     handleSubmit = (event) => {
         event.preventDefault();
         const task = {

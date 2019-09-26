@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import './dashboard.css';
-import HttpService from '../services/http-service';
 import Cards  from './cards';
 import List from './listformat';
-import {Redirect} from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { baseUrl } from '../baseurl';
+
+const MySwal = withReactContent(Swal);
 
 
 class App extends Component {
@@ -13,9 +16,42 @@ constructor(){
     showCards: false
   }
   this.handleCheckChange = this.handleCheckChange.bind(this);
+  this.deleteProject = this.deleteProject.bind(this);
 }
 handleCheckChange(){
   this.setState({showCards: !this.state.showCards});
+}
+deleteProject(projectId, name){
+  MySwal.fire({
+      title: <p>Are you sure you want to delete Project {name}</p>,
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      customClass: {
+          popup: 'animated tada'
+      },
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+      if (result.value) {
+        fetch(baseUrl+'projects/'+projectId, {
+          method: "DELETE",
+          headers: {
+            'Authorization': 'Bearer '+this.props.token
+          }
+        }).then(res => res.json()).then((res) => {
+          if(res.success){
+            this.props.getProjects();
+            MySwal.fire(
+              'Deleted!',
+              'Project '+name+' has been deleted.',
+              'success'
+            )
+          }
+        });
+      }
+  });
 }
 render(){
   const cardss = [];
@@ -23,8 +59,8 @@ render(){
   for(let i=0;i<this.props.projects.length;i++){
     let sum = 0;
     this.props.projects[i].tasks.forEach(task => {sum += task.completion*task.weightage/100;});
-    cardss.push(<Cards key={i} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
-    list.push(<List key={i} index={i} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
+    cardss.push(<Cards key={i} deleteProject={this.deleteProject} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
+    list.push(<List key={i} index={i} deleteProject={this.deleteProject} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
   }
     return (
     <div className="container-fluid">

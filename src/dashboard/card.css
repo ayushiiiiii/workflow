@@ -11,15 +11,9 @@
     background-color: #008CBA;
 }
 */
-
-.project
-{
-    border: 1px solid black;
-    /* box-sizing: border-box; */
-    height: 200rpm;
-    /* padding :20px; */
-     max-width:300rem;
-}
-button{
-    float: center;
+.close-button{
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }

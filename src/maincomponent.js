@@ -16,7 +16,6 @@ import Com from './adminpanel/comments';
 import Complete from './adminpanel/completion';
 import UAccess from './adminpanel/useraccess';
 import List from './dashboard/listproject';
-import Disable from './dashboard/disablecard';
 
 class Main extends Component{
     constructor(props){
@@ -112,6 +111,12 @@ class Main extends Component{
         }).catch((err) => console.log(err));
     }
     editTasks({projectId, tasks}){
+        for(let i=0;i<tasks.length;i++){
+            tasks[i].members  =tasks[i].members.map(member => member.username);
+            for(let j=0;j<tasks[i].comments.length;j++){
+                tasks[i].comments[j].author = tasks[i].comments[j].author._id;
+            }
+        }
         fetch(baseUrl+'projects/'+projectId,{
             method: "PUT",
             headers:{
@@ -182,7 +187,7 @@ class Main extends Component{
         <div>
           <Switch>
               <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard projectId={match.params.projectId} addTask={this.addTask} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
-              <Route exact path='/home' component={() => <Dashboard projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
+              <Route exact path='/home' component={() => <Dashboard getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
               <Route exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
               <Route exact path='/filespop' component={() => <Addpop />} />
               <Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />
