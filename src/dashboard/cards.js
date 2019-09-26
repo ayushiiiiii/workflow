@@ -70,7 +70,7 @@ class Cards extends Component{
                     </div>
                     <div className="card-footer">
                     <Link to={"/home/"+this.props.project._id}><button type="Submit">More details</button></Link>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index}>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index}>
                         Edit 
                         </button>   
                     </div>
@@ -80,16 +80,16 @@ class Cards extends Component{
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id={this.props.index} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div className="modal fade" id={this.props.index} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                            
                         <div className="container">
                     <nav className="navbar navbar-expand-sm bg-light justify-content-center">
@@ -100,41 +100,41 @@ class Cards extends Component{
                                         <br/>
                                     <div className="row">
                                         <div className="col">
-                                            <label htmlfor="mdsno" className="control-label "><h5><b>Project Number</b></h5></label>
+                                            <label htmlFor="mdsno" className="control-label "><h5><b>Project Number</b></h5></label>
                                             <input type="text" ref={"mdsno"+this.props.project._id} value={this.state.mdsno} onChange={() => this.onChange("mdsno")} required></input></div>
                                         <div className="col">
-                                            <label  htmlfor="name" className="control-label "><h5><b>Project Name</b></h5></label>
+                                            <label  htmlFor="name" className="control-label "><h5><b>Project Name</b></h5></label>
                                             <input type="text" ref={"name"+this.props.project._id} value={this.state.name} onChange={() => this.onChange("name")} required></input>
                                 </div></div> <br/>
                             <div className="row">
                                     <div className="col">
-                                        <label htmlfor="short_name" className="control-label" ><h5><b>Short Name</b></h5></label>
+                                        <label htmlFor="short_name" className="control-label" ><h5><b>Short Name</b></h5></label>
                                         <input type="text" ref={"short_name"+this.props.project._id} value={this.state.short_name} onChange={() => this.onChange("short_name")}  required></input></div>
                                     <div className="col">
-                                        <label htmlfor="location"  className="control-label"><h5><b>Location</b></h5></label>
+                                        <label htmlFor="location"  className="control-label"><h5><b>Location</b></h5></label>
                                         <input type="text" ref={"location"+this.props.project._id} value={this.state.location} onChange={() => this.onChange("location")}  required></input>
                             </div></div> <br/>
                                 <div className="row">
                                     <div className="col">   
-                                        <label htmlfor="start_date"  className="control-label"><h5><b>start date</b></h5></label>
+                                        <label htmlFor="start_date"  className="control-label"><h5><b>start date</b></h5></label>
                                         <input type="date" ref={"start_date"+this.props.project._id} value={this.state.start_date} onChange={() => this.onChange("start_date")}  required></input></div>
                                     <div className="col">
-                                        <label htmlfor="fat_date"  className="control-label"><h5><b>Fat Date</b></h5></label>
+                                        <label htmlFor="fat_date"  className="control-label"><h5><b>Fat Date</b></h5></label>
                                         <input type="date"ref={"fat_date"+this.props.project._id} value={this.state.fat_date} onChange={() => this.onChange("fat_date")} required></input>
                                     </div></div> <br/>
                                 <div className="row">
                                         <div className="col">
-                                            <label htmlfor="actual_end"  className="control-label"><h5><b>Actual Date</b></h5></label>
+                                            <label htmlFor="actual_end"  className="control-label"><h5><b>Actual Date</b></h5></label>
                                             <input type="date" ref={"actual_end"+this.props.project._id} value={this.state.actual_end} onChange={() => this.onChange("actual_end")}  required></input></div>
                                         <div className="col">
-                                            <label htmlfor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
+                                            <label htmlFor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
                                             <select className="dropdown" ref={"active"+this.props.project._id} onChange={() => this.onChange("active")}  required>
                                             <option value={true} selected={this.state.active}>Active</option>
                                             <option value={false} selected={!this.state.active}>Inactive</option></select ></div>
                             </div><br/>
                             <div className="row">
                                     <div className="col">
-                                        <label htmlfor="machine" className="control-label"><h5><b>Machine</b></h5></label>
+                                        <label htmlFor="machine" className="control-label"><h5><b>Machine</b></h5></label>
                                         <input type="text" ref={"machine"+this.props.project._id} value={this.state.machine} onChange={() => this.onChange("machine")}  required></input></div>
                                    </div><br/>
                                 
@@ -144,9 +144,9 @@ class Cards extends Component{
 
 
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
                         </div>
                         </div>
                     </div>

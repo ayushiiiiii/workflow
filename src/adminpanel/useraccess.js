@@ -91,10 +91,11 @@ class UserA extends Component{
         return(
                 <div className="container">
                     <form  className="form-group" onSubmit={this.handleSubmit} method="post">
-                    <div class="container-fluid">
+                    <div className="container-fluid">
                     <h1>User Access Page</h1>
                     <hr/>
                     <table className="tabledata table-responsive" >
+                        <tbody>
                         <tr>
                             <th>Access</th><th>Level A</th><th>Level B</th><th>Level C</th><th>Level D</th>
                         </tr>
@@ -164,7 +165,7 @@ class UserA extends Component{
                             <td><Switch onClick={() => this.handleClick(2,'offer_details')} on={this.state.usertypes[2].offer_details}/></td>
                             <td><Switch onClick={() => this.handleClick(3,'offer_details')} on={this.state.usertypes[3].offer_details}/></td>
                             </tr>
-
+                        </tbody>
                     </table>
 
                         </div><br/>

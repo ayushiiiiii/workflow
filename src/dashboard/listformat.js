@@ -40,7 +40,7 @@ function List(props){;
                     <CircularProgressbar value={props.completion} text={`${props.completion}%` } />
                     </div>
                     <Link to={"/home/"+props.project._id}><button type="Submit">More details</button></Link>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target={"#"+props.index2}>Edit</button>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#"+props.index2}>Edit</button>
                 </div>
             </div>
             </div>

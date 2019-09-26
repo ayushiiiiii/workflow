@@ -30,8 +30,11 @@ class Admin extends Component{
     <div>
         <Link to="./home"><button  className="col-sm-3"><img  src={dash}></img><h3>View Dashboard</h3></button></Link>
     </div>
-
-
+<br/>
+<br/>
+<div className="">
+<button type="submit" className="btn btn-primary "> LogOut</button>
+</div>
 </div>
 
         );
