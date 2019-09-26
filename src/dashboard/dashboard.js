@@ -59,7 +59,7 @@ render(){
   for(let i=0;i<this.props.projects.length;i++){
     let sum = 0;
     this.props.projects[i].tasks.forEach(task => {sum += task.completion*task.weightage/100;});
-    cardss.push(<Cards key={i} index={"project"+i} showCards={this.state.showCards} deleteProject={this.deleteProject} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
+    cardss.push(<Cards key={i} editProject={this.props.editProject} index={"project"+i} showCards={this.state.showCards} deleteProject={this.deleteProject} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
     list.push(<List key={i} index={i} index2={"project"+i} deleteProject={this.deleteProject} title={this.props.projects[i].name} project= {this.props.projects[i]} completion={sum} />);
   }
     return (
