@@ -5,6 +5,8 @@ import pro from '../ms-project.png';
 import login from '../new_login.png';
 import dash from '../monitor.png';
 import {Link} from 'react-router-dom';
+import Acces from '../user_access.png';
+import AP from '../addp.png';
 
 
 
@@ -18,11 +20,11 @@ class Admin extends Component{
     </nav>
     <br/>
     <div className="row">
-        <Link to="./access" className="col-sm-3" ><button><img src={fold}></img><h3>Add folder</h3></button></Link>
+        <Link to="./access" className="col-sm-3" ><button><img src={Acces}></img><h3>User Access</h3></button></Link>
         <p className="col-sm-1"></p>       
         <Link to="./signup"  className="col-sm-3"><button><img src={login}></img><h3>Add User</h3></button></Link>
         <p className="col-sm-1"></p>  
-        <Link to="./addProject" className="col-sm-3"><button ><img  src={fold}></img><h3>Add Project</h3></button></Link>
+        <Link to="./addProject" className="col-sm-3"><button ><img  src={AP}></img><h3>Add Project</h3></button></Link>
     </div>
     <br />
     <div>

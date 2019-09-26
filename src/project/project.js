@@ -16,7 +16,7 @@ class Project extends Component{
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project text-center">
                 <div className="card-header">
-                    <h4 className="card-title">{this.props.task.name}</h4>
+                    <h4 className="card-title">{this.props.task.name}&nbsp; <i className="fa fa-close"/> </h4>
                 </div>
                 <div className="card-body">
                 <br/>
@@ -43,7 +43,7 @@ class Project extends Component{
                         <CircularProgressbar value={this.props.task.completion} text={`${this.props.task.completion}%`} />
                         </div></div>
                         <br/><div className="row text-center wraper bbb card-footer">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
                         <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button className="btn" type="submit">Folders</button></Link>
                         <Link to={'/home/'+this.props.projectId+'/'+this.props.task._id+'/comments'}><button className="btn" type="submit">Comments</button></Link>
                         </div></div>

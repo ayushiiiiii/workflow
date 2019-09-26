@@ -102,25 +102,24 @@ class  Disable extends Component{
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h4 className="modal-title align-items-center" id="exampleModalLabel"><b>Add task</b></h4>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <form  id="myform" onSubmit={this.handleSubmit} method="post" className="form-group fo">
-                            <hr/>
-                            <label htmlfor="start_date">Start date(planned)</label>
+                            <label htmlfor="start_date"><b>Start date(planned)</b></label>
                             <input type="date" ref="start_date" required></input>
-                            <label htmlfor="end_date">End date(planned)</label>
+                            <label htmlfor="end_date"><b>End date(planned)</b></label>
                             <input type="date" ref="end_date" required></input>
-                            <label  htmlfor="duration">actual start Date</label>
+                            <label  htmlfor="duration"><b>actual start Date</b></label>
                             <input type="date" ref="actual_start" required></input>
-                            <label htmlfor=" review_date">Review Date</label>
+                            <label htmlfor=" review_date"><b>Review Date</b></label>
                             <input type="date" ref="review_date" required></input>
-                            <label htmlfor="actual_end_date">Actual end date</label>
+                            <label htmlfor="actual_end_date"><b>Actual end date</b></label>
                             <input type="date" ref="actual_end_date" required></input>
-                            <label htmlfor="members">Add Members</label>
+                            <label htmlfor="members"><b>Add Members</b></label>
                             <input type="email" ref="member" className="form-control"></input>
                              <a href={void(0)} src={Ad} className="btn btn-primary glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"  onClick={this.addMembers}><img src={Ad}></img>Add</a>
 
