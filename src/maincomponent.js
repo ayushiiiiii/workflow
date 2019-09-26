@@ -34,6 +34,7 @@ class Main extends Component{
         this.addUser = this.addUser.bind(this);
         this.editTasks = this.editTasks.bind(this);
         this.addTask = this.addTask.bind(this);
+        this.editProject = this.editProject.bind(this);
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
@@ -108,6 +109,27 @@ class Main extends Component{
         .then(project => {
             this.setState({projects: [...this.state.projects, project]})
         }).catch((err) => console.log(err));
+    }
+    editProject({projectId, project}){
+        console.log(JSON.stringify(project));
+        fetch(baseUrl+'projects/'+projectId,{
+            method: "PUT",
+            headers: {
+                'Authorization': 'Bearer '+this.state.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(project)
+        }).then(project => project.json())
+        .then(project => {
+            let temp = this.state.projects;
+            for(let i=0;i<temp.length;i++){
+                if(temp[i]._id==project._id){
+                    temp[i]=project;
+                    break;
+                }
+            }
+            this.setState({projects: temp});
+        })
     }
     editTasks({projectId, tasks}){
         for(let i=0;i<tasks.length;i++){
@@ -186,7 +208,7 @@ class Main extends Component{
         <div>
           <Switch>
               <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard projectId={match.params.projectId} addTask={this.addTask} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
-              <Route exact path='/home' component={() => <Dashboard getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
+              <Route exact path='/home' component={() => <Dashboard editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
               <Route exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
               <Route exact path='/filespop' component={() => <Addpop />} />
               <Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />

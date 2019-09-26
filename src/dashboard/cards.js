@@ -26,20 +26,39 @@ class Cards extends Component{
             short_name:this.props.project.short_name,
             location: this.props.project.location,
             machine:this.props.project.machine,
-            start_date :formatDate(this.props.project.start_date),
-            fat_date:formatDate(this.props.project.fat_date),
-            actual_end:formatDate(this.props.project.actual_date),
-            active: (this.props.project.active=="true"?true:false),
+            start_date: (this.props.project.start_date==null?null:formatDate(this.props.project.start_date)),
+            fat_date: (this.props.project.fat_date==null?null:formatDate(this.props.project.fat_date)),
+            actual_end: (this.props.project.actual_date==null?null:formatDate(this.props.project.actual_date)),
+            active: this.props.project.active,
+            disableSubmit: true
         }
         this.onChange = this.onChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(){
+        let project={
+            name: this.state.name,
+            mdsno: this.state.mdsno,
+            short_name: this.state.short_name,
+            location: this.state.location,
+            machine: this.state.machine,
+            start_date: this.state.start_date,
+            fat_date: this.state.fat_date,
+            actual_end: this.state.actual_end,
+            active: this.state.active,
+        };
+        this.props.editProject({projectId: this.props.project._id, project: project});
     }
     onChange(field){
-        this.setState({[field]: this.refs[field+this.props.project._id].value})
+        if(field!="active"){
+            this.setState({[field]: this.refs[field+this.props.project._id].value, disableSubmit: false})
+        }else{
+            this.setState({[field]: (this.refs[field+this.props.project._id].value=="true"?true:false), disableSubmit: false})
+        }
     }
     render(){
         let start_date = new Date(this.props.project.start_date);
         let fat_date = new Date(this.props.project.fat_date);
-        console.log(this.props.index);
         return(
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project " hidden={!this.props.showCards}>
@@ -129,8 +148,8 @@ class Cards extends Component{
                                         <div className="col">
                                             <label htmlfor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
                                             <select className="dropdown" ref={"active"+this.props.project._id} onChange={() => this.onChange("active")}  required>
-                                            <option value={true} selected={this.state.active}>Active</option>
-                                            <option value={false} selected={!this.state.active}>Inactive</option></select ></div>
+                                            <option value="true" selected={this.state.active}>Active</option>
+                                            <option value="false" selected={!this.state.active}>Inactive</option></select ></div>
                             </div><br/>
                             <div className="row">
                                     <div className="col">
@@ -146,7 +165,7 @@ class Cards extends Component{
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.handleSubmit} disabled={this.state.disableSubmit}>Save changes</button>
                         </div>
                         </div>
                     </div>
