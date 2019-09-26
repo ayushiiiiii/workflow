@@ -68,19 +68,23 @@ class Folders extends Component{
     for(let i=0;i<12;i++){
       fol.push(<Image/>);
     }
-    return(
-      <div>
+    if(this.props.project){
+      return(
         <div>
-        <Navbar start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
-        </div> 
-        <br/>
-          <div className="row">
-            <div className="col-12" >
-              <FileWindow fileId={this.state.fileId} fileError={this.state.fileError} />
+          <div>
+          <Navbar logOut={this.props.logOut} start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
+          </div> 
+          <br/>
+            <div className="row">
+              <div className="col-12" >
+                <FileWindow fileId={this.state.fileId} fileError={this.state.fileError} />
+              </div>
             </div>
           </div>
-        </div>
-    );
+      );
+    }else{
+      return(<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>);
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React from 'react';
 import './adminpage.css';
 import fold from '../folfol.png';
 import pro from '../ms-project.png';
@@ -10,8 +10,7 @@ import AP from '../addp.png';
 
 
 
-class Admin extends Component{
-    render(){
+function Admin(props){
         return(
 <div className="container-fluid">
     <nav className="navbar navbar-expand-sm bg-light justify-content-center">
@@ -33,11 +32,10 @@ class Admin extends Component{
 <br/>
 <br/>
 <div className="">
-<button type="submit" className="btn btn-primary "> LogOut</button>
+<button type="submit" className="btn btn-primary" onClick={props.logOut}> LogOut</button>
 </div>
 </div>
 
-        );
-    }
+    );
 }
 export default Admin;

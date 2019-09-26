@@ -92,7 +92,7 @@ class  Disable extends Component{
                 </div>
 
 
-                <div className="modal fade" id={this.props.task.split(' ').join('-')} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id={this.props.task.split(' ').join('-')} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                     <div className="modal-header">

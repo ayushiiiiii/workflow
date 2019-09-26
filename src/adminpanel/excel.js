@@ -11,6 +11,7 @@ class TaskForm extends Component{
     }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addMembers = this.addMembers.bind(this);
+        this.removeMembers=this.removeMembers.bind(this);
     }
     onChange(e){
             this.setState({
@@ -105,7 +106,7 @@ class TaskForm extends Component{
                                 <input type="date" ref="review_date" required></input></div>
                             <div className="col">
                             <label htmlFor="members"><h5><b>Add Members</b></h5></label>
-                                <input type="email" ref="member" className="form-control"></input><a href={void(0)} src={Ad} className="btn glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"  onClick={this.addMembers}><img src={Ad}></img>Add</a>
+                                <input type="email" ref="member" className="form-control"></input><a href={void(0)} src={Ad} className="btn glyphicon glyphicon-plus-sign" onClick={this.addMembers}><img src={Ad}></img>Add</a>
                                 </div></div>
 
                         <div className="row">

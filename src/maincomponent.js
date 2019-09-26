@@ -35,6 +35,8 @@ class Main extends Component{
         this.editTasks = this.editTasks.bind(this);
         this.addTask = this.addTask.bind(this);
         this.editProject = this.editProject.bind(this);
+        this.editTask = this.editTask.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
@@ -149,6 +151,62 @@ class Main extends Component{
             this.setState({project: project});
         }).catch(err => console.log(err));
     }
+    editTask(projectId, taskId, task, members){
+        let addMembers=[],projectIndex=-1,taskIndex=-1,temp = this.state.projects;;
+        fetch(baseUrl+'projects/'+projectId+'/tasks/'+taskId, {
+            method: "PUT",
+            headers: {
+                'Authorization': 'Bearer '+this.state.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(task)
+        }).then(task => task.json())
+        .then(async(task) => {
+            let curMembers = task.members.map(member => member.username);
+            members.forEach(member => {
+                if(curMembers.indexOf(member)==-1){
+                    addMembers.push(member);
+                }
+            });
+            for(let i=0;i<temp.length;i++){
+                if(temp[i]._id==projectId){
+                    projectIndex=i;
+                    for(let j=0;j<temp[i].tasks.length;j++){
+                        if(temp[i].tasks[j]._id==taskId){
+                            taskIndex=j;
+                            temp[i].tasks[j]=task;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            for(let i=0;i<curMembers.length;i++){
+                if(members.indexOf(curMembers[i])==-1){
+                    await fetch(baseUrl+'projects/'+projectId+'/tasks/'+taskId+'/members/'+curMembers[i],{
+                        method: "DELETE",
+                        headers: { 'Authorization': 'Bearer '+this.state.token }
+                    });
+                }
+            }
+            return;
+        }).then(() => {
+            return fetch(baseUrl+'projects/'+projectId+'/tasks/'+taskId+'/members',{
+                method: "POST",
+                headers: {
+                    'Authorization': 'Bearer '+this.state.token,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({members: addMembers})
+            });
+        }).then(res => res.json())
+        .then(res => {
+            if(projectIndex!==-1 && taskIndex!==-1){
+                temp[projectIndex].tasks[taskIndex].members=res;
+            }
+            this.setState({projects: temp});
+        },err => console.log(err));
+    }
     addTask({projectId,task}){
         fetch(baseUrl+'projects/'+projectId+'/tasks',{
             method: "POST",
@@ -168,6 +226,17 @@ class Main extends Component{
             }
             this.setState({projects: temp});
         },(err) => console.log(err));
+    }
+    logOut(){
+        localStorage.removeItem('token');
+        this.setState({
+            Loggedin: false,
+            projects: [],
+            issues:null,
+            token: null,
+            isProjectsLoading: true,
+            user: null
+        });
     }
     componentDidMount(){
         // this.setState({projects: PROJECTS});
@@ -206,13 +275,13 @@ class Main extends Component{
         return(
         <div>
           <Switch>
-              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard projectId={match.params.projectId} addTask={this.addTask} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
-              <Route exact path='/home' component={() => <Dashboard editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
-              <Route exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
+              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard logOut={this.logOut} editTask={this.editTask} projectId={match.params.projectId} addTask={this.addTask} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
+              <Route exact path='/home' component={() => <Dashboard logOut={this.logOut} editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
+              <Route exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata logOut={this.logOut} projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
               <Route exact path='/filespop' component={() => <Addpop />} />
               <Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />
               <Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />
-              <Route exact path='/admin' component={() => <Admin />} />
+              <Route exact path='/admin' component={() => <Admin logOut={this.logOut} />} />
               <Route exact path='/edittask' component={() => <Edittask />} />
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
               <Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks:[]} />} />

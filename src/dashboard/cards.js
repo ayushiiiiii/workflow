@@ -103,7 +103,7 @@ class Cards extends Component{
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">{this.props.project.mdsno}</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -147,9 +147,9 @@ class Cards extends Component{
                                             <input type="date" ref={"actual_end"+this.props.project._id} value={this.state.actual_end} onChange={() => this.onChange("actual_end")}  required></input></div>
                                         <div className="col">
                                             <label htmlFor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
-                                            <select className="dropdown" ref={"active"+this.props.project._id} onChange={() => this.onChange("active")}  required>
-                                            <option value="true" selected={this.state.active}>Active</option>
-                                            <option value="false" selected={!this.state.active}>Inactive</option></select ></div>
+                                            <select className="dropdown" value={this.state.active?"true":"false"} ref={"active"+this.props.project._id} onChange={() => this.onChange("active")}  required>
+                                            <option value="true">Active</option>
+                                            <option value="false">Inactive</option></select ></div>
                             </div><br/>
                             <div className="row">
                                     <div className="col">
@@ -163,9 +163,9 @@ class Cards extends Component{
 
 
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.handleSubmit} disabled={this.state.disableSubmit}>Save changes</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.handleSubmit} disabled={this.state.disableSubmit}>Save changes</button>
                         </div>
                         </div>
                     </div>

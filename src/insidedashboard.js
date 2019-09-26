@@ -14,7 +14,7 @@ render(){
   let Projects = [], Disables = [];
   if(this.props.project){
     for(let i=0;i<this.props.project.tasks.length;i++){
-      Projects.push(<Project key={i} index={i} index2={"project"+i} projectId={this.props.projectId} project= {this.props.project}  task={this.props.project.tasks[i]} />);
+      Projects.push(<Project key={i} index={i} index2={"project"+i} editTask={this.props.editTask} projectId={this.props.projectId} project= {this.props.project}  task={this.props.project.tasks[i]} />);
     }
     let temp = {
       "Mechanical Design": false,
@@ -40,11 +40,11 @@ render(){
       }
     }
     for(let i=0;i<disables.length;i++){
-      Disables.push(<Disable projectId={this.props.projectId} addTask={this.props.addTask} task={disables[i]}/>);
+      Disables.push(<Disable key={i} projectId={this.props.projectId} addTask={this.props.addTask} task={disables[i]}/>);
     }
     return (
       <div className="container-fluid">
-        <Navbar start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
+        <Navbar logOut={this.props.logOut} start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
           
       <div className=" App-main">
         <div className="row">

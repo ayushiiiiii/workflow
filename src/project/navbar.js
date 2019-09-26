@@ -13,7 +13,7 @@ function Navbar(props){
       <td><b>End Date</b></td><td><span>{end_date.toDateString().slice(4)}</span></td>
       
       <td><b>Location</b></td><td><span>{props.location}</span></td>
-      <td><button type="submit" classname="btn btn-primary"> Log Out</button></td>
+      <td><button type="submit" className="btn btn-primary" onClick={props.logOut}> Log Out</button></td>
       
       </tr>
       </tbody>

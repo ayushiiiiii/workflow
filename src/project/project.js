@@ -3,7 +3,7 @@ import './project.css';
 import { Link } from 'react-router-dom';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { buildStyles } from 'react-circular-progressbar';
+import Ad from '../pluss.png';
 
 function formatDate(date) {
     var d=new Date(date), month = '' + (d.getMonth() + 1),
@@ -22,23 +22,51 @@ class Project extends Component{
     constructor(props){
         super(props);
         this.state={
-            name: this.props.project.tasks[this.props.index].name,
-            weightage: this.props.project.tasks[this.props.index].weightage,
-            start_date: formatDate(this.props.project.tasks[this.props.index].start_date),
-            end_date: formatDate(this.props.project.tasks[this.props.index].end_date),
-            actual_start: formatDate(this.props.project.tasks[this.props.index].actual_start),
-            actual_end: formatDate(this.props.project.tasks[this.props.index].actual_end),
-         
+            weightage: this.props.task.weightage,
+            start_date: (this.props.task.start_date==null?null:formatDate(this.props.task.start_date)),
+            end_date: (this.props.task.end_date==null?null:formatDate(this.props.task.end_date)),
+            actual_start: (this.props.task.actual_start==null?null:formatDate(this.props.task.actual_start)),
+            actual_end: (this.props.task.actual_end==null?null:formatDate(this.props.task.actual_end)),
+            members: this.props.task.members.map(member => member.username),
+            disable: true
         }
+        this.handleSubmit=this.handleSubmit.bind(this);
+        this.onChange=this.onChange.bind(this);
+        this.addMembers=this.addMembers.bind(this);
+        this.removeMembers=this.removeMembers.bind(this);
     }
 
-        onChange(field){
-            this.setState({[field]: this.refs[field+this.props.project._id].value})
-        }
+    onChange(field){
+        this.setState({[field]: this.refs[field+this.props.task._id].value, disable: false})
+    }
+    handleSubmit(){
+        this.props.editTask(this.props.projectId, this.props.task._id, {
+            weightage: this.state.weightage,
+            start_date: this.props.task.start_date,
+            end_date: this.props.task.end_date,
+            actual_start: this.props.task.actual_start,
+            actual_end: this.props.task.actual_end
+        }, this.state.members);
+    }
+    addMembers(e){
+        e.preventDefault();
+        if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.refs["member"+this.props.task._id].value))) return;
+        this.setState({members: [this.refs["member"+this.props.task._id].value, ...this.state.members], disable: false});
+        this.refs["member"+this.props.task._id].value='';
+    }
+    removeMembers(member){
+        let arr = [...this.state.members];
+        arr.splice(this.state.members.indexOf(member),1);
+        this.setState({members: arr, disable: false});
+    }
     
     render(){
         let start_date = new Date(this.props.task.start_date);
         let actual_end_date = new Date(this.props.task.actual_end_date);
+        let viewMembers = [];
+        for(let i=0;i<this.state.members.length;i++){
+            viewMembers.push(<li key={i}>{this.state.members[i]} <span className="btn btn-danger btn-sm rounded-circle" onClick={() => this.removeMembers(this.state.members[i])}>&#x2715;</span></li>);
+        }
         return(
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project text-center">
@@ -73,66 +101,59 @@ class Project extends Component{
                         
                         <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button className="btn" type="submit">Folders</button></Link>
                         <Link to={'/home/'+this.props.projectId+'/'+this.props.task._id+'/comments'}><button className="btn" type="submit">Comments</button></Link>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index2}>
+                        <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index2}>
                         Edit 
                         </button>
 
-                        <div class="modal fade" id={this.props.index2} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"><b>Add Task</b></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <div className="modal fade" id={this.props.index2} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel"><b>{this.props.task.name}</b></h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                            
                         <div className="container">
                     <form className="container form-group ex" onSubmit={this.handleSubmit} method="post">
                     <br/><div className="form-row">
-                        <div className="col text-center" >
-                            <label htmlfor="name" ><h5><b>Major Tasks </b></h5></label>
-                            
-                            <select ref="name"  ref={"name"+this.props.project._id} defaultValue={this.state.name} onChange={() => this.onChange("name")} required>
-                            <option value="Mechanical Design" selected>Mechanical Design</option>
-                            <option value="Electrical Design">Electrical Design</option>
-                            <option value="Mechanical Parts Ordering">Mechanical Parts Ordering</option>
-                            <option value="Electrical Parts Ordering">Electrical Parts Ordering</option>
-                            <option value="Mechanical assy" >Mechanical assy</option>
-                            <option value="Electrical assy" >Electrical assy</option>
-                            <option value="Total Assembly">Total Assembly</option>
-                            <option value="Programming">Programming</option>
-                            <option value="Testing & internal trial" >Testing & internal trial</option>
-                            <option value="FAT & review point">FAT & review point</option>
-                            <option value="Installation Commissioning">Installation Commissioning</option>
-                            <option value="Handover and closure">Handover and closure</option>
-                         </select></div>
                          <div className="col">
-                             <label htmlfor="weightage"><h5><b>Weightage</b></h5></label>
-                             <input type="text" ref={"weightage"+this.props.project._id} value={this.state.weightage} onChange={() => this.onChange("weightage")} required></input><br/>
+                             <label htmlFor="weightage"><h5><b>Weightage</b></h5></label>
+                             <input type="text" ref={"weightage"+this.props.task._id} value={this.state.weightage} onChange={() => this.onChange("weightage")} required></input><br/>
                         </div></div>
                         <div className="row">
                              <div className="col">
-                                 <label htmlfor="start_date"><h5><b>Start date(planned)</b></h5></label>
-                                 <input type="date" ref={"start_date"+this.props.project._id} value={ this.state.start_date} onChange={() => this.onChange("start_date")} required></input></div>
+                                 <label htmlFor="start_date"><h5><b>Start date(planned)</b></h5></label>
+                                 <input type="date" ref={"start_date"+this.props.task._id} value={ this.state.start_date} onChange={() => this.onChange("start_date")} required></input></div>
                              <div className="col">
-                                 <label htmlfor="end_date"><h5><b>End date(planned)</b></h5></label>
-                                 <input type="date" ref={"end_date"+this.props.project._id} value={this.state.end_date} onChange={() => this.onChange("end_date")} required></input><br/>
+                                 <label htmlFor="end_date"><h5><b>End date(planned)</b></h5></label>
+                                 <input type="date" ref={"end_date"+this.props.task._id} value={this.state.end_date} onChange={() => this.onChange("end_date")} required></input><br/>
                         </div></div>
                         <div className="row">
                             <div className="col">
-                                <label htmlfor="actual_end_date"><h5><b>Actual end date</b></h5></label>
-                                <input type="date" ref={"actual_end_date"+this.props.project._id} value={this.state.actual_end} onChange={() => this.onChange("Actual_end_date")} required></input><br/></div>
+                                <label htmlFor="actual_end_date"><h5><b>Actual end date</b></h5></label>
+                                <input type="date" ref={"actual_end_date"+this.props.task._id} value={this.state.actual_end} onChange={() => this.onChange("Actual_end_date")} required></input><br/></div>
                             <div className="col">
-                                <label htmlfor="actual_start"><h5><b>actual start Date</b></h5></label>
-                                <input type="date" ref={"actual_start"+this.props.project._id} value={this.state.actual_start} onChange={() => this.onChange("Actual_start")} required></input><br/>
+                                <label htmlFor="actual_start"><h5><b>actual start Date</b></h5></label>
+                                <input type="date" ref={"actual_start"+this.props.task._id} value={this.state.actual_start} onChange={() => this.onChange("Actual_start")} required></input><br/>
                         </div></div>
                         <div className="row">
                             <div className="col">
-                                <label htmlfor="review_date"><h5><b>Review Date</b></h5></label>
-                                <input type="date" ref={"review_date"+this.props.project._id} value={this.state.review_date} onChange={() => this.onChange("review_date")} required></input></div>
+                                <label htmlFor="review_date"><h5><b>Review Date</b></h5></label>
+                                <input type="date" ref={"review_date"+this.props.task._id} value={this.state.review_date} onChange={() => this.onChange("review_date")} required></input></div>
                            </div>
+                        <div className="row">
+                           <div className="col">
+                            <label htmlFor="members"><h5><b>Add Members</b></h5></label>
+                                <input type="email" ref={"member"+this.props.task._id} className="form-control"></input><a href={void(0)} src={Ad} className="btn glyphicon glyphicon-plus-sign" onClick={this.addMembers}><img src={Ad}></img>Add</a>
+                                </div></div>
+
+                        <div className="row">
+                            <div className="col">
+                                {viewMembers}
+                                </div></div>
                         
                    
                     <br/>
@@ -142,9 +163,9 @@ class Project extends Component{
 
 
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" disabled={this.state.disable} onClick={this.handleSubmit}>Save changes</button>
                         </div>
                         </div>
                     </div>
