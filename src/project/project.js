@@ -17,7 +17,7 @@ class Project extends Component{
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project text-center">
                 <div className="card-header">
-                    <h4 className="card-title">{this.props.task.name}&nbsp; <i className="fa fa-close"/> </h4>
+                    <h4 className="card-title">{this.props.task.name} </h4>
                 </div>
                 <div className="card-body">
                 <br/>
