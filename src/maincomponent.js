@@ -111,7 +111,6 @@ class Main extends Component{
         }).catch((err) => console.log(err));
     }
     editProject({projectId, project}){
-        console.log(JSON.stringify(project));
         fetch(baseUrl+'projects/'+projectId,{
             method: "PUT",
             headers: {
