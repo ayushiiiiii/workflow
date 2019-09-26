@@ -6,7 +6,7 @@ import Formm from './excel';
 import Ad from '../pluss.png';
 
 
-class Editproject extends Component{
+class EditProject extends Component{
     constructor(props)
     {
         super(props);
@@ -29,15 +29,19 @@ class Editproject extends Component{
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        const project_name=this.refs.project_name.value;
-        const project_number=this.refs.project_number.value;
-        const short_name=this.refs.short_name.value;
-        const location=this.refs.location.value;
-        const start_date =this.refs.start_date.value;
-        const fat_date=this.refs.fat_date.value;
-        const actual_date=this.refs.actual_date.value;
-        const active_inactive=this.refs.fat_date.value;
-        const completed=this.refs.fat_date.value;
+        var project={
+            name:this.refs.project_name.value,
+            mdsno: this.refs.project_number.value,
+            short_name:this.refs.short_name.value,
+            location: this.refs.location.value,
+            machine:this.refs.machine.value,
+            start_date :this.refs.start_date.value,
+            fat_date:this.refs.fat_date.value,
+            actual_end:this.refs.actual_date.value,
+            active: (this.refs.fat_date.value=="true"?true:false),
+            tasks: this.state.tasks
+        }
+        this.props.postProject({project: project});
     }
     addTask({task}){
         this.setState({tasks: [...this.state.tasks, task], addTask: false});
@@ -48,6 +52,18 @@ class Editproject extends Component{
         this.setState({tasks: arr});
     }
         
+    removeField(){
+            this.refs.project_name.value=''
+            this.refs.project_number.value=''
+            this.refs.short_name.value=''
+            this.refs.location.value=''
+            this.refs.machine.value=''
+            this.refs.start_date.value=''
+            this.refs.fat_date.value=''
+            this.refs.actual_date.value=''
+            this.refs.fat_date.value=''
+            this.state.tasks=''
+    }
 render(){
         if(!this.state.addTask){
             let tasks = [];
@@ -64,39 +80,53 @@ render(){
 
     <center> <h1>Title{this.props.title}</h1> </center>
     </nav><br/>
-                <form className="dis ex form-group" onSubmit={this.handleSubmit} method="post">
-                    <table className="tabledata ">
-                    <tbody>
+                <form className="container ex form-group" onSubmit={this.handleSubmit} method="post">
                         <br/>
-                <tr>
-                <td value="project_number" className="control-label "><b>Project Number</b></td><td><input type="text" ref="project_number"></input></td>
-                <td value="project_name" className="control-label "><b>Project Name</b></td><td><input type="text" ref="project_name"></input></td>
-                </tr> <br/>
-                <tr>
-                <td value="short_name" className="control-label" ><b>Short Name</b></td><td><input type="text" ref="short_name"></input></td>
-                <td value="location"  className="control-label"><b>Location</b></td><td><input type="text" ref="location"></input></td>
-                </tr> <br/>
-                <tr>
-                <td value="start_date"  className="control-label"><b>start date</b></td><td><input type="date" ref="start_date"></input></td>
-                <td value="fat_date"  className="control-label"><b>Fat Date</b></td><td><input type="date" ref="fat_date"></input></td>
-                </tr> <br/>
-                <tr>
-                <td value="actual_date"  className="control-label"><b>Actual Date</b></td><td><input type="date" ref="actual_date"></input></td>
-                <td value="active_inactive"  className="control-label"><b>Active/Inactive</b></td><td><select className="dropdown">
-                            <option value="UserOperator" selected>Active</option>
-                            <option value="DataEntry">Inactive</option></select></td> 
-                </tr> <br/>
-               
-                <tr>
-                <td value="completed" className="control-label"><b>%completed</b></td><td><input type="text" ref="completed"></input></td>
-                <td value="task_completed"><b>Add Task </b><button type="button" src={Ad} className="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onClick={() => this.setState({addTask: true})}><img src={Ad}></img></button>
- </td>
-                <td>
-                    {returnTasks()}
-                </td>
-                </tr><br/>
-                </tbody>
-                </table>
+                    <div className="row">
+                        <div className="col">
+                            <label htmlfor="project_number" className="control-label "><h5><b>Project Number</b></h5></label>
+                            <input type="text" ref="project_number" required></input></div>
+                        <div className="col">
+                            <label  htmlfor="project_name" className="control-label "><h5><b>Project Name</b></h5></label>
+                            <input type="text" ref="project_name" required></input>
+                </div></div> <br/>
+               <div className="row">
+                    <div className="col">
+                        <label htmlfor="short_name" className="control-label" ><h5><b>Short Name</b></h5></label>
+                        <input type="text" ref="short_name" required></input></div>
+                    <div className="col">
+                        <label htmlfor="location"  className="control-label"><h5><b>Location</b></h5></label>
+                        <input type="text" ref="location" required></input>
+               </div></div> <br/>
+                <div className="row">
+                    <div className="col">   
+                        <label htmlfor="start_date"  className="control-label"><h5><b>start date</b></h5></label>
+                        <input type="date" ref="start_date" required></input></div>
+                    <div className="col">
+                        <label htmlfor="fat_date"  className="control-label"><h5><b>Fat Date</b></h5></label>
+                        <input type="date" ref="fat_date" required></input>
+                    </div></div> <br/>
+                <div className="row">
+                        <div className="col">
+                            <label htmlfor="actual_date"  className="control-label"><h5><b>Actual Date</b></h5></label>
+                            <input type="date" ref="actual_date" required></input></div>
+                        <div className="col">
+                            <label htmlfor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
+                            <select className="dropdown" required>
+                            <option value="true" selected>Active</option>
+                            <option value="false">Inactive</option></select ></div>
+               </div><br/>
+               <div className="row">
+                    <div className="col">
+                        <label htmlfor="machine" className="control-label"><h5><b>Machine</b></h5></label>
+                        <input type="text" ref="machine" required></input></div>
+                    <div className="col">
+                        <label htmlfor="task_completed"><h5><b>Add Task </b></h5><button type="button" src={Ad} className="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onClick={() => this.setState({addTask: true})}><img src={Ad}></img></button>
+                      </label></div></div>
+                <div className="row">
+                    <div className="col">
+                            {returnTasks()}
+                </div></div><br/>
                 
                   <button type="submit">Submit</button>
                 </form>
@@ -109,4 +139,4 @@ render(){
     }
 }
 
-export default Editproject;
+export default EditProject;

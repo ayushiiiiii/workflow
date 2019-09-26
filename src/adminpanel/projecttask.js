@@ -83,39 +83,53 @@ render(){
 
     <center> <h1>Title{this.props.title}</h1> </center>
     </nav><br/>
-                <form className="dis ex form-group" onSubmit={this.handleSubmit} method="post">
-                    <table className="tabledata ">
-                    <tbody>
+                <form className="container ex form-group" onSubmit={this.handleSubmit} method="post">
                         <br/>
-                <tr>
-                <td value="project_number" className="control-label "><b>Project Number</b></td><td><input type="text" ref="project_number" required></input></td>
-                <td value="project_name" className="control-label "><b>Project Name</b></td><td><input type="text" ref="project_name" required></input></td>
-                </tr> <br/>
-                <tr>
-                <td value="short_name" className="control-label" ><b>Short Name</b></td><td><input type="text" ref="short_name" required></input></td>
-                <td value="location"  className="control-label"><b>Location</b></td><td><input type="text" ref="location" required></input></td>
-                </tr> <br/>
-                <tr>
-                <td value="start_date"  className="control-label"><b>start date</b></td><td><input type="date" ref="start_date" required></input></td>
-                <td value="fat_date"  className="control-label"><b>Fat Date</b></td><td><input type="date" ref="fat_date" required></input></td>
-                </tr> <br/>
-                <tr>
-                <td value="actual_date"  className="control-label"><b>Actual Date</b></td><td><input type="date" ref="actual_date" required></input></td>
-                <td value="active_inactive"  className="control-label"><b>Active/Inactive</b></td><td><select className="dropdown" required>
+                    <div className="row">
+                        <div className="col">
+                            <label htmlfor="project_number" className="control-label "><h5><b>Project Number</b></h5></label>
+                            <input type="text" ref="project_number" required></input></div>
+                        <div className="col">
+                            <label  htmlfor="project_name" className="control-label "><h5><b>Project Name</b></h5></label>
+                            <input type="text" ref="project_name" required></input>
+                </div></div> <br/>
+               <div className="row">
+                    <div className="col">
+                        <label htmlfor="short_name" className="control-label" ><h5><b>Short Name</b></h5></label>
+                        <input type="text" ref="short_name" required></input></div>
+                    <div className="col">
+                        <label htmlfor="location"  className="control-label"><h5><b>Location</b></h5></label>
+                        <input type="text" ref="location" required></input>
+               </div></div> <br/>
+                <div className="row">
+                    <div className="col">   
+                        <label htmlfor="start_date"  className="control-label"><h5><b>start date</b></h5></label>
+                        <input type="date" ref="start_date" required></input></div>
+                    <div className="col">
+                        <label htmlfor="fat_date"  className="control-label"><h5><b>Fat Date</b></h5></label>
+                        <input type="date" ref="fat_date" required></input>
+                    </div></div> <br/>
+                <div className="row">
+                        <div className="col">
+                            <label htmlfor="actual_date"  className="control-label"><h5><b>Actual Date</b></h5></label>
+                            <input type="date" ref="actual_date" required></input></div>
+                        <div className="col">
+                            <label htmlfor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
+                            <select className="dropdown" required>
                             <option value="true" selected>Active</option>
-                            <option value="false">Inactive</option></select ></td> 
-                </tr> <br/>
-               
-                <tr>
-                <td value="machine" className="control-label"><b>Machine</b></td><td><input type="text" ref="machine" required></input></td>
-                <td value="task_completed"><b>Add Task </b><button type="button" src={Ad} className="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onClick={() => this.setState({addTask: true})}><img src={Ad}></img></button>
- </td>
-                <td>
-                    {returnTasks()}
-                </td>
-                </tr><br/>
-                </tbody>
-                </table>
+                            <option value="false">Inactive</option></select ></div>
+               </div><br/>
+               <div className="row">
+                    <div className="col">
+                        <label htmlfor="machine" className="control-label"><h5><b>Machine</b></h5></label>
+                        <input type="text" ref="machine" required></input></div>
+                    <div className="col">
+                        <label htmlfor="task_completed"><h5><b>Add Task </b></h5><button type="button" src={Ad} className="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onClick={() => this.setState({addTask: true})}><img src={Ad}></img></button>
+                      </label></div></div>
+                <div className="row">
+                    <div className="col">
+                            {returnTasks()}
+                </div></div><br/>
                 
                   <button type="submit">Submit</button>
                 </form>
