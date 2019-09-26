@@ -63,7 +63,7 @@ class TaskForm extends Component{
             <form className="container form-group ex" onSubmit={this.handleSubmit} method="post">
                     <br/><div className="form-row">
                         <div className="col text-center" >
-                            <label htmlfor="major_tasks"><h5><b>Major Tasks </b></h5></label>
+                            <label htmlFor="major_tasks"><h5><b>Major Tasks </b></h5></label>
                             
                             <select ref="major_task" required>
                             <option value="Mechanical Design" selected>Mechanical Design</option>
@@ -80,31 +80,31 @@ class TaskForm extends Component{
                             <option value="Handover and closure">Handover and closure</option>
                          </select></div>
                          <div className="col">
-                             <label htmlfor="weightage"><h5><b>Weightage</b></h5></label>
+                             <label htmlFor="weightage"><h5><b>Weightage</b></h5></label>
                              <input type="text" ref="weightage" required></input><br/>
                         </div></div>
                         <div className="row">
                              <div className="col">
-                                 <label htmlfor="start_date"><h5><b>Start date(planned)</b></h5></label>
+                                 <label htmlFor="start_date"><h5><b>Start date(planned)</b></h5></label>
                                  <input type="date" ref="start_date" required></input></div>
                              <div className="col">
-                                 <label htmlfor="end_date"><h5><b>End date(planned)</b></h5></label>
+                                 <label htmlFor="end_date"><h5><b>End date(planned)</b></h5></label>
                                  <input type="date" ref="end_date" required></input><br/>
                         </div></div>
                         <div className="row">
                             <div className="col">
-                                <label htmlfor="actual_end_date"><h5><b>Actual end date</b></h5></label>
+                                <label htmlFor="actual_end_date"><h5><b>Actual end date</b></h5></label>
                                 <input type="date" ref="actual_end_date" required></input><br/></div>
                             <div className="col">
-                                <label htmlfor="actual_start"><h5><b>actual start Date</b></h5></label>
+                                <label htmlFor="actual_start"><h5><b>actual start Date</b></h5></label>
                                 <input type="date" ref="actual_start" required></input><br/>
                         </div></div>
                         <div className="row">
                             <div className="col">
-                                <label htmlfor="review_date"><h5><b>Review Date</b></h5></label>
+                                <label htmlFor="review_date"><h5><b>Review Date</b></h5></label>
                                 <input type="date" ref="review_date" required></input></div>
                             <div className="col">
-                            <label htmlfor="members"><h5><b>Add Members</b></h5></label>
+                            <label htmlFor="members"><h5><b>Add Members</b></h5></label>
                                 <input type="email" ref="member" className="form-control"></input><a href={void(0)} src={Ad} className="btn glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"  onClick={this.addMembers}><img src={Ad}></img>Add</a>
                                 </div></div>
 

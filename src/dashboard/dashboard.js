@@ -64,7 +64,10 @@ render(){
   }
     return (
     <div className="container-fluid">
-      <nav className="navbar navbar-expand-sm bg-light justify-content-center ">&nbsp;&nbsp;&nbsp;&nbsp;
+      <nav className="navbar navbar-expand-sm bg-light justify-content-center "> 
+      
+      &nbsp;&nbsp;&nbsp;&nbsp;
+     
           <center> <h1>Project list </h1> </center>
           <div className="toggle">
             <span>Show Cards</span><br/>

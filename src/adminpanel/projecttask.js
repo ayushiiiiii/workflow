@@ -87,44 +87,44 @@ render(){
                         <br/>
                     <div className="row">
                         <div className="col">
-                            <label htmlfor="project_number" className="control-label "><h5><b>Project Number</b></h5></label>
+                            <label htmlFor="project_number" className="control-label "><h5><b>Project Number</b></h5></label>
                             <input type="text" ref="project_number" required></input></div>
                         <div className="col">
-                            <label  htmlfor="project_name" className="control-label "><h5><b>Project Name</b></h5></label>
+                            <label  htmlFor="project_name" className="control-label "><h5><b>Project Name</b></h5></label>
                             <input type="text" ref="project_name" required></input>
                 </div></div> <br/>
                <div className="row">
                     <div className="col">
-                        <label htmlfor="short_name" className="control-label" ><h5><b>Short Name</b></h5></label>
+                        <label htmlFor="short_name" className="control-label" ><h5><b>Short Name</b></h5></label>
                         <input type="text" ref="short_name" required></input></div>
                     <div className="col">
-                        <label htmlfor="location"  className="control-label"><h5><b>Location</b></h5></label>
+                        <label htmlFor="location"  className="control-label"><h5><b>Location</b></h5></label>
                         <input type="text" ref="location" required></input>
                </div></div> <br/>
                 <div className="row">
                     <div className="col">   
-                        <label htmlfor="start_date"  className="control-label"><h5><b>start date</b></h5></label>
+                        <label htmlFor="start_date"  className="control-label"><h5><b>start date</b></h5></label>
                         <input type="date" ref="start_date" required></input></div>
                     <div className="col">
-                        <label htmlfor="fat_date"  className="control-label"><h5><b>Fat Date</b></h5></label>
+                        <label htmlFor="fat_date"  className="control-label"><h5><b>Fat Date</b></h5></label>
                         <input type="date" ref="fat_date" required></input>
                     </div></div> <br/>
                 <div className="row">
                         <div className="col">
-                            <label htmlfor="actual_date"  className="control-label"><h5><b>Actual Date</b></h5></label>
+                            <label htmlFor="actual_date"  className="control-label"><h5><b>Actual Date</b></h5></label>
                             <input type="date" ref="actual_date" required></input></div>
                         <div className="col">
-                            <label htmlfor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
-                            <select className="dropdown" required>
-                            <option value="true" selected>Active</option>
+                            <label htmlFor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
+                            <select className="dropdown"  defaultValue="Active" required>
+                            <option value="true" >Active</option>
                             <option value="false">Inactive</option></select ></div>
                </div><br/>
                <div className="row">
                     <div className="col">
-                        <label htmlfor="machine" className="control-label"><h5><b>Machine</b></h5></label>
+                        <label htmlFor="machine" className="control-label"><h5><b>Machine</b></h5></label>
                         <input type="text" ref="machine" required></input></div>
                     <div className="col">
-                        <label htmlfor="task_completed"><h5><b>Add Task </b></h5><button type="button" src={Ad} className="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onClick={() => this.setState({addTask: true})}><img src={Ad}></img></button>
+                        <label htmlFor="task_completed"><h5><b>Add Task </b></h5><button type="button" src={Ad} className="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onClick={() => this.setState({addTask: true})}><img src={Ad}></img></button>
                       </label></div></div>
                 <div className="row">
                     <div className="col">

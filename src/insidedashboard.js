@@ -14,7 +14,7 @@ render(){
   let Projects = [], Disables = [];
   if(this.props.project){
     for(let i=0;i<this.props.project.tasks.length;i++){
-      Projects.push(<Project key={i} projectId={this.props.projectId} task={this.props.project.tasks[i]} />);
+      Projects.push(<Project key={i} index={i} index2={"project"+i} projectId={this.props.projectId} project= {this.props.project}  task={this.props.project.tasks[i]} />);
     }
     let temp = {
       "Mechanical Design": false,
