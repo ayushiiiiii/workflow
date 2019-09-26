@@ -9,6 +9,8 @@ class Cards extends Component{
         super(props);
     }
     render(){
+        let start_date = new Date(this.props.project.start_date);
+        let fat_date = new Date(this.props.project.fat_date);
         return(
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project ">
@@ -26,9 +28,9 @@ class Cards extends Component{
                                 <td><b>LOCATION</b></td><td><span>{this.props.project.location}</span></td></tr>
                                 <tr><td><b>SHORT NAME</b></td><td><span>{this.props.project.short_name} </span></td>
                             </tr>
-                            <tr><td><b>START DATE</b></td><td><span>{this.props.project.start_date} </span></td>
+                            <tr><td><b>START DATE</b></td><td><span>{start_date.toDateString().slice(4)} </span></td>
                             </tr>
-                            <tr><td><b>FAT DATE</b></td><td><span>{this.props.project.fat_date } </span></td>
+                            <tr><td><b>FAT DATE</b></td><td><span>{fat_date.toDateString().slice(4)} </span></td>
                             </tr>
                             </tbody>
                         </table></center>

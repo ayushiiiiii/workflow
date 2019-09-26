@@ -46,6 +46,9 @@ class ProjectForm extends Component{
     addTask({task}){
         this.setState({tasks: [...this.state.tasks, task], addTask: false});
     }
+    cancelAddTask(){
+        this.setState({addTask: false});
+    }
     removeTask(task){
         let arr = [...this.state.tasks];
         arr.splice(this.state.tasks.indexOf(task),1);
@@ -134,7 +137,7 @@ render(){
                 
             );
         }else{
-            return(<Formm addTask={this.addTask} />)
+            return(<Formm addTask={this.addTask} cancelAddTask={this.cancelAddTask.bind(this)} />)
         }
     }
 }

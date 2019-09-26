@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './progress.css';
-import ReactDOM from 'react';
 
 class Progress extends Component{
     render(){

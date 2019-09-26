@@ -6,6 +6,8 @@ import 'react-circular-progressbar/dist/styles.css';
 
 
 function List(props){;
+    let start_date = new Date(props.project.start_date);
+    let fat_date = new Date(props.project.fat_date);
     return(
         <div className="card">
             <div className="card-header" id={"heading"+props.index}>
@@ -28,9 +30,9 @@ function List(props){;
                         <td><b>LOCATION</b></td><td><span>{props.project.location}</span></td></tr>
                         <tr><td><b>SHORT NAME</b></td><td><span>{props.project.short_name} </span></td>
                     </tr>
-                    <tr><td><b>START DATE</b></td><td><span>{props.project.start_date} </span></td>
+                    <tr><td><b>START DATE</b></td><td><span>{start_date.toDateString().slice(4)} </span></td>
                     </tr>
-                    <tr><td><b>FAT DATE</b></td><td><span>{props.project.fat_date } </span></td>
+                    <tr><td><b>FAT DATE</b></td><td><span>{fat_date.toDateString().slice(4)} </span></td>
                     </tr>
                     </tbody>
                 </table></center>

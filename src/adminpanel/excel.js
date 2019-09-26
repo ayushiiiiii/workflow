@@ -24,7 +24,6 @@ class TaskForm extends Component{
             weightage: this.refs.weightage.value,
             start_date: this.refs.start_date.value,
             end_date: this.refs.end_date.value,
-            completion: this.refs.completion.value,
             actual_start: this.refs.actual_start.value,
             actual_end_date: this.refs.actual_end_date.value,
             members: this.state.members
@@ -118,6 +117,7 @@ class TaskForm extends Component{
                    
                     <br/>
                     <button type="submit">Add</button>
+                    <button className="btn btn-danger" onClick={() => this.props.cancelAddTask()}>Cancel</button>
                 </form>
             </div>
 
