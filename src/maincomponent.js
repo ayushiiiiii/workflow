@@ -10,7 +10,6 @@ import Projectform from './adminpanel/projecttask';
 import Admin from './adminpanel/adminpage';
 import { baseUrl } from './baseurl';
 import Sign from './adminpanel/signup';
-import Editp from './adminpanel/editproject';
 import Edittask from './adminpanel/edittask';
 import Com from './adminpanel/comments';
 import Complete from './adminpanel/completion';
@@ -193,7 +192,6 @@ class Main extends Component{
               <Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />
               <Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />
               <Route exact path='/admin' component={() => <Admin />} />
-              <Route exact path='/editproject' component={() => <Editp />} />
               <Route exact path='/edittask' component={() => <Edittask />} />
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
               <Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks:[]} />} />

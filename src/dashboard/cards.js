@@ -39,9 +39,10 @@ class Cards extends Component{
     render(){
         let start_date = new Date(this.props.project.start_date);
         let fat_date = new Date(this.props.project.fat_date);
+        console.log(this.props.index);
         return(
         <div className="col-12 col-sm-6 col-md-3">
-            <div className="card project ">
+            <div className="card project " hidden={!this.props.showCards}>
                 <div className="card-header">
                     <h4 className="card-title">{this.props.title} &nbsp;&nbsp; <i className="fa fa-close ml-auto close-button" onClick={() => this.props.deleteProject(this.props.project._id, this.props.project.name)} /> </h4>
                 </div>
@@ -69,11 +70,17 @@ class Cards extends Component{
                     </div>
                     <div className="card-footer">
                     <Link to={"/home/"+this.props.project._id}><button type="Submit">More details</button></Link>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index}>
                         Edit 
-                        </button>
+                        </button>   
+                    </div>
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id={this.props.index} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
@@ -144,15 +151,6 @@ class Cards extends Component{
                         </div>
                     </div>
                     </div>
-
-                                    
-                    </div>
-
-
-
-                    </div>
-                </div>
-            </div>
         </div>
 
            
