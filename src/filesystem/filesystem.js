@@ -10,7 +10,7 @@ function FileSystem(props){
     apiRoot: baseUrl+'files'
   }
   return(
-    <div style={{ height: '480px' }} className={(props.upload?null:"hideUpload ")+(props.download?null:"hideDownload")}>
+    <div style={{ height: '480px' }} className={(props.upload?"":"hideUpload ")+(props.download?"":"hideDownload")}>
       <FileManager>
         <FileNavigator
           id={props.fileId}
