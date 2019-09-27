@@ -1,3 +1,12 @@
 div.oc-fm--location-bar{
     display: none;
 }
+div.hideUpload button.oc-fm--toolbar__item[title="Upload"],
+div.hideUpload button.oc-fm--toolbar__item[title="Create folder"],
+div.hideUpload button.oc-fm--toolbar__item[title="Remove"],
+div.hideUpload button.oc-fm--toolbar__item[title="Rename"]{
+    display: none;
+}
+div.hideDownload button.oc-fm--toolbar__item[title="Download"]{
+    display: none;
+}

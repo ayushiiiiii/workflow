@@ -5,13 +5,13 @@ import Navbar from '../project/navbar';
 import { baseUrl } from '../baseurl';
 import FileSystem from '../filesystem/filesystem';
 
-const FileWindow = ({fileId, fileError}) => {
+const FileWindow = ({upload, download, fileId, fileError}) => {
   if(fileId=='' && !fileError){
     return(<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>);
   }else if(fileError){
     return(<textarea rows="20" cols="80" defaultValue="File Not Found"></textarea>);
   }else{
-    return(<FileSystem fileId={fileId} ></FileSystem>);
+    return(<FileSystem upload={upload} download={download} fileId={fileId} ></FileSystem>);
   }
 }
 
@@ -77,7 +77,7 @@ class Folders extends Component{
           <br/>
             <div className="row">
               <div className="col-12" >
-                <FileWindow fileId={this.state.fileId} fileError={this.state.fileError} />
+                <FileWindow upload={this.props.upload} download={this.props.download} fileId={this.state.fileId} fileError={this.state.fileError} />
               </div>
             </div>
           </div>
