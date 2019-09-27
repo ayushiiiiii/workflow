@@ -14,9 +14,8 @@ class UserA extends Component{
                     location_view: true,
                     upload: true,
                     comments: true,
-                    chat: true,
+                    file_access: true,
                     data_entry: true,
-                    chat: true,
                     download: true,
                     offer_details: true
                 },
@@ -26,9 +25,8 @@ class UserA extends Component{
                     location_view: true,
                     upload: true,
                     comments: true,
-                    chat: true,
+                    file_access: true,
                     data_entry: true,
-                    chat: true,
                     download: true,
                     offer_details: true
                 },
@@ -38,9 +36,8 @@ class UserA extends Component{
                     location_view: true,
                     upload: true,
                     comments: true,
-                    chat: true,
+                    file_access: true,
                     data_entry: true,
-                    chat: true,
                     download: true,
                     offer_details: true
                 },
@@ -50,9 +47,8 @@ class UserA extends Component{
                     location_view: true,
                     upload: true,
                     comments: true,
-                    chat: true,
+                    file_access: true,
                     data_entry: true,
-                    chat: true,
                     download: true,
                     offer_details: true
                 }
@@ -143,11 +139,11 @@ class UserA extends Component{
                             </tr>
                         
                             <tr>
-                            <td>Chat</td>
-                            <td><Switch onClick={() => this.handleClick(0,'chat')} on={this.state.usertypes[0].chat}/></td>
-                            <td><Switch onClick={() => this.handleClick(1,'chat')} on={this.state.usertypes[1].chat}/></td>
-                            <td><Switch onClick={() => this.handleClick(2,'chat')} on={this.state.usertypes[2].chat}/></td>
-                            <td><Switch onClick={() => this.handleClick(3,'chat')} on={this.state.usertypes[3].chat}/></td>
+                            <td>File Access</td>
+                            <td><Switch onClick={() => this.handleClick(0,'file_access')} on={this.state.usertypes[0].file_access}/></td>
+                            <td><Switch onClick={() => this.handleClick(1,'file_access')} on={this.state.usertypes[1].file_access}/></td>
+                            <td><Switch onClick={() => this.handleClick(2,'file_access')} on={this.state.usertypes[2].file_access}/></td>
+                            <td><Switch onClick={() => this.handleClick(3,'file_access')} on={this.state.usertypes[3].file_access}/></td>
                             </tr>
                         
                             <tr>

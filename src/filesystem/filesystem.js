@@ -1,5 +1,5 @@
 import React from 'react';
-import './filesystem.css';
+import css from'./filesystem.css';
 import { FileManager, FileNavigator } from '@opuscapita/react-filemanager';
 import connectorNodeV1 from '@opuscapita/react-filemanager-connector-node-v1';
 import { baseUrl } from '../baseurl';

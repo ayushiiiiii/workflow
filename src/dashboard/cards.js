@@ -63,7 +63,7 @@ class Cards extends Component{
         <div className="col-12 col-sm-6 col-md-3">
             <div className="card project " hidden={!this.props.showCards}>
                 <div className="card-header">
-                    <h4 className="card-title">{this.props.title} &nbsp;&nbsp; <i className="fa fa-close ml-auto close-button" onClick={() => this.props.deleteProject(this.props.project._id, this.props.project.name)} /> </h4>
+                    <h4 className="card-title">{this.props.title} &nbsp;&nbsp; <i hidden={!this.props.data_entry} className="fa fa-close ml-auto close-button" onClick={() => this.props.deleteProject(this.props.project._id, this.props.project.name)} /> </h4>
                 </div>
                 <div className="card-body ">
                     <div className="card-text container-fluid">
@@ -89,7 +89,7 @@ class Cards extends Component{
                     </div>
                     <div className="card-footer">
                     <Link to={"/home/"+this.props.project._id}><button type="Submit">More details</button></Link>
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index}>
+                    <button hidden={!this.props.data_entry} type="button" className="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index}>
                         Edit 
                         </button>   
                     </div>
@@ -165,7 +165,7 @@ class Cards extends Component{
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.handleSubmit} disabled={this.state.disableSubmit}>Save changes</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" hidden={!this.props.data_entry} onClick={this.handleSubmit} disabled={this.state.disableSubmit}>Save changes</button>
                         </div>
                         </div>
                     </div>

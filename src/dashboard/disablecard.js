@@ -86,7 +86,7 @@ class  Disable extends Component{
                         </div>
                         <br/>
                     </div><div className="card-footer">
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target={'#'+this.props.task.split(' ').join('-')}>
+                <button type="button" className="btn btn-primary" data-toggle="modal" hidden={!this.props.data_entry} data-target={'#'+this.props.task.split(' ').join('-')}>
                 Add Now
                 </button>
                 </div>

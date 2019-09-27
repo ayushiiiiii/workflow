@@ -14,7 +14,7 @@ render(){
   let Projects = [], Disables = [];
   if(this.props.project){
     for(let i=0;i<this.props.project.tasks.length;i++){
-      Projects.push(<Project key={i} index={i} index2={"project"+i} editTask={this.props.editTask} projectId={this.props.projectId} project= {this.props.project}  task={this.props.project.tasks[i]} />);
+      Projects.push(<Project key={i} file_access={this.props.file_access} data_entry={this.props.data_entry} index={i} index2={"project"+i} editTask={this.props.editTask} projectId={this.props.projectId} project= {this.props.project}  task={this.props.project.tasks[i]} />);
     }
     let temp = {
       "Mechanical Design": false,
@@ -40,7 +40,7 @@ render(){
       }
     }
     for(let i=0;i<disables.length;i++){
-      Disables.push(<Disable key={i} projectId={this.props.projectId} addTask={this.props.addTask} task={disables[i]}/>);
+      Disables.push(<Disable key={i} data_entry={this.props.data_entry} projectId={this.props.projectId} addTask={this.props.addTask} task={disables[i]}/>);
     }
     return (
       <div className="container-fluid">
@@ -52,14 +52,14 @@ render(){
         {Disables}
       </div>  
         </div>
-        <Link to={'/home/'+this.props.projectId+'/file-system/Application Data'}><button type="submit"  className="btnnav " > Application data</button></ Link>
+        <Link to={'/home/'+this.props.projectId+'/file-system/Application Data'}><button hidden={!this.props.file_access} type="submit"  className="btnnav " > Application data</button></ Link>
           
           <div className="col-sm-12 col-12 col-md-12">
-          <Link to={'/home/'+this.props.projectId+'/file-system/Solution'}> <button type="submit"  className="btnnav "> Solution</button></Link>
+          <Link to={'/home/'+this.props.projectId+'/file-system/Solution'}> <button type="submit" hidden={!this.props.file_access} className="btnnav "> Solution</button></Link>
       
         
-          <Link to={'/home/'+this.props.projectId+'/file-system/Project Management'}> <button type="submit"  className="btnnav "> Project Management</button></Link>
-         <Link to={'/home/'+this.props.projectId+'/complete'} ><button type="submit"  className="btnnav "> Edit Completion</button></Link>
+          <Link to={'/home/'+this.props.projectId+'/file-system/Project Management'}> <button type="submit" hidden={!this.props.file_access} className="btnnav "> Project Management</button></Link>
+         <Link to={'/home/'+this.props.projectId+'/complete'} ><button type="submit"  className="btnnav " hidden={!this.props.data_entry}> Edit Completion</button></Link>
        
           </div>
        </div>

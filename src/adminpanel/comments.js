@@ -71,7 +71,7 @@ class Comment extends Component{
         <h1>Comentarios  {/*  <a href="http://creaticode.com">creaticode.com</a> */}</h1>
 
             <ul id="comments-list" className="comments-list">
-            <li className="commentForm"><div className="comment-box comment-head">
+            <li hidden={!this.props.comments} className="commentForm"><div className="comment-box comment-head">
                 <h6 className="comment-name by-author">{this.props.user.usertype}</h6> 
                         <span>{this.props.user.firstname+' '+this.props.user.lastname}</span>
                         <i className="fa fa-reply"></i>

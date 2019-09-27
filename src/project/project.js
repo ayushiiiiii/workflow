@@ -99,9 +99,9 @@ class Project extends Component{
                         </div></div>
                         <br/><div className="row text-center wraper bbb card-footer">
                         
-                        <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button className="btn" type="submit">Folders</button></Link>
+                        <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button hidden={!this.props.file_access} className="btn" type="submit">Folders</button></Link>
                         <Link to={'/home/'+this.props.projectId+'/'+this.props.task._id+'/comments'}><button className="btn" type="submit">Comments</button></Link>
-                        <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index2}>
+                        <button type="button" className="btn btn-primary" hidden={!this.props.data_entry} data-toggle="modal" data-target={"#"+this.props.index2}>
                         Edit 
                         </button>
 
@@ -165,7 +165,7 @@ class Project extends Component{
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-dismiss="modal" disabled={this.state.disable} onClick={this.handleSubmit}>Save changes</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" hidden={!this.props.data_entry} disabled={this.state.disable} onClick={this.handleSubmit}>Save changes</button>
                         </div>
                         </div>
                     </div>

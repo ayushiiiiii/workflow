@@ -1,0 +1,3 @@
+button.oc-fm--toolbar__item[title="Upload"], button.oc-fm--toolbar__item[title="Create folder"]{
+    display: none;
+}
