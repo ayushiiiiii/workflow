@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './project.css';
 import { Link } from 'react-router-dom';
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Ad from '../pluss.png';
 
@@ -27,6 +27,8 @@ class Project extends Component{
             end_date: (this.props.task.end_date==null?null:formatDate(this.props.task.end_date)),
             actual_start: (this.props.task.actual_start==null?null:formatDate(this.props.task.actual_start)),
             actual_end: (this.props.task.actual_end==null?null:formatDate(this.props.task.actual_end)),
+            review_date: (this.props.task.review_date==null?null:formatDate(this.props.task.review_date)),
+            expected_completion: this.props.task.expected_completion,
             members: this.props.task.members.map(member => member.username),
             disable: true
         }
@@ -42,10 +44,12 @@ class Project extends Component{
     handleSubmit(){
         this.props.editTask(this.props.projectId, this.props.task._id, {
             weightage: this.state.weightage,
-            start_date: this.props.task.start_date,
-            end_date: this.props.task.end_date,
-            actual_start: this.props.task.actual_start,
-            actual_end: this.props.task.actual_end
+            start_date: this.state.start_date,
+            end_date: this.state.end_date,
+            actual_start: this.state.actual_start,
+            actual_end: this.state.actual_end,
+            expected_completion: this.state.expected_completion,
+            review_date: this.state.review_date
         }, this.state.members);
     }
     addMembers(e){
@@ -66,6 +70,17 @@ class Project extends Component{
         let viewMembers = [];
         for(let i=0;i<this.state.members.length;i++){
             viewMembers.push(<li key={i}>{this.state.members[i]} <span className="btn btn-danger btn-sm rounded-circle" onClick={() => this.removeMembers(this.state.members[i])}>&#x2715;</span></li>);
+        }
+        let arr=[];
+        for (let i=0;i<this.props.task.members.length;i++){
+           arr.push(<li key={i}>{this.props.task.members[i].firstname} {this.props.task.members[i].lastname} </li>)
+        }
+        let color='#27cc2a';
+        if(this.props.task.expected_completion!==0){
+            let ratio=(this.props.task.completion*100)/this.props.task.expected_completion;
+            if(ratio<50) color='#db0b2a';
+            else if(ratio<75) color='#f56c2c';
+            else if(ratio<100) color='#2d41c4';
         }
         return(
         <div className="col-12 col-sm-6 col-md-3">
@@ -92,10 +107,19 @@ class Project extends Component{
                                 <td>Days</td>
                                 <td>Days</td>
                             </tr>
+                            <tr>
+                                <td><h5 style={{fontWeight: 'bold'}}> Members</h5></td><td><ol>{arr}</ol></td>
+                                
+                            </tr>
                             </tbody>
                         </table></center>
                         <div className="col-6">
-                        <CircularProgressbar value={this.props.task.completion} text={`${this.props.task.completion}%`} />
+                        <CircularProgressbar value={this.props.task.completion} text={`${this.props.task.completion}%`} styles={buildStyles({
+                            pathColor: color,
+                            textColor: color,
+                            trailColor: '#d6d6d6',
+                            backgroundColor: 'white',
+                        })}  />
                         </div></div>
                         <br/><div className="row text-center wraper bbb card-footer">
                         
@@ -144,6 +168,12 @@ class Project extends Component{
                                 <label htmlFor="review_date"><h5><b>Review Date</b></h5></label>
                                 <input type="date" ref={"review_date"+this.props.task._id} value={this.state.review_date} onChange={() => this.onChange("review_date")} required></input></div>
                            </div>
+                           <div className="row">
+                           <div className="col">
+                           <label htmlFor="expected_completion"><h5><b>Expected Completion</b></h5></label>
+                                <input type="text" ref={"expected_completion"+this.props.task._id} value={this.state.expected_completion} onChange={() => this.onChange("expected_completion")} required></input></div>
+                         </div>
+                           
                         <div className="row">
                            <div className="col">
                             <label htmlFor="members"><h5><b>Add Members</b></h5></label>

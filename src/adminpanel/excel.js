@@ -27,6 +27,7 @@ class TaskForm extends Component{
             end_date: this.refs.end_date.value,
             actual_start: this.refs.actual_start.value,
             actual_end_date: this.refs.actual_end_date.value,
+            expected_completion: this.refs.expected_completion,
             members: this.state.members
         }
         this.props.addTask({task: task});
@@ -104,15 +105,17 @@ class TaskForm extends Component{
                             <div className="col">
                                 <label htmlFor="review_date"><h5><b>Review Date</b></h5></label>
                                 <input type="date" ref="review_date" required></input></div>
+                                <div className="col">
+                           <label htmlFor="expected_completion"><h5><b>Expected Completion</b></h5></label>
+                                <input type="text" ref="expected_completion" value={this.state.expected_completion} onChange={() => this.onChange("expected_completion")} required></input></div>
+                         </div>
+                         <div className="row">
                             <div className="col">
                             <label htmlFor="members"><h5><b>Add Members</b></h5></label>
                                 <input type="email" ref="member" className="form-control"></input><a href={void(0)} src={Ad} className="btn glyphicon glyphicon-plus-sign" onClick={this.addMembers}><img src={Ad}></img>Add</a>
-                                </div></div>
-
-                        <div className="row">
-                            <div className="col">
+                                </div></div> <div className="col">
                                 {returnMembers() }
-                                </div></div>
+                                </div>
                                <br/>
                         
                    
