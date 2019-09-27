@@ -11,6 +11,15 @@ class ProjectForm extends Component{
     {
         super(props);
         this.state={
+            name: '',
+            mdsno: '',
+            short_name: '',
+            location: '',
+            machine: '',
+            start_date: '',
+            fat_date: '',
+            actual_end: '',
+            active: false,
             addTask: false,
             tasks: []
         };
@@ -88,34 +97,34 @@ render(){
                     <div className="row">
                         <div className="col">
                             <label htmlFor="project_number" className="control-label "><h5><b>Project Number</b></h5></label>
-                            <input type="text" ref="project_number" required></input></div>
+                            <input type="text" ref="project_number" value={this.state.mdsno} onChange={e => this.setState({mdsno: e.target.value})} required></input></div>
                         <div className="col">
                             <label  htmlFor="project_name" className="control-label "><h5><b>Project Name</b></h5></label>
-                            <input type="text" ref="project_name" required></input>
+                            <input type="text" ref="project_name" value={this.state.name} onChange={e => this.setState({name: e.target.value})} required></input>
                 </div></div> <br/>
                <div className="row">
                     <div className="col">
                         <label htmlFor="short_name" className="control-label" ><h5><b>Short Name</b></h5></label>
-                        <input type="text" ref="short_name" required></input></div>
+                        <input type="text" ref="short_name" value={this.state.short_name} onChange={e => this.setState({short_name: e.target.value})} required></input></div>
                     <div className="col">
                         <label htmlFor="location"  className="control-label"><h5><b>Location</b></h5></label>
-                        <input type="text" ref="location" required></input>
+                        <input type="text" ref="location" value={this.state.location} onChange={e => this.setState({location: e.target.value})} required></input>
                </div></div> <br/>
                 <div className="row">
                     <div className="col">   
                         <label htmlFor="start_date"  className="control-label"><h5><b>start date</b></h5></label>
-                        <input type="date" ref="start_date" required></input></div>
+                        <input type="date" ref="start_date" value={this.state.start_date} onChange={e => this.setState({start_date: e.target.value})} required></input></div>
                     <div className="col">
                         <label htmlFor="fat_date"  className="control-label"><h5><b>Fat Date</b></h5></label>
-                        <input type="date" ref="fat_date" required></input>
+                        <input type="date" ref="fat_date" value={this.state.fat_date} onChange={e => this.setState({fat_date: e.target.value})} required></input>
                     </div></div> <br/>
                 <div className="row">
                         <div className="col">
                             <label htmlFor="actual_date"  className="control-label"><h5><b>Actual Date</b></h5></label>
-                            <input type="date" ref="actual_date" required></input></div>
+                            <input type="date" ref="actual_date" value={this.state.actual_date} onChange={e => this.setState({actual_date: e.target.value})} required></input></div>
                         <div className="col">
                             <label htmlFor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
-                            <select className="dropdown"  defaultValue="Active" required>
+                            <select className="dropdown" value={this.state.active?"true":"false"} onChange={e => this.setState({active: (e.target.value==="true"?true:false)})} defaultValue="Active" required>
                             <option value="true" >Active</option>
                             <option value="false">Inactive</option></select ></div>
                </div><br/>
