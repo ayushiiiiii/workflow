@@ -17,6 +17,7 @@ class UserA extends Component{
                     file_access: true,
                     data_entry: true,
                     download: true,
+                    admin: true,
                     offer_details: true
                 },
                 {
@@ -28,6 +29,7 @@ class UserA extends Component{
                     file_access: true,
                     data_entry: true,
                     download: true,
+                    admin: true,
                     offer_details: true
                 },
                 {
@@ -39,6 +41,7 @@ class UserA extends Component{
                     file_access: true,
                     data_entry: true,
                     download: true,
+                    admin: true,
                     offer_details: true
                 },
                 {
@@ -50,6 +53,7 @@ class UserA extends Component{
                     file_access: true,
                     data_entry: true,
                     download: true,
+                    admin: true,
                     offer_details: true
                 }
             ],

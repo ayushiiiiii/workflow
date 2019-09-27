@@ -19,7 +19,7 @@ function Admin(props){
     </nav>
     <br/>
     <div className="row">
-        <Link to="./access" className="col-sm-3" ><button hidden={props.usertype==="User Operator"}><img src={Acces}></img><h3>User Access</h3></button></Link>
+        <Link to="./access" className="col-sm-3" ><button hidden={!props.admin}><img src={Acces}></img><h3>User Access</h3></button></Link>
         <p className="col-sm-1"></p>       
         <Link to="./signup"  className="col-sm-3"><button hidden={!props.data_entry}><img src={login}></img><h3>Add User</h3></button></Link>
         <p className="col-sm-1"></p>  
