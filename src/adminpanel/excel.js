@@ -13,11 +13,7 @@ class TaskForm extends Component{
         this.addMembers = this.addMembers.bind(this);
         this.removeMembers=this.removeMembers.bind(this);
     }
-    onChange(e){
-            this.setState({
-                [e.target.project_name]: e.target.value
-        })
-    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const task = {
@@ -107,7 +103,7 @@ class TaskForm extends Component{
                                 <input type="date" ref="review_date" required></input></div>
                                 <div className="col">
                            <label htmlFor="expected_completion"><h5><b>Expected Completion</b></h5></label>
-                                <input type="text" ref="expected_completion" value={this.state.expected_completion} onChange={() => this.onChange("expected_completion")} required></input></div>
+                                <input type="text" ref="expected_completion" required></input></div>
                          </div>
                          <div className="row">
                             <div className="col">
