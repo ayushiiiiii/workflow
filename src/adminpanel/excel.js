@@ -23,7 +23,7 @@ class TaskForm extends Component{
             end_date: this.refs.end_date.value,
             actual_start: this.refs.actual_start.value,
             actual_end_date: this.refs.actual_end_date.value,
-            expected_completion: this.refs.expected_completion,
+            expected_completion: this.refs.expected_completion.value,
             members: this.state.members
         }
         this.props.addTask({task: task});
