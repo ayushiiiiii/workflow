@@ -148,7 +148,14 @@ class Main extends Component{
             body: JSON.stringify({tasks: tasks})
         }).then(project => project.json())
         .then(project => {
-            this.setState({project: project});
+            let temp = this.state.projects;
+            for(let i=0;i<temp.length;i++){
+                if(temp[i]._id===projectId){
+                    temp[i]=project;
+                    this.setState({projects: temp});
+                    break;
+                }
+            }
         }).catch(err => console.log(err));
     }
     editTask(projectId, taskId, task, members){
