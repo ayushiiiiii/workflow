@@ -131,7 +131,7 @@ render(){
                <div className="row">
                     <div className="col">
                         <label htmlFor="machine" className="control-label"><h5><b>Machine</b></h5></label>
-                        <input type="text" ref="machine" required></input></div>
+                        <input type="text" ref="machine" value={this.state.machine} onChange={e => this.setState({machine: e.target.value})} required></input></div>
                     <div className="col">
                         <label htmlFor="task_completed"><h5><b>Add Task </b></h5><button type="button" src={Ad} className="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onClick={() => this.setState({addTask: true})}><img src={Ad}></img></button>
                       </label></div></div>
