@@ -27,8 +27,8 @@ class Sign extends Component{
         return(
             <form  onSubmit={this.handleSubmit} method="post" className=" log form-group" >
                 <div className="container-fluid">
-                    <h1>Add User</h1>
-                    <p>Please fill in this form to create an account.</p>
+                    <h1>Add User </h1>
+                    <p>Please fill in the details to add a user</p>
                     <hr/>
 
                     <label value="first_name" htmlFor="first"><b>First Name</b></label>
@@ -60,10 +60,12 @@ class Sign extends Component{
                     <br/>
                     <div className="clearfix">
                     <button type="button" className="cancelbtn">Cancel</button>
-                    <button type="submit" className="signupbtn">Sign Up</button>
+                    <button type="submit" className="signupbtn">Add User</button>
+                   
                     </div>
                 </div>
 </form>
+
 
 
         );

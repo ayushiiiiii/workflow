@@ -14,7 +14,8 @@ import Edittask from './adminpanel/edittask';
 import Com from './adminpanel/comments';
 import Complete from './adminpanel/completion';
 import UAccess from './adminpanel/useraccess';
-import List from './dashboard/listproject';
+import Manage from './adminpanel/manage_user';
+import Editmanage from './adminpanel/editmanageuser';
 
 class Main extends Component{
     constructor(props){
@@ -26,7 +27,8 @@ class Main extends Component{
             token: null,
             isLoginLoading: true,
             isProjectsLoading: true,
-            user: null
+            user: null,
+            users: []
         }
         this.auth=this.auth.bind(this);
         this.getProjects = this.getProjects.bind(this);
@@ -37,6 +39,7 @@ class Main extends Component{
         this.editProject = this.editProject.bind(this);
         this.editTask = this.editTask.bind(this);
         this.logOut = this.logOut.bind(this);
+        this.listUsers = this.listUsers.bind(this);
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
@@ -227,6 +230,22 @@ class Main extends Component{
             this.setState({projects: temp});
         },(err) => console.log(err));
     }
+    listUsers(){
+        fetch(baseUrl+'users/list',{
+            headers: {
+                'Authorization': 'Bearer '+this.state.token
+            }
+        }).then(res => res.json())
+        .then(users => this.setState({users: users}),(err) => console.log(err));
+    }
+    getUser(userId){
+        fetch(baseUrl+'users/list/'+userId,{
+            headers: {
+                'Authorization': 'Bearer '+this.state.token
+            }
+        }).then(res => res.json())
+        .then(users => this.setState({users: users}),(err) => console.log(err));
+    }
     logOut(){
         localStorage.removeItem('token');
         this.setState({
@@ -278,9 +297,11 @@ class Main extends Component{
         }if(this.state.user.type.data_entry){
             routes.push(<Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />);
             routes.push(<Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks:[]} />} />);
-            routes.push(<Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />);
         }if(this.state.user.type.admin){
             routes.push(<Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
+            routes.push(<Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />);
+            routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} />} />);
+            routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage getUser={this.getUser.bind(this)} userId={match.params.userId} />} />);
         }
         return(
         <div>
