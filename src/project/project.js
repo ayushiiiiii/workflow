@@ -83,49 +83,54 @@ class Project extends Component{
             else if(ratio<100) color='#2d41c4';
         }
         return(
-        <div className="col-12 col-sm-6 col-md-3">
-            <div className="card project text-center">
-                <div className="card-header">
-                    <h4 className="card-title">{this.props.task.name} </h4>
+        <div className="col-6 col-sm-4 col-md-2">
+            <div className="card project cssss text-center">
+                <div className="card-head">
+                    <h5 className="card-title">{this.props.task.name} </h5>
                 </div>
-                <div className="card-body">
-                <br/>
+                <div className="card-bodyy">
 <center><table className="table-responsive table table-striped text-center ">
                             <tbody>
                             <tr>
-                                <th>Start</th>
-                                <th>Target</th>
-                                <th>Actual</th>
+                                <th><font size="2">Start</font></th>
+                                <th><font size="2">Target</font></th>
+                                <th><font size="2">Actual</font></th>
                             </tr>
                             <tr>
-                                <td><span>{start_date.toDateString().slice(4)}</span></td>
-                                <td><span>{this.props.task.expected_completion}</span></td>
-                                <td><span>{actual_end_date.toDateString().slice(4)}</span></td>
+                                <td><font size="2"><span><p>{start_date.toDateString().slice(4)}</p></span></font></td>
+                                <td><font size="2"><span><p>{this.props.task.expected_completion}</p></span></font></td>
+                                <td><font size="2"><span><p>{actual_end_date.toDateString().slice(4)}</p></span></font></td>
                             </tr>
                             <tr>
-                                <td>Date </td>
-                                <td>Days</td>
-                                <td>Days</td>
+                                <td><font size="2">Date </font></td>
+                                <td><font size="2">Days</font></td>
+                                <td><font size="2">Days</font></td>
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 <td><h5 style={{fontWeight: 'bold'}}> Members</h5></td><td><ol>{arr}</ol></td>
                                 
-                            </tr>
+                            </tr> */}
                             </tbody>
                         </table></center>
-                        <div className="col-6">
+                        <div className="row">
+                            <div className="col-3">
+
+                            </div>
+                        <div className="col-4">
                         <CircularProgressbar value={this.props.task.completion} text={`${this.props.task.completion}%`} styles={buildStyles({
                             pathColor: color,
                             textColor: color,
                             trailColor: '#d6d6d6',
                             backgroundColor: 'white',
                         })}  />
-                        </div></div>
+                        </div>
+                        <div className="col-3">
+                            </div></div></div>
                         <br/><div className="row text-center wraper bbb card-footer">
                         
-                        <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button hidden={!this.props.file_access} className="btn" type="submit">Folders</button></Link>
-                        <Link to={'/home/'+this.props.projectId+'/'+this.props.task._id+'/comments'}><button className="btn" type="submit">Comments</button></Link>
-                        <button type="button" className="btn btn-primary" hidden={!this.props.data_entry} data-toggle="modal" data-target={"#"+this.props.index2}>
+                        <Link to={'/home/'+this.props.projectId+'/file-system/'+this.props.task._id}><button hidden={!this.props.file_access} className="btn btn-primary ubtn" type="button">File</button></Link>
+                        <Link to={'/home/'+this.props.projectId+'/'+this.props.task._id+'/comments'}><button className="btn btn-primary ubtn" type="button">Comments</button></Link>
+                        <button type="button" className="btn btn-primary ubtn " hidden={!this.props.data_entry} data-toggle="modal" data-target={"#"+this.props.index2}>
                         Edit 
                         </button>
 

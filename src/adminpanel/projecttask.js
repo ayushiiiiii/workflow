@@ -90,7 +90,7 @@ render(){
                 <div className="container">
                     <nav className="navbar navbar-expand-sm bg-light justify-content-center">
 
-    <center> <h1>Title{this.props.title}</h1> </center>
+    <center> <h1>Add Project{this.props.title}</h1> </center>
     </nav><br/>
                 <form className="container ex form-group" onSubmit={this.handleSubmit} method="post">
                         <br/>

@@ -55,19 +55,18 @@ class  Disable extends Component{
                 return members;
             }
         return(
-        <div className="col-12 col-sm-6 col-md-3 ">
-            <div className="card project text-center ">
-                <div className="card-header ">
-                    <h4 className="card-title">{this.props.task}</h4>
+        <div className="col-6 col-sm-4 col-md-2 ">
+            <div className="card cssss project text-center ">
+                <div className="card-head ">
+                    <h6 className="card-title">{this.props.task}</h6>
                 </div>
-                <div className="card-body bodyy">
-                <br/>
+                <div className="card-bodyy bodyy">
 <center><table className="table-responsive table table-striped text-center ">
                             <tbody>
                             <tr>
-                                <th>Start</th>
-                                <th>Target</th>
-                                <th>Actual</th>
+                                <th><font size="2">Start</font></th>
+                                <th><font size="2">Target</font></th>
+                                <th><font size="2">Actual</font></th>
                             </tr>
                             <tr>
                                 <td><span>--/--/----</span></td>
@@ -75,18 +74,17 @@ class  Disable extends Component{
                                 <td><span>--/--/----</span></td>
                             </tr>
                             <tr>
-                                <td>Date </td>
-                                <td>Days</td>
-                                <td>Days</td>
+                                <td><font size="2">Date </font></td>
+                                <td><font size="2">Days</font></td>
+                                <td><font size="2">Days</font></td>
                             </tr>
                             </tbody>
                         </table></center>
                         <div className="col-6">
                         <CircularProgressbar value={0} text={`0%`} />
                         </div>
-                        <br/>
                     </div><div className="card-footer">
-                <button type="button" className="btn btn-primary" data-toggle="modal" hidden={!this.props.data_entry} data-target={'#'+this.props.task.split(' ').join('-')}>
+                <button type="button" className="btn btn-primary ubtn" data-toggle="modal" hidden={!this.props.data_entry} data-target={'#'+this.props.task.split(' ').join('-')}>
                 Add Now
                 </button>
                 </div>

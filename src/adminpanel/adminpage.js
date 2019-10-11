@@ -14,14 +14,14 @@ function Admin(props){
         return(
 <div className="container-fluid">
     <nav className="navbar navbar-expand-sm bg-light justify-content-center">
-        <h1>Admin Page</h1>
+        <h1>Home Page</h1>
 
     </nav>
     <br/>
     <div className="row">
         <Link to="./access" className="col-sm-3" ><button hidden={!props.admin}><img src={Acces}></img><h3>User Access</h3></button></Link>
         <p className="col-sm-1"></p>       
-        <Link to="./signup"  className="col-sm-3"><button hidden={!props.data_entry}><img src={login}></img><h3>Add User</h3></button></Link>
+        <Link to="./manage"  className="col-sm-3"><button hidden={!props.admin}><img src={login}></img><h3>Manage User</h3></button></Link>
         <p className="col-sm-1"></p>  
         <Link to="./addProject" className="col-sm-3"><button hidden={!props.data_entry}><img  src={AP}></img><h3>Add Project</h3></button></Link>
     </div>
