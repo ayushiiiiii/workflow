@@ -7,15 +7,24 @@ class Editmanage extends Component{
     constructor(props){
         super(props);
         this.state={
+            found: false,
             user: null
         }
     }
     componentDidMount(){
-        this.props.getUser(this.props.userId).then(user => {this.setState({user: user})});
+        this.props.users.forEach(user => {
+            if(user._id==this.props.userId){
+                this.setState({user: user, found: true});
+                return false;
+            }
+        });
+        if(!this.state.found){
+            this.props.listUsers();
+        }
     }
     render(){
         
-      if(this.state.user){
+      if(this.state.found){
         return(
                 <div className= "container">
                     <nav className="navbar">

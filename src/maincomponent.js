@@ -245,14 +245,6 @@ class Main extends Component{
         }).then(res => res.json())
         .then(users => this.setState({users: users}),(err) => console.log(err));
     }
-    getUser(userId){
-        fetch(baseUrl+'users/list/'+userId,{
-            headers: {
-                'Authorization': 'Bearer '+this.state.token
-            }
-        }).then(res => res.json())
-        .then(users => this.setState({users: users}),(err) => console.log(err));
-    }
     logOut(){
         localStorage.removeItem('token');
         this.setState({
@@ -308,7 +300,7 @@ class Main extends Component{
             routes.push(<Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
             routes.push(<Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />);
             routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} />} />);
-            routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage getUser={this.getUser.bind(this)} userId={match.params.userId} />} />);
+            routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} />} />);
         }
         return(
         <div>
