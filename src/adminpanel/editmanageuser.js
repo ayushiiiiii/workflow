@@ -26,11 +26,11 @@ class Editmanage extends Component{
         
       if(this.state.found){
         return(
-                <div className= "container">
+                <div className= "container ex">
                     <nav className="navbar">
-                        <h3> Edit Users</h3>
+                        <center><h3> Edit Users</h3></center>
                     </nav>
-                    <form onSubmit="" >
+                    <form onSubmit="" className=" ex form-group container-fluid formm">
                     <div className="row">
                              <label htmlFor="email"><h5><b>Email</b></h5></label>
                              <input type="text" ref="email" value={this.state.user.username} required></input><br/>
@@ -52,6 +52,7 @@ class Editmanage extends Component{
                           <option value="Data Entry">Data Entry</option>
                           </select>
                           </div>
+                          <button type="submit"> Submit</button>
                           </form>
                           </div>
                                   );
