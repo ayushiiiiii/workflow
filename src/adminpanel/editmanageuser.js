@@ -40,7 +40,7 @@ class Editmanage extends Component{
                                  <input type="text" ref="First_name" value={this.state.user.first_name}required></input></div>
                         <div className="row">
                                  <label htmlFor="Last_name"><h5><b>Last_Name</b></h5></label>
-                                 <input type="date" ref="Last_Name" value={this.state.user.last_name} required></input><br/>
+                                 <input type="text" ref="Last_Name" value={this.state.user.last_name} required></input><br/>
                         </div>
                         <div className="row">
                           <label htmlFor="user_type"><h5><b>User Type</b></h5></label>
