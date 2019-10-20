@@ -29,7 +29,7 @@ class Popup extends React.Component {
     render() {
       return (
         <div className='app'>
-          <button onClick={this.togglePopup.bind(this)}> Issues</button>
+          <button onClick={this.togglePopup.bind(this)}> Edit Password</button>
 
           {this.state.showPopup ? 
             <Popup

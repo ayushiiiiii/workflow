@@ -32,6 +32,7 @@ function Admin(props){
 <br/>
 <br/>
 <div className="">
+<Link to ='/details'><button type="submit" className="btn btn-primary" >Profile</button></Link>
 <button type="submit" className="btn btn-primary" onClick={props.logOut}> LogOut</button>
 </div>
 </div>

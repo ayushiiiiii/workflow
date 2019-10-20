@@ -16,6 +16,8 @@ import Complete from './adminpanel/completion';
 import UAccess from './adminpanel/useraccess';
 import Manage from './adminpanel/manage_user';
 import Editmanage from './adminpanel/editmanageuser';
+import Details from './adminpanel/profile';
+import Change from './adminpanel/change';
 
 class Main extends Component{
     constructor(props){
@@ -301,7 +303,9 @@ class Main extends Component{
             routes.push(<Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />);
             routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} />} />);
             routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} />} />);
+            routes.push(<Route exact path='/change' component={() => <Change />} />);
         }
+
         return(
         <div>
           <Switch>
@@ -309,6 +313,7 @@ class Main extends Component{
               <Route exact path='/home' component={() => <Dashboard data_entry={this.state.user.type.data_entry} logOut={this.logOut} editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
               <Route exact path='/admin' component={() => <Admin admin={this.state.user.type.admin} data_entry={this.state.user.type.data_entry} logOut={this.logOut} />} />
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} comments={this.state.user.type.comments} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
+              <Route exact path='/details' component={() => <Details listUsers={this.listUsers}  users={this.state.user}  />} />
               {routes}
               <Redirect to='/admin' />
           </Switch>
