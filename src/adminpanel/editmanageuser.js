@@ -1,7 +1,5 @@
 import React, {Component } from 'react';
 import './excel.css';
-import Ad from '../pluss.png';
-import { tsConstructorType } from '@babel/types';
 
 class Editmanage extends Component{
     constructor(props){
@@ -10,6 +8,7 @@ class Editmanage extends Component{
         for(let i=0;i<this.props.users.length;i++){
             if(this.props.users[i]._id==this.props.userId){
                 user= this.props.users[i];
+                user._id=undefined;
                 found= true;
                 break;
             }
@@ -29,14 +28,10 @@ class Editmanage extends Component{
         user[f]=this.refs[f].value;
         this.setState({user: user, found: true})
     }
-    handleSubmit(){
-        this.props.user(this.props.usertId, this.props.user._id, {
-            username: this.state.username,
-            firstname: this.state.first_name,
-            lastname: this.state.last_name,
-            user_type: this.state.user_type,
-            })
-        }
+    handleSubmit(e){
+        e.preventDefault();
+        this.props.editUser(this.props.userId, this.state.user);
+    }
     render(){
     if(this.state.found===true){
         return(
@@ -57,8 +52,8 @@ class Editmanage extends Component{
                                     <input type="text" ref="lastname" value={this.state.user.lastname}  onChange={() => this.onChange("lastname")} required></input><br/>
                         </div>
                         <div className="row">
-                            <label htmlFor="user_type"><h5><b>User Type</b></h5></label>
-                            <select ref="user_type"   onChange={() => this.onChange("user_type")} required>
+                            <label htmlFor="usertype"><h5><b>User Type</b></h5></label>
+                            <select ref="usertype" value={this.state.user.usertype} onChange={() => this.onChange("usertype")} required>
                             <option value="Review" selected>Review</option>
                             <option value="Admin">Admin</option>
                             <option value="GB">GB</option>

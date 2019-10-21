@@ -46,6 +46,7 @@ class Main extends Component{
         this.listUsers = this.listUsers.bind(this);
         this.resetPassword = this.resetPassword.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
+        this.editUser = this.editUser.bind(this);
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
@@ -339,6 +340,34 @@ class Main extends Component{
             }
         });
     }
+    editUser(userId,newInfo){
+        fetch(baseUrl+'users/list/'+userId,{
+            method: "PUT",
+            headers: {
+                'Authorization': 'Bearer '+this.state.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newInfo)
+        }).then(res => res.json())
+        .then(res => {
+            let list = this.state.users;
+            list.forEach((user,index) => {
+                if(user._id==userId){
+                    list[index]=res;
+                    this.setState({users: list});
+                    return false;
+                }
+            });
+            MySwal.fire('Success','User Info Edited...','success');
+        },(err) => {
+            console.log(err);
+            MySwal.fire(
+                'Something Went Wrong',
+                err.message,
+                'error'
+            );
+        });
+    }
     componentDidMount(){
         // this.setState({projects: PROJECTS});
         let token = localStorage.getItem('token');
@@ -383,7 +412,7 @@ class Main extends Component{
             routes.push(<Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
             routes.push(<Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />);
             routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} deleteUser={this.deleteUser} />} />);
-            routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} />} />);
+            routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} editUser={this.editUser} />} />);
         }
 
         return(
