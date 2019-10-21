@@ -11,11 +11,11 @@ class Change extends Component{
         
         if(this.refs.newpassword.value===this.refs.retypepassword.value){
             const pass={
-                oldpassword: this.refs.oldpassword.value,
-                newpassword:this.refs.newpassword.value,
+                oldPassword: this.refs.oldpassword.value,
+                newPassword:this.refs.newpassword.value,
                
             }
-            this.props.pass({oldpassword: this.refs.newpassword.value});
+            this.props.resetPassword(pass);
         }else{
             alert("Check your password");
         }

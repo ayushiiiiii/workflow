@@ -14,7 +14,10 @@ class Manage extends Component{
         for (let i=0;i<this.props.users.length;i++){
                 users.push(
                     <tr>
-                        <td>{this.props.users[i].firstname+' '+this.props.users[i].lastname}</td> <td>{this.props.users[i].username}</td> <td>{this.props.users[i].usertype}</td><td><Link to ={'/Edit/'+this.props.users[i]._id}><button className="btn btn-info">Edit</button></Link> </td><td><button className="btn btn-secondary">Delete</button></td>
+                        <td>{this.props.users[i].firstname+' '+this.props.users[i].lastname}</td>
+                        <td>{this.props.users[i].username}</td> <td>{this.props.users[i].usertype}</td>
+                        <td><Link to ={'/Edit/'+this.props.users[i]._id}><button className="btn btn-info">Edit</button></Link></td>
+                        <td><button className="btn btn-secondary" onClick={() => this.props.deleteUser(this.props.users[i]._id, this.props.users[i].firstname+' '+this.props.users[i].lastname)}>Delete</button></td>
                     </tr>
                 )
         }

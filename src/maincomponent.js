@@ -5,12 +5,10 @@ import Dashboard from './dashboard/dashboard';
 import Appdata from './dashboard/appdata';
 import Insidedashboard from './insidedashboard';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Addpop from'./dashboard/add';
 import Projectform from './adminpanel/projecttask';
 import Admin from './adminpanel/adminpage';
 import { baseUrl } from './baseurl';
 import Sign from './adminpanel/signup';
-import Edittask from './adminpanel/edittask';
 import Com from './adminpanel/comments';
 import Complete from './adminpanel/completion';
 import UAccess from './adminpanel/useraccess';
@@ -18,6 +16,10 @@ import Manage from './adminpanel/manage_user';
 import Editmanage from './adminpanel/editmanageuser';
 import Details from './adminpanel/profile';
 import Change from './adminpanel/change';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 class Main extends Component{
     constructor(props){
@@ -42,6 +44,8 @@ class Main extends Component{
         this.editTask = this.editTask.bind(this);
         this.logOut = this.logOut.bind(this);
         this.listUsers = this.listUsers.bind(this);
+        this.resetPassword = this.resetPassword.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
@@ -258,6 +262,83 @@ class Main extends Component{
             user: null
         });
     }
+    resetPassword(password){
+        fetch(baseUrl+'users/resetPassword',{
+            method: "PUT",
+            headers: {
+                'Authorization': 'Bearer '+this.state.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(password)
+        }).then(res => res.json())
+        .then(res => {
+            if(res.success){
+                MySwal.fire(
+                    'Success',
+                    res.message,
+                    'success'
+                );
+            }else{
+                MySwal.fire(
+                    'Something Went Wrong',
+                    res.err,
+                    'error'
+                );
+            }
+        },(err) => {
+            console.log(err);
+            MySwal.fire(
+                'Something Went Wrong',
+                err.message,
+                'error'
+            );
+        });
+    }
+    deleteUser(userId, name){
+        MySwal.fire({
+            title: <p>Are you sure you want to delete the User {name}</p>,
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            customClass: {
+                popup: 'animated tada'
+            },
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete!'
+        }).then((result) => {
+            if (result.value) {
+                fetch(baseUrl+'users/list/'+userId,{
+                    method: "DELETE",
+                    headers: {
+                        'Authorization': 'Bearer '+this.state.token
+                    }
+                }).then(res => res.json())
+                .then(res => {
+                    if(!res.success){
+                        MySwal.fire(
+                            'Something Went Wrong',
+                            res.message,
+                            'error'
+                        )
+                    }else{
+                        MySwal.fire(
+                            'Deleted!',
+                            'User '+name+' has been deleted.',
+                            'success'
+                        )
+                    }
+                },(err) => {
+                    console.log(err);
+                    MySwal.fire(
+                        'Something Went Wrong',
+                        err.message,
+                        'error'
+                    )
+                });
+            }
+        });
+    }
     componentDidMount(){
         // this.setState({projects: PROJECTS});
         let token = localStorage.getItem('token');
@@ -301,9 +382,8 @@ class Main extends Component{
         }if(this.state.user.type.admin){
             routes.push(<Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
             routes.push(<Route exact path='/signup' component={() => <Sign addUser={this.addUser} />} />);
-            routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} />} />);
+            routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} deleteUser={this.deleteUser} />} />);
             routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} />} />);
-            routes.push(<Route exact path='/change' component={() => <Change />} />);
         }
 
         return(
@@ -313,7 +393,8 @@ class Main extends Component{
               <Route exact path='/home' component={() => <Dashboard data_entry={this.state.user.type.data_entry} logOut={this.logOut} editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
               <Route exact path='/admin' component={() => <Admin admin={this.state.user.type.admin} data_entry={this.state.user.type.data_entry} logOut={this.logOut} />} />
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} comments={this.state.user.type.comments} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
-              <Route exact path='/details' component={() => <Details listUsers={this.listUsers}  users={this.state.user}  />} />
+              <Route exact path='/details' component={() => <Details listUsers={this.listUsers}  users={this.state.user} />} />
+              <Route exact path='/change' component={() => <Change resetPassword={this.resetPassword} />} />
               {routes}
               <Redirect to='/admin' />
           </Switch>
