@@ -423,7 +423,7 @@ class Main extends Component{
               <Route exact path='/admin' component={() => <Admin admin={this.state.user.type.admin} data_entry={this.state.user.type.data_entry} logOut={this.logOut} />} />
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} comments={this.state.user.type.comments} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
               <Route exact path='/details' component={() => <Details listUsers={this.listUsers}  users={this.state.user} />} />
-              <Route exact path='/change' component={() => <Change resetPassword={this.resetPassword} />} />
+              <Route exact path='/details/changepassword' component={() => <Change resetPassword={this.resetPassword} />} />
               {routes}
               <Redirect to='/admin' />
           </Switch>

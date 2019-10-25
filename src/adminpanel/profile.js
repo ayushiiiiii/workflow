@@ -55,7 +55,7 @@ class Info extends Component{
                     <br/>
 
                             
-                   <Link to='/change'><button type="submit">Change password</button></Link>
+                   <Link to='/details/changepassword'><button type="submit">Change password</button></Link>
 
                     
 </div>
