@@ -24,7 +24,7 @@ class Manage extends Component{
         return(<div className="container">
                 <nav className="navbar-nav">
                     <div className="row">
-                    <h1 className=" col-sm-11 navbar-text"><center><b>Manage Users</b></center> </h1><Link className="col-sm-1 " to='/signup'><button className="btn btn-primary">Add</button></Link>
+                    <h1 className=" col-sm-11 navbar-text"><center><b>Manage Users</b></center> </h1><Link className="col-sm-1 " to='/manage/signup'><button className="btn btn-primary">Add</button></Link>
                     </div>
                     <hr/>
                 </nav>
