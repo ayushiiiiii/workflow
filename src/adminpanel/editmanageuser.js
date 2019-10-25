@@ -36,23 +36,30 @@ class Editmanage extends Component{
     if(this.state.found===true){
         return(
                 <div className= "container ex">
-                    <nav className="navbar">
-                        <center><h3> Edit Users</h3></center>
-                    </nav>
                     <form className=" ex form-group container-fluid formm">
+                    <center><h2> Edit Users</h2></center>
                     <div className="row">
-                                <label htmlFor="username"><h5><b>Email</b></h5></label>
+                        <div className="col">
+                                <label htmlFor="username"><h5><b>Email</b></h5></label></div>
+                            <div className="col">
                                 <input type="text" ref="username" value={this.state.user.username} onChange={() => this.onChange("username")} required></input><br/>
-                        </div>
+                        </div></div>
                         <div className="row">
-                                    <label htmlFor="Firstname"><h5><b>First Name</b></h5></label>
+                            <div className="col">
+                                    <label htmlFor="Firstname"><h5><b>First Name</b></h5></label></div>
+                                <div className="col">
                                     <input type="text" ref="firstname" value={this.state.user.firstname}  onChange={() => this.onChange("firstname")} required></input></div>
-                        <div className="row">
-                                    <label htmlFor="Lastname"><h5><b>Last_Name</b></h5></label>
-                                    <input type="text" ref="lastname" value={this.state.user.lastname}  onChange={() => this.onChange("lastname")} required></input><br/>
                         </div>
                         <div className="row">
-                            <label htmlFor="usertype"><h5><b>User Type</b></h5></label>
+                             <div className="col">
+                                    <label htmlFor="Lastname"><h5><b>Last_Name</b></h5></label></div>
+                             <div className="col">
+                                    <input type="text" ref="lastname" value={this.state.user.lastname}  onChange={() => this.onChange("lastname")} required></input><br/>
+                        </div></div>
+                        <div className="row">
+                            <div className="col">
+                            <label htmlFor="usertype"><h5><b>User Type</b></h5></label></div>
+                        <div className="col">
                             <select ref="usertype" value={this.state.user.usertype} onChange={() => this.onChange("usertype")} required>
                             <option value="Review" selected>Review</option>
                             <option value="Admin">Admin</option>
@@ -60,6 +67,7 @@ class Editmanage extends Component{
                             <option value="User Operator">User operator</option>
                             <option value="Data Entry">Data Entry</option>
                             </select>
+                            </div>
                             </div>
                             <button type="submit" onClick={this.handleSubmit} > Submit</button>
                             </form>
