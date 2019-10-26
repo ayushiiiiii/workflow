@@ -410,9 +410,9 @@ class Main extends Component{
             routes.push(<Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks:[]} />} />);
         }if(this.state.user.type.admin){
             routes.push(<Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
-            routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} deleteUser={this.deleteUser} />} />);
-            routes.push(<Route exact path='/manage/signup' component={() => <Sign addUser={this.addUser} />} />);
-            routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} editUser={this.editUser} />} />);
+            routes.push(<Route path='/manage/signup' component={() => <Sign addUser={this.addUser} />} />);
+            routes.push(<Route path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} editUser={this.editUser} />} />);
+            routes.push(<Route path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} deleteUser={this.deleteUser} />} />);
         }
 
         return(
