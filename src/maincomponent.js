@@ -402,18 +402,21 @@ class Main extends Component{
                 </Switch>
             );
         }
-        let routes=[];
-        if(this.state.user.type.file_access){
-            routes.push(<Route exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata upload={this.state.user.type.upload} download={this.state.user.type.download} logOut={this.logOut} projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />);
-        }if(this.state.user.type.data_entry){
-            routes.push(<Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />);
-            routes.push(<Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks:[]} />} />);
-        }if(this.state.user.type.admin){
-            routes.push(<Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
-            routes.push(<Route exact path='/manage/signup' component={() => <Sign addUser={this.addUser} />} />);
-            routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} editUser={this.editUser} />} />);
-            routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} deleteUser={this.deleteUser} />} />);
-        }
+		let Addroutes = () => {
+			let routes=[];
+			if(this.state.user.type.file_access){
+				routes.push(<Route exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata upload={this.state.user.type.upload} download={this.state.user.type.download} logOut={this.logOut} projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />);
+			}if(this.state.user.type.data_entry){
+				routes.push(<Route exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />);
+				routes.push(<Route exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks:[]} />} />);
+			}if(this.state.user.type.admin){
+				routes.push(<Route exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
+				routes.push(<Route exact path='/manage/signup' component={() => <Sign addUser={this.addUser} />} />);
+				routes.push(<Route exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} editUser={this.editUser} />} />);
+				routes.push(<Route exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} deleteUser={this.deleteUser} />} />);
+			}
+			return routes;
+		}
 
         return(
         <div>
@@ -424,7 +427,7 @@ class Main extends Component{
               <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} comments={this.state.user.type.comments} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
 			  <Route exact path='/details/changepassword' component={() => <Change resetPassword={this.resetPassword} />} />
               <Route exact path='/details' component={() => <Details listUsers={this.listUsers}  users={this.state.user} />} />
-              {routes}
+              {() => Addroutes()}
               <Redirect to='/admin' />
           </Switch>
         </div>
