@@ -7,7 +7,7 @@ class Manage extends Component{
         super(props);
     }
     componentDidMount(){
-        this.props.listUsers();
+        if(this.props.users.length===0) this.props.listUsers();
     }
     render()
     {   let users=[];

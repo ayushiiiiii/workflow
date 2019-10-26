@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './insidedashboard.css';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter,withRouter } from 'react-router-dom';
 import Main from './maincomponent';
 
 

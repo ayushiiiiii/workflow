@@ -8,9 +8,6 @@ class Info extends Component{
             this.handleSubmit=this.handleSubmit.bind;
         
     }
-    componentDidMount(){
-        this.props.listUsers();
-    }
 
     handleSubmit = (event) => {
         event.preventDefault();
