@@ -120,8 +120,20 @@ class Main extends Component{
         })
         .then(project => project.json())
         .then(project => {
+            MySwal.fire(
+                'Project Added Successfully!',
+                'Project '+project.name+' added Successfully with MdsNo '+project.mdsno,
+                'success'
+            );
             this.setState({projects: [...this.state.projects, project]})
-        }).catch((err) => console.log(err));
+        }).catch((err) => {
+            MySwal.fire(
+                'Something went wrong',
+                'Project was not added as something went wrong',
+                'error'
+            );
+            console.log(err);
+        });
     }
     editProject({projectId, project}){
         fetch(baseUrl+'projects/'+projectId,{
@@ -133,6 +145,11 @@ class Main extends Component{
             body: JSON.stringify(project)
         }).then(project => project.json())
         .then(project => {
+            MySwal.fire(
+                'Project Edited Successfully!',
+                'Project '+project.name+' edited Successfully with MdsNo '+project.mdsno,
+                'success'
+            );
             let temp = this.state.projects;
             for(let i=0;i<temp.length;i++){
                 if(temp[i]._id==project._id){
@@ -141,7 +158,14 @@ class Main extends Component{
                 }
             }
             this.setState({projects: temp});
-        })
+        }).catch((err) => {
+            MySwal.fire(
+                'Something went wrong',
+                'Project was not edited as something went wrong',
+                'error'
+            );
+            console.log(err);
+        });
     }
     editTasks({projectId, tasks}){
         for(let i=0;i<tasks.length;i++){
