@@ -1,7 +1,7 @@
 .back{
   background: lightgrey;
 }
-img {
+.login-card img {
     width:55%;
     display: block;
     margin-left: auto;
@@ -15,7 +15,7 @@ img {
         border-radius: 4px;
         resize: vertical;
       }i*/
-label {
+.login-card label {
         padding: 12px 12px 12px 0;
         display: inline-block;
         float: left;
@@ -44,12 +44,12 @@ button[type=submit] {
     display: block;
     text-align: center;
       }
-form{
+      .login-card form{
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
     text-align:center;
-    background:rgb(110, 81, 81);
+    background:grey;
     
     
 
@@ -68,7 +68,7 @@ form{
     height: 5px;
 }
 
-input[type=text], input[type=password] {
+.login-card input[type=text], .login-card input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

@@ -9,6 +9,21 @@ import Disable from './dashboard/disablecard';
 class App extends Component {
   constructor(props){
     super(props);
+
+    this.weightage = {
+      "Mechanical Design": 10,
+      "Electrical Design": 5,
+      "Mechanical Parts Ordering": 15,
+      "Electrical Parts Ordering": 15,
+      "Mechanical assy": 10,
+      "Electrical assy": 5,
+      "Total Assembly": 5,
+      "Programming": 10,
+      "Testing and internal trial": 5,
+      "FAT & review point": 10,
+      "Installation Commissioning": 5,
+      "Handover and Closure": 5
+    };
  }
 render(){
   let Projects = [], Disables = [];
@@ -30,6 +45,7 @@ render(){
       "Installation Commissioning": false,
       "Handover and Closure": false
     };
+
     let disables=[];
     this.props.project.tasks.forEach(task => {
       temp[task.name]=true;
@@ -40,7 +56,7 @@ render(){
       }
     }
     for(let i=0;i<disables.length;i++){
-      Disables.push(<Disable key={i} data_entry={this.props.data_entry} projectId={this.props.projectId} addTask={this.props.addTask} task={disables[i]}/>);
+      Disables.push(<Disable key={i} data_entry={this.props.data_entry} projectId={this.props.projectId} addTask={this.props.addTask} task={disables[i]} weightage={this.weightage[disables[i]]} />);
     }
     return (
       <div className="container-fluid">

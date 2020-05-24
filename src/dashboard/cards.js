@@ -26,9 +26,9 @@ class Cards extends Component{
             short_name:this.props.project.short_name,
             location: this.props.project.location,
             machine:this.props.project.machine,
-            start_date: (this.props.project.start_date==null?null:formatDate(this.props.project.start_date)),
-            fat_date: (this.props.project.fat_date==null?null:formatDate(this.props.project.fat_date)),
-            actual_end: (this.props.project.actual_date==null?null:formatDate(this.props.project.actual_date)),
+            start_date: (this.props.project.start_date==null?'':formatDate(this.props.project.start_date)),
+            fat_date: (this.props.project.fat_date==null?'':formatDate(this.props.project.fat_date)),
+            actual_end: (this.props.project.actual_date==null?'':formatDate(this.props.project.actual_date)),
             active: this.props.project.active,
             disableSubmit: true
         }

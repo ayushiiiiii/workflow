@@ -12,7 +12,7 @@ import AP from '../addp.png';
 
 function Admin(props){
         return(
-<div className="container-fluid">
+<div className="container-fluid admin-panel">
     <nav className="navbar navbar-expand-sm bg-light justify-content-center">
         <h1>Home Page</h1>
 

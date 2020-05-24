@@ -87,7 +87,7 @@ render(){
             }
             
             return(
-                <div className="container">
+                <div className="container projectTask">
                     <nav className="navbar navbar-expand-sm bg-light justify-content-center">
 
     <center> <h1>Add Project{this.props.title}</h1> </center>

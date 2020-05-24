@@ -6,7 +6,7 @@ import { baseUrl } from '../baseurl';
 import FileSystem from '../filesystem/filesystem';
 
 const FileWindow = ({upload, download, fileId, fileError}) => {
-  if(fileId=='' && !fileError){
+  if(fileId==='' && !fileError){
     return(<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>);
   }else if(fileError){
     return(<textarea rows="20" cols="80" defaultValue="File Not Found"></textarea>);
@@ -16,6 +16,8 @@ const FileWindow = ({upload, download, fileId, fileError}) => {
 }
 
 class Folders extends Component{
+  _isMounted = false;
+
   constructor(props){
     super(props);
     this.state={
@@ -23,7 +25,14 @@ class Folders extends Component{
       fileError: false
     }
   }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   componentDidMount(){
+    this._isMounted = true;
+
     fetch(baseUrl+'resolve',{
       method: "POST",
       headers:{
@@ -39,12 +48,12 @@ class Folders extends Component{
     .then(projects => {
       let projectId='';
       projects.items.forEach(project => {
-        if(project.name==this.props.projectId){
+        if(project.name===this.props.projectId){
           projectId=project.id;
           return false;
         }
       })
-      if(projectId==''){
+      if(projectId===''){
         let err = new Error('Project Not found!');
         err.status=404;
         return err;
@@ -53,12 +62,12 @@ class Folders extends Component{
     .then(items => items.json())
     .then(items => {
       items.items.forEach(item => {
-        if(item.name==this.props.folder){
+        if(item.name===this.props.folder && this._isMounted){
           this.setState({fileId: item.id});
           return false;
         }
       });
-      if(this.state.fileId==''){
+      if(this.state.fileId==='' && this._isMounted){
         this.setState({fileError: true});
       }
     },(err) => console.log(err));

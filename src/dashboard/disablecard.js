@@ -102,7 +102,7 @@ class  Disable extends Component{
                     <div className="modal-body">
                         <form method="post" className="form-group fo">
                             <label>Weightage</label>
-                            <input type="text" ref={"weightage"+this.props.task.split(' ').join('-')} />
+                            <input type="text" value={this.props.weightage} ref={"weightage"+this.props.task.split(' ').join('-')} disabled />
                             <label htmlFor="start_date">Start date(planned)</label>
                             <input type="date" ref={"start_date"+this.props.task.split(' ').join('-')} required></input>
                             <label htmlFor="end_date">End date(planned)</label>

@@ -150,7 +150,7 @@ class Project extends Component{
                     <br/><div className="form-row">
                          <div className="col">
                              <label htmlFor="weightage"><h5><b>Weightage</b></h5></label>
-                             <input type="text" ref={"weightage"+this.props.task._id} value={this.state.weightage} onChange={() => this.onChange("weightage")} required></input><br/>
+                             <input type="text" disabled ref={"weightage"+this.props.task._id} value={this.state.weightage} onChange={() => this.onChange("weightage")} required></input><br/>
                         </div></div>
                         <div className="row">
                              <div className="col">

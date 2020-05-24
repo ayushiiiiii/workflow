@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-
 class Complete extends Component{
     constructor(props){
         super(props);
@@ -35,7 +34,7 @@ class Complete extends Component{
         };
         return(
             <div  className="container ui-content range-field my-5">
-                <form onSubmit={this.handleSubmit} method="post" className="log form-group">
+                <form onSubmit={this.handleSubmit} style={{backgroundColor: 'white'}} method="post" className="log form-group">
                 <h1>Tasks Completion</h1>
                     <hr/>
                     {taskView}

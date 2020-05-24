@@ -6,12 +6,15 @@
           display: block;
           text-align: center;
       }
+.projectTask form{
+    background:grey;
+}
+
 form{
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
     text-align:center;
-    background:grey;
 
     
 }

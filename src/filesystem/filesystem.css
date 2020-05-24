@@ -3,9 +3,11 @@ div.oc-fm--location-bar{
 }
 div.hideUpload button.oc-fm--toolbar__item[title="Upload"],
 div.hideUpload button.oc-fm--toolbar__item[title="Create folder"],
+div.hideUpload button.oc-fm--toolbar__item[title="Create Drive Link"],
 div.hideUpload button.oc-fm--toolbar__item[title="Remove"],
 div.hideUpload button.oc-fm--toolbar__item[title="Rename"],
 div.hideUpload nav.oc-fm--context-menu__content div.react-contextmenu-item:first-child,
+div.hideUpload nav.oc-fm--context-menu__content div.react-contextmenu-item:nth-child(2),
 div.hideUpload nav.oc-fm--context-menu__content div.react-contextmenu-item:nth-child(3){
     display: none;
 }
