@@ -20,7 +20,7 @@ class App extends Component {
       "Total Assembly": 5,
       "Programming": 10,
       "Testing and internal trial": 5,
-      "FAT & review point": 10,
+      "FAT and review point": 10,
       "Installation Commissioning": 5,
       "Handover and Closure": 5
     };
@@ -41,7 +41,7 @@ render(){
       "Total Assembly": false,
       "Programming": false,
       "Testing and internal trial": false,
-      "FAT & review point": false,
+      "FAT and review point": false,
       "Installation Commissioning": false,
       "Handover and Closure": false
     };
