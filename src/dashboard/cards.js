@@ -31,7 +31,6 @@ class Cards extends Component{
             active: this.props.project.active,
             disableSubmit: true
         }
-        console.log(this.props.project, this.state);
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
