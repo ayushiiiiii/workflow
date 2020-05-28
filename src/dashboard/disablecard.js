@@ -76,7 +76,7 @@ class  Disable extends Component{
                             <tr>
                                 <td><font size="2">Date </font></td>
                                 <td><font size="2">Days</font></td>
-                                <td><font size="2">Days</font></td>
+                                <td><font size="2">Date</font></td>
                             </tr>
                             </tbody>
                         </table></center>
@@ -115,7 +115,7 @@ class  Disable extends Component{
                             <input type="date" ref={"actual_end_date"+this.props.task.split(' ').join('-')} required></input>
                             <label htmlFor="members">Add Members</label>
                             <input type="email" ref="member" className="form-control"></input>
-                             <a href={void(0)} src={Ad} className="btn btn-primary glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"  onClick={this.addMembers}><img src={Ad}></img>Add</a>
+                             <a href="javascript:void(0)" src={Ad} className="btn btn-primary glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"  onClick={this.addMembers}><img src={Ad}></img>Add</a>
 
                           {returnMembers() }
 

@@ -22,12 +22,13 @@ class Complete extends Component{
     }
     render(){
         var taskView = [];
+        console.log(this.state.tasks)
         for(let i=0;i<this.state.tasks.length;i++){
             taskView.push(
                 <span key={this.state.tasks[i]._id}>
-                    <label htmlFor="project1"><b>{this.state.tasks[i].name}</b></label>
+                    <label htmlFor="project1"><b>{this.state.tasks[i].name} (Review Date: {new Date(this.state.tasks[i].review_date).toLocaleDateString()})</b></label>
                     <input ref={this.state.tasks[i]._id} type="range" name="points" className="custom-range" min="0" value="0" max="100" onChange={() => this.handleChange(i)} value={this.state.tasks[i].completion}/>
-                    <span>{this.state.tasks[i].completion}</span>
+                    <span>{this.state.tasks[i].completion} %</span>
                     <br/>
                 </span>
             );

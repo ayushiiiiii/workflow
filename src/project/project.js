@@ -23,11 +23,11 @@ class Project extends Component{
         super(props);
         this.state={
             weightage: this.props.task.weightage,
-            start_date: (this.props.task.start_date==null?null:formatDate(this.props.task.start_date)),
-            end_date: (this.props.task.end_date==null?null:formatDate(this.props.task.end_date)),
-            actual_start: (this.props.task.actual_start==null?null:formatDate(this.props.task.actual_start)),
-            actual_end: (this.props.task.actual_end==null?null:formatDate(this.props.task.actual_end)),
-            review_date: (this.props.task.review_date==null?null:formatDate(this.props.task.review_date)),
+            start_date: (!this.props.task.start_date?'':formatDate(this.props.task.start_date)),
+            end_date: (!this.props.task.end_date?'':formatDate(this.props.task.end_date)),
+            actual_start_date: (!this.props.task.actual_start_date?'':formatDate(this.props.task.actual_start_date)),
+            actual_end_date: (!this.props.task.actual_end_date?'':formatDate(this.props.task.actual_end_date)),
+            review_date: (!this.props.task.review_date?'':formatDate(this.props.task.review_date)),
             expected_completion: this.props.task.expected_completion,
             members: this.props.task.members.map(member => member.username),
             disable: true
@@ -46,8 +46,8 @@ class Project extends Component{
             weightage: this.state.weightage,
             start_date: this.state.start_date,
             end_date: this.state.end_date,
-            actual_start: this.state.actual_start,
-            actual_end: this.state.actual_end,
+            actual_start_date: this.state.actual_start_date,
+            actual_end_date: this.state.actual_end_date,
             expected_completion: this.state.expected_completion,
             review_date: this.state.review_date
         }, this.state.members);
@@ -98,13 +98,13 @@ class Project extends Component{
                             </tr>
                             <tr>
                                 <td><font size="2"><span><p>{start_date.toDateString().slice(4)}</p></span></font></td>
-                                <td><font size="2"><span><p>{this.props.task.expected_completion}</p></span></font></td>
+                                <td><font size="2"><span><p>{this.props.task.expected_completion} %</p></span></font></td>
                                 <td><font size="2"><span><p>{actual_end_date.toDateString().slice(4)}</p></span></font></td>
                             </tr>
                             <tr>
                                 <td><font size="2">Date </font></td>
-                                <td><font size="2">Days</font></td>
-                                <td><font size="2">Days</font></td>
+                                <td><font size="2"></font></td>
+                                <td><font size="2">Date</font></td>
                             </tr>
                             {/* <tr>
                                 <td><h5 style={{fontWeight: 'bold'}}> Members</h5></td><td><ol>{arr}</ol></td>
@@ -163,10 +163,10 @@ class Project extends Component{
                         <div className="row">
                             <div className="col">
                                 <label htmlFor="actual_end_date"><h5><b>Actual end date</b></h5></label>
-                                <input type="date" ref={"actual_end_date"+this.props.task._id} value={this.state.actual_end} onChange={() => this.onChange("Actual_end_date")} required></input><br/></div>
+                                <input type="date" ref={"actual_end_date"+this.props.task._id} value={this.state.actual_end_date} onChange={() => this.onChange("actual_end_date")} required></input><br/></div>
                             <div className="col">
-                                <label htmlFor="actual_start"><h5><b>actual start Date</b></h5></label>
-                                <input type="date" ref={"actual_start"+this.props.task._id} value={this.state.actual_start} onChange={() => this.onChange("Actual_start")} required></input><br/>
+                                <label htmlFor="actual_start"><h5><b>Actual start Date</b></h5></label>
+                                <input type="date" ref={"actual_start_date"+this.props.task._id} value={this.state.actual_start_date} onChange={() => this.onChange("actual_start_date")} required></input><br/>
                         </div></div>
                         <div className="row">
                             <div className="col">
@@ -175,7 +175,7 @@ class Project extends Component{
                            </div>
                            <div className="row">
                            <div className="col">
-                           <label htmlFor="expected_completion"><h5><b>Expected Completion</b></h5></label>
+                           <label htmlFor="expected_completion"><h5><b>Expected Completion (in %)</b></h5></label>
                                 <input type="text" ref={"expected_completion"+this.props.task._id} value={this.state.expected_completion} onChange={() => this.onChange("expected_completion")} required></input></div>
                          </div>
                            

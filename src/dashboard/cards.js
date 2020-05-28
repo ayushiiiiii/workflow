@@ -3,7 +3,6 @@ import './card.css';
 import { Link } from 'react-router-dom';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import Ad from '../pluss.png';
 
 function formatDate(date) {
     var d=new Date(date), month = '' + (d.getMonth() + 1),
@@ -26,12 +25,13 @@ class Cards extends Component{
             short_name:this.props.project.short_name,
             location: this.props.project.location,
             machine:this.props.project.machine,
-            start_date: (this.props.project.start_date==null?'':formatDate(this.props.project.start_date)),
-            fat_date: (this.props.project.fat_date==null?'':formatDate(this.props.project.fat_date)),
-            actual_end: (this.props.project.actual_date==null?'':formatDate(this.props.project.actual_date)),
+            start_date: (!this.props.project.start_date?'':formatDate(this.props.project.start_date)),
+            fat_date: (!this.props.project.fat_date?'':formatDate(this.props.project.fat_date)),
+            actual_end: (!this.props.project.actual_end?'':formatDate(this.props.project.actual_end)),
             active: this.props.project.active,
             disableSubmit: true
         }
+        console.log(this.props.project, this.state);
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -50,10 +50,10 @@ class Cards extends Component{
         this.props.editProject({projectId: this.props.project._id, project: project});
     }
     onChange(field){
-        if(field!="active"){
+        if(field!=="active"){
             this.setState({[field]: this.refs[field+this.props.project._id].value, disableSubmit: false})
         }else{
-            this.setState({[field]: (this.refs[field+this.props.project._id].value=="true"?true:false), disableSubmit: false})
+            this.setState({[field]: (this.refs[field+this.props.project._id].value==="true"?true:false), disableSubmit: false})
         }
     }
     render(){
@@ -135,7 +135,7 @@ class Cards extends Component{
                             </div></div> <br/>
                                 <div className="row">
                                     <div className="col">   
-                                        <label htmlFor="start_date"  className="control-label"><h5><b>start date</b></h5></label>
+                                        <label htmlFor="start_date"  className="control-label"><h5><b>Start date</b></h5></label>
                                         <input type="date" ref={"start_date"+this.props.project._id} value={this.state.start_date} onChange={() => this.onChange("start_date")}  required></input></div>
                                     <div className="col">
                                         <label htmlFor="fat_date"  className="control-label"><h5><b>Fat Date</b></h5></label>
@@ -143,7 +143,7 @@ class Cards extends Component{
                                     </div></div> <br/>
                                 <div className="row">
                                         <div className="col">
-                                            <label htmlFor="actual_end"  className="control-label"><h5><b>Actual Date</b></h5></label>
+                                            <label htmlFor="actual_end"  className="control-label"><h5><b>Actual End Date</b></h5></label>
                                             <input type="date" ref={"actual_end"+this.props.project._id} value={this.state.actual_end} onChange={() => this.onChange("actual_end")}  required></input></div>
                                         <div className="col">
                                             <label htmlFor="active_inactive"  className="control-label"><h5><b>Active/Inactive</b></h5></label>
