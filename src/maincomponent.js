@@ -47,6 +47,7 @@ class Main extends Component{
         this.resetPassword = this.resetPassword.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
         this.editUser = this.editUser.bind(this);
+        this.logOutOnError = this.logOutOnError.bind(this);
     }
     auth({uname, password}){
         fetch(baseUrl+'users/login',{
@@ -82,6 +83,8 @@ class Main extends Component{
         .then((result) => {
             alert(result.status);
 			this.listUsers();
+        }).catch(err => {
+            this.logOutOnError();
         });
     }
     getProjects(){
@@ -96,6 +99,8 @@ class Main extends Component{
         .then((projects) => projects.json())
         .then((projects)=>{
             this.setState({projects: projects, isProjectsLoading: false});
+        }).catch(err => {
+            this.logOutOnError();
         });
     }
     postProject({project}){
@@ -127,11 +132,7 @@ class Main extends Component{
             );
             this.setState({projects: [...this.state.projects, project]})
         }).catch((err) => {
-            MySwal.fire(
-                'Something went wrong',
-                'Project was not added as something went wrong',
-                'error'
-            );
+            this.logOutOnError();
             console.log(err);
         });
     }
@@ -152,18 +153,14 @@ class Main extends Component{
             );
             let temp = this.state.projects;
             for(let i=0;i<temp.length;i++){
-                if(temp[i]._id==project._id){
+                if(temp[i]._id===project._id){
                     temp[i]=project;
                     break;
                 }
             }
             this.setState({projects: temp});
         }).catch((err) => {
-            MySwal.fire(
-                'Something went wrong',
-                'Project was not edited as something went wrong',
-                'error'
-            );
+            this.logOutOnError();
             console.log(err);
         });
     }
@@ -191,7 +188,9 @@ class Main extends Component{
                     break;
                 }
             }
-        }).catch(err => console.log(err));
+        }).catch(err => {
+            this.logOutOnError();
+        });
     }
     editTask(projectId, taskId, task, members){
         let addMembers=[],projectIndex=-1,taskIndex=-1,temp = this.state.projects;;
@@ -206,15 +205,15 @@ class Main extends Component{
         .then(async(task) => {
             let curMembers = task.members.map(member => member.username);
             members.forEach(member => {
-                if(curMembers.indexOf(member)==-1){
+                if(curMembers.indexOf(member)===-1){
                     addMembers.push(member);
                 }
             });
             for(let i=0;i<temp.length;i++){
-                if(temp[i]._id==projectId){
+                if(temp[i]._id===projectId){
                     projectIndex=i;
                     for(let j=0;j<temp[i].tasks.length;j++){
-                        if(temp[i].tasks[j]._id==taskId){
+                        if(temp[i].tasks[j]._id===taskId){
                             taskIndex=j;
                             temp[i].tasks[j]=task;
                             break;
@@ -224,7 +223,7 @@ class Main extends Component{
                 }
             }
             for(let i=0;i<curMembers.length;i++){
-                if(members.indexOf(curMembers[i])==-1){
+                if(members.indexOf(curMembers[i])===-1){
                     await fetch(baseUrl+'projects/'+projectId+'/tasks/'+taskId+'/members/'+curMembers[i],{
                         method: "DELETE",
                         headers: { 'Authorization': 'Bearer '+this.state.token }
@@ -247,7 +246,9 @@ class Main extends Component{
                 temp[projectIndex].tasks[taskIndex].members=res;
             }
             this.setState({projects: temp});
-        },err => console.log(err));
+        }).catch(err => {
+            this.logOutOnError();
+        });
     }
     addTask({projectId,task}){
         fetch(baseUrl+'projects/'+projectId+'/tasks',{
@@ -261,13 +262,15 @@ class Main extends Component{
         .then(project => {
             let temp = this.state.projects;
             for(let i=0;i<temp.length;i++){
-                if(temp[i]._id==projectId){
+                if(temp[i]._id===projectId){
                     temp[i]=project;
                     break;
                 }
             }
             this.setState({projects: temp});
-        },(err) => console.log(err));
+        }).catch(err => {
+            this.logOutOnError();
+        });
     }
     listUsers(){
         fetch(baseUrl+'users/list',{
@@ -275,7 +278,10 @@ class Main extends Component{
                 'Authorization': 'Bearer '+this.state.token
             }
         }).then(res => res.json())
-        .then(users => this.setState({users: users}),(err) => console.log(err));
+        .then(users => this.setState({users: users}))
+        .catch(err => {
+            this.logOutOnError();
+        });
     }
     logOut(){
         localStorage.removeItem('token');
@@ -311,13 +317,8 @@ class Main extends Component{
                     'error'
                 );
             }
-        },(err) => {
-            console.log(err);
-            MySwal.fire(
-                'Something Went Wrong',
-                err.message,
-                'error'
-            );
+        }).catch(err => {
+            this.logOutOnError();
         });
     }
     deleteUser(userId, name){
@@ -350,7 +351,7 @@ class Main extends Component{
                     }else{
 						let users=this.state.users;
 						users.forEach((user,index) => {
-							if(user._id==userId){
+							if(user._id===userId){
 								users.splice(index,1);
 								this.setState({users: users});
 								return false;
@@ -362,13 +363,8 @@ class Main extends Component{
                             'success'
                         )
                     }
-                },(err) => {
-                    console.log(err);
-                    MySwal.fire(
-                        'Something Went Wrong',
-                        err.message,
-                        'error'
-                    )
+                }).catch(err => {
+                    this.logOutOnError();
                 });
             }
         });
@@ -385,22 +381,28 @@ class Main extends Component{
         .then(res => {
             let list = this.state.users;
             list.forEach((user,index) => {
-                if(user._id==userId){
+                if(user._id===userId){
                     list[index]=res;
                     this.setState({users: list});
                     return false;
                 }
             });
             MySwal.fire('Success','User Info Edited...','success');
-        },(err) => {
-            console.log(err);
-            MySwal.fire(
-                'Something Went Wrong',
-                err.message,
-                'error'
-            );
+        }).catch(err => {
+            this.logOutOnError();
         });
     }
+
+    logOutOnError() {
+        MySwal.fire(
+            'Session Expired!',
+            'Your session may have been expired! Log in again.',
+            'warning'
+        ).then(() => {
+            this.logOut();
+        });
+    }
+
     componentDidMount(){
         // this.setState({projects: PROJECTS});
         let token = localStorage.getItem('token');
@@ -417,14 +419,13 @@ class Main extends Component{
                 this.setState({isLoginLoading: false, user: result});
             }).catch(err => {
                 this.setState({isLoginLoading: false});
-                console.log(err);
             });
         }else{
             this.setState({isLoginLoading: false});
         }      
     }
     render(){
-        if(this.state.isLoginLoading==true){
+        if(this.state.isLoginLoading){
             return(<div className="icon"><i className="fas fa-spinner fa-3x fa-pulse text-primary ic"></i></div>);
         }
         if (!this.state.Loggedin){
@@ -437,10 +438,10 @@ class Main extends Component{
         }
 		let routes=[];
 		if(this.state.user.type.file_access){
-			routes.push(<Route key='1' exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata upload={this.state.user.type.upload} download={this.state.user.type.download} logOut={this.logOut} projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />);
+			routes.push(<Route key='1' exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata upload={this.state.user.type.upload} download={this.state.user.type.download} logOut={this.logOut} projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id===match.params.projectId)[0]} />} />);
 		}if(this.state.user.type.data_entry){
 			routes.push(<Route key='2' exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />);
-			routes.push(<Route key='3' exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id==match.params.projectId)[0].tasks:[]} />} />);
+			routes.push(<Route key='3' exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id===match.params.projectId)[0].tasks:[]} />} />);
 		}if(this.state.user.type.admin){
 			routes.push(<Route key='4' exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
 			routes.push(<Route key='5' exact path='/manage/signup' component={() => <Sign addUser={this.addUser} />} />);
@@ -451,7 +452,7 @@ class Main extends Component{
         return(
         <div>
           <Switch>
-              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard file_access={this.state.user.type.file_access} data_entry={this.state.user.type.data_entry}  logOut={this.logOut} editTask={this.editTask} projectId={match.params.projectId} addTask={this.addTask} project={this.state.projects.filter(project => project._id==match.params.projectId)[0]} />} />
+              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard file_access={this.state.user.type.file_access} data_entry={this.state.user.type.data_entry}  logOut={this.logOut} editTask={this.editTask} projectId={match.params.projectId} addTask={this.addTask} project={this.state.projects.filter(project => project._id===match.params.projectId)[0]} />} />
               <Route exact path='/home' component={() => <Dashboard data_entry={this.state.user.type.data_entry} logOut={this.logOut} editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
               <Route exact path='/admin' component={() => <Admin admin={this.state.user.type.admin} data_entry={this.state.user.type.data_entry} logOut={this.logOut} />} />
 			  <Route exact path='/details/changepassword' component={() => <Change resetPassword={this.resetPassword} />} />
