@@ -83,7 +83,7 @@ class Project extends Component{
             else if(ratio<100) color='#2d41c4';
         }
         return(
-        <div className="col-6 col-sm-4 col-md-2">
+        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
             <div className="card project cssss text-center">
                 <div className="card-head">
                     <h5 className="card-title">{this.props.task.name} </h5>

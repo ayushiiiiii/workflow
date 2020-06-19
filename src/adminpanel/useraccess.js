@@ -92,7 +92,13 @@ class UserA extends Component{
                 <div className="container">
                     <form  className="form-group" onSubmit={this.handleSubmit} method="post">
                     <div className="container-fluid">
-                    <h1>User Access Page</h1>
+                    <div >
+                        
+                    </div>
+                    <h1>
+                        <span className="ml-4 fas fa-arrow-left fa-sm float-left" style={{cursor: 'pointer'}} onClick={() => this.props.goBack()}></span>
+                        User Access Page
+                    </h1>
                     <hr/>
                     <table className="tabledata table-responsive" >
                         <tbody>

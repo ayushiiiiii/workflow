@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './login.css';
 import login from '../new_login.png';
-import { withRouter , Redirect} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 class Login extends Component{
@@ -24,7 +24,7 @@ onChange(e){
     render(){
         return(<div className="back">
             <div className="container login-card ">
-        <form className="log" onSubmit={this.handleSubmit}>  
+        <form className="log col-12 col-sm-8 col-md-6" onSubmit={this.handleSubmit}>  
         <div className="container ">
 
         <div className="imgcontainer">

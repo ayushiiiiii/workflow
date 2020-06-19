@@ -81,7 +81,7 @@ class Folders extends Component{
       return(
         <div>
           <div>
-          <Navbar logOut={this.props.logOut} start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
+          <Navbar goBack={this.props.goBack} logOut={this.props.logOut} start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
           </div> 
           <br/>
             <div className="row">

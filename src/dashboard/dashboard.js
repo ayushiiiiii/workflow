@@ -13,7 +13,7 @@ class App extends Component {
 constructor(){
   super();
   this.state={
-    showCards: false
+    showCards: true
   }
   this.handleCheckChange = this.handleCheckChange.bind(this);
   this.deleteProject = this.deleteProject.bind(this);
@@ -64,15 +64,15 @@ render(){
   }
     return (
     <div className="container-fluid">
-      <nav className="navbar navbar-expand-sm bg-light justify-content-center "> 
-      
-      &nbsp;&nbsp;&nbsp;&nbsp;
-     
-          <center> <h1>Project list </h1> </center>
+      <nav className="navbar navbar-expand-sm bg-light"> 
+      <div className="ml-4" style={{cursor: 'pointer'}} onClick={() => this.props.goBack()}>
+        <span className="fas fa-arrow-left fa-lg"></span>
+      </div>
+          <center className="ml-auto mr-auto"> <h1>Project list </h1> </center>
           <div className="toggle">
             <span>Show Cards</span><br/>
             <label className="switchs">
-              <input type="checkbox" onChange={this.handleCheckChange}/>
+              <input type="checkbox" checked={this.state.showCards} onChange={this.handleCheckChange}/>
               <span className="slider round"></span>
             </label>
           </div>

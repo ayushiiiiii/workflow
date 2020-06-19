@@ -88,9 +88,12 @@ render(){
             
             return(
                 <div className="container projectTask">
-                    <nav className="navbar navbar-expand-sm bg-light justify-content-center">
+                    <nav className="navbar navbar-expand-sm bg-light">
+                    <div className="ml-4" style={{cursor: 'pointer'}} onClick={() => this.props.goBack()}>
+                        <span className="fas fa-arrow-left fa-lg"></span>
+                    </div>
 
-    <center> <h1>Add Project{this.props.title}</h1> </center>
+    <center className="mx-auto"> <h1>Add Project{this.props.title}</h1> </center>
     </nav><br/>
                 <form className="container ex form-group" onSubmit={this.handleSubmit} method="post">
                         <br/>

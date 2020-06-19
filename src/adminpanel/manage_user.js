@@ -3,9 +3,6 @@ import './manage_user.css';
 import { Link } from 'react-router-dom';
 
 class Manage extends Component{
-    constructor(props){
-        super(props);
-    }
     componentDidMount(){
         if(this.props.users.length===0) this.props.listUsers();
     }
@@ -23,6 +20,9 @@ class Manage extends Component{
         }
         return(<div className="container">
                 <nav className="navbar-nav">
+                <div className="ml-4" style={{cursor: 'pointer'}} onClick={() => this.props.goBack()}>
+                    <span className="fas fa-arrow-left fa-lg"></span>
+                </div>
                     <div className="row">
                     <h1 className=" col-sm-11 navbar-text"><center><b>Manage Users</b></center> </h1><Link className="col-sm-1 " to='/manage/signup'><button className="btn btn-primary">Add</button></Link>
                     </div>

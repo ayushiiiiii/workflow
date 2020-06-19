@@ -36,7 +36,9 @@ class Complete extends Component{
         return(
             <div  className="container ui-content range-field my-5">
                 <form onSubmit={this.handleSubmit} style={{backgroundColor: 'white'}} method="post" className="log form-group">
-                <h1>Tasks Completion</h1>
+                <h1>
+                    <span className="fas fa-arrow-left fa-sm float-left" style={{cursor: 'pointer'}} onClick={() => this.props.goBack()}></span>
+                    Tasks Completion</h1>
                     <hr/>
                     {taskView}
                     <button type="submit" className="btn btn-primary" disabled={this.state.disable}>Apply</button>

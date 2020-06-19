@@ -60,7 +60,7 @@ render(){
     }
     return (
       <div className="container-fluid">
-        <Navbar logOut={this.props.logOut} start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
+        <Navbar goBack={this.props.goBack} logOut={this.props.logOut} start_date={this.props.project.start_date} end_date={this.props.project.fat_date} project_name={this.props.project.name} location={this.props.project.location}/>
           
       <div className=" App-main">
         <div className="row">

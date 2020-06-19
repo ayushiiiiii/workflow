@@ -55,7 +55,7 @@ class  Disable extends Component{
                 return members;
             }
         return(
-        <div className="col-6 col-sm-4 col-md-2 ">
+        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
             <div className="card cssss project text-center ">
                 <div className="card-head ">
                     <h6 className="card-title">{this.props.task}</h6>

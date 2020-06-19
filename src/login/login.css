@@ -43,7 +43,7 @@ button[type=submit] {
 .log{
     display: block;
     text-align: center;
-      }
+    }
       .login-card form{
     display: inline-block;
     margin-left: auto;
@@ -80,7 +80,6 @@ button[type=submit] {
     border: 3px solid #f1f1f1;
     padding: 10px;
     float: center;
-    width: 40%;
     }
 
   

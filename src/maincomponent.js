@@ -4,7 +4,7 @@ import Login from './login/login';
 import Dashboard from './dashboard/dashboard';
 import Appdata from './dashboard/appdata';
 import Insidedashboard from './insidedashboard';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Projectform from './adminpanel/projecttask';
 import Admin from './adminpanel/adminpage';
 import { baseUrl } from './baseurl';
@@ -438,22 +438,22 @@ class Main extends Component{
         }
 		let routes=[];
 		if(this.state.user.type.file_access){
-			routes.push(<Route key='1' exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata upload={this.state.user.type.upload} download={this.state.user.type.download} logOut={this.logOut} projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id===match.params.projectId)[0]} />} />);
+			routes.push(<Route key='1' exact path='/home/:projectId/file-system/:fileName' component={({match}) => <Appdata upload={this.state.user.type.upload} download={this.state.user.type.download} logOut={this.logOut} projectId={match.params.projectId} folder={match.params.fileName} token={this.state.token} project={this.state.projects.filter(project => project._id===match.params.projectId)[0]} goBack={this.props.history.goBack} />} />);
 		}if(this.state.user.type.data_entry){
-			routes.push(<Route key='2' exact path='/addProject' component={() => <Projectform postProject={this.postProject} />} />);
-			routes.push(<Route key='3' exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id===match.params.projectId)[0].tasks:[]} />} />);
+			routes.push(<Route key='2' exact path='/addProject' component={() => <Projectform postProject={this.postProject} goBack={this.props.history.goBack} />} />);
+			routes.push(<Route key='3' exact path='/home/:projectId/complete' component={({match}) => <Complete editTasks={this.editTasks} projectId={match.params.projectId} tasks={this.state.projects.length>0?this.state.projects.filter(project => project._id===match.params.projectId)[0].tasks:[]} goBack={this.props.history.goBack} />} />);
 		}if(this.state.user.type.admin){
-			routes.push(<Route key='4' exact path='/access' component={()=> <UAccess token={this.state.token} /> }/>);
+			routes.push(<Route key='4' exact path='/access' component={()=> <UAccess token={this.state.token} goBack={this.props.history.goBack} /> }/>);
 			routes.push(<Route key='5' exact path='/manage/signup' component={() => <Sign addUser={this.addUser} />} />);
 			routes.push(<Route key='6' exact path='/Edit/:userId' component={({match}) => <Editmanage listUsers={this.listUsers} users={this.state.users} userId={match.params.userId} editUser={this.editUser} />} />);
-			routes.push(<Route key='7' exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} deleteUser={this.deleteUser} />} />);
+			routes.push(<Route key='7' exact path='/manage' component={() => <Manage listUsers={this.listUsers} users={this.state.users} deleteUser={this.deleteUser} goBack={this.props.history.goBack} />} />);
 		}
 
         return(
         <div>
           <Switch>
-              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard file_access={this.state.user.type.file_access} data_entry={this.state.user.type.data_entry}  logOut={this.logOut} editTask={this.editTask} projectId={match.params.projectId} addTask={this.addTask} project={this.state.projects.filter(project => project._id===match.params.projectId)[0]} />} />
-              <Route exact path='/home' component={() => <Dashboard data_entry={this.state.user.type.data_entry} logOut={this.logOut} editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} />} />
+              <Route exact path='/home/:projectId' component={({match}) => <Insidedashboard file_access={this.state.user.type.file_access} data_entry={this.state.user.type.data_entry}  logOut={this.logOut} editTask={this.editTask} projectId={match.params.projectId} addTask={this.addTask} project={this.state.projects.filter(project => project._id===match.params.projectId)[0]} goBack={this.props.history.goBack} />} />
+              <Route exact path='/home' component={() => <Dashboard data_entry={this.state.user.type.data_entry} logOut={this.logOut} editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} goBack={this.props.history.goBack} />} />
               <Route exact path='/admin' component={() => <Admin admin={this.state.user.type.admin} data_entry={this.state.user.type.data_entry} logOut={this.logOut} />} />
 			  <Route exact path='/details/changepassword' component={() => <Change resetPassword={this.resetPassword} />} />
               <Route exact path='/details' component={() => <Details users={this.state.user} />} />
@@ -465,4 +465,4 @@ class Main extends Component{
         );
     }
 }
- export default Main;
+ export default withRouter(Main);

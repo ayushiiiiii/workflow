@@ -16,6 +16,12 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
+
+const shorten = text => {
+    if(text.length <= 23) return text;
+    return text.substr(0, 20) + '...';
+}
+
 class Cards extends Component{
     constructor(props){
         super(props);
@@ -59,35 +65,46 @@ class Cards extends Component{
         let start_date = new Date(this.props.project.start_date);
         let fat_date = new Date(this.props.project.fat_date);
         return(
-        <div className="col-12 col-sm-6 col-md-3">
+        <div className="col-12 col-sm-6 col-md-4 col-lg-3">
             <div className="card project " hidden={!this.props.showCards}>
                 <div className="card-header">
-                    <h4 className="card-title">{this.props.title} &nbsp;&nbsp; <i hidden={!this.props.data_entry} className="fa fa-close ml-auto close-button" onClick={() => this.props.deleteProject(this.props.project._id, this.props.project.name)} /> </h4>
+                    <h4 className="card-title" data-toggle="tooltip" title={this.props.title}>
+                        {shorten(this.props.title)}
+                        {/* &nbsp;&nbsp; <i hidden={!this.props.data_entry} className="fa fa-close ml-auto close-button" onClick={() => this.props.deleteProject(this.props.project._id, this.props.project.name)} /> */}
+                    </h4>
                 </div>
-                <div className="card-body ">
-                    <div className="card-text container-fluid">
-                       <center> <table className=" table-responsive table table-striped text-center table-condensed">
-                            <tbody>
-                            <tr>
-                             <td><b>MACHINE</b></td><td><span>{this.props.project.machine} </span></td></tr>
-                             <tr><td><b>MDSNO</b></td><td><span>{this.props.project.mdsno}</span></td>
-                            </tr><tr>
-                                <td><b>LOCATION</b></td><td><span>{this.props.project.location}</span></td></tr>
-                                <tr><td><b>SHORT NAME</b></td><td><span>{this.props.project.short_name} </span></td>
-                            </tr>
-                            <tr><td><b>START DATE</b></td><td><span>{start_date.toDateString().slice(4)} </span></td>
-                            </tr>
-                            <tr><td><b>FAT DATE</b></td><td><span>{fat_date.toDateString().slice(4)} </span></td>
-                            </tr>
-                            </tbody>
-                        </table></center>
+                <div className="card-body px-0 pb-0">
+                    <div className="card-text px-0 container-fluid">
+                       <center className="mx-0 mx-lg-4">
+                        <div className="table-responsive">
+                            <table className="table table-striped text-center table-condensed w-100">
+                                <tbody>
+                                <tr>
+                                <td><b>MACHINE</b></td>
+                                    <td>
+                                        <div style={{height: '3em', overflowY: 'scroll'}}>
+                                            {this.props.project.machine}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr><td><b>MDSNO</b></td><td><span>{this.props.project.mdsno}</span></td>
+                                </tr><tr>
+                                    <td><b>LOCATION</b></td><td><span>{this.props.project.location}</span></td></tr>
+                                <tr><td><b>START&nbsp;DATE</b></td><td><span>{start_date.toDateString().slice(4)} </span></td>
+                                </tr>
+                                <tr><td><b>FAT&nbsp;DATE</b></td><td><span>{fat_date.toDateString().slice(4)} </span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </center>
 
                         
                     <div className="col-sm-6">
                     <CircularProgressbar value={this.props.completion} text={`${this.props.completion}%`} />
                     </div>
                     <div className="card-footer">
-                    <Link to={"/home/"+this.props.project._id}><button type="Submit">More details</button></Link>
+                    <Link to={"/home/"+this.props.project._id}><button className="btn btn-success">More details</button></Link>
                     <button hidden={!this.props.data_entry} type="button" className="btn btn-primary" data-toggle="modal" data-target={"#"+this.props.index}>
                         Edit 
                         </button>   
