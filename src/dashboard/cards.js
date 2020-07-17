@@ -18,6 +18,14 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
+<<<<<<< HEAD
+=======
+const shorten = text => {
+    if(text.length <= 20) return text;
+    return text.substr(0, 17) + '...';
+}
+
+>>>>>>> 49133f2051c36923d12e424c09df16e9035fd7a0
 class Cards extends Component{
     constructor(props){
         super(props);

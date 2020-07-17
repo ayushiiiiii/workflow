@@ -24,7 +24,7 @@ onChange(e){
     render(){
         return(<div className="back">
             <div className="container login-card ">
-        <form className="log col-12 col-sm-8 col-md-6" onSubmit={this.handleSubmit}>  
+        <form className="log col-12 col-sm-8 col-md-4" onSubmit={this.handleSubmit}>  
         <div className="container ">
 
         <div className="imgcontainer">
