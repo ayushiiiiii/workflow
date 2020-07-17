@@ -3,6 +3,7 @@ import './card.css';
 import { Link } from 'react-router-dom';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 
 function formatDate(date) {
     var d=new Date(date), month = '' + (d.getMonth() + 1),
@@ -15,11 +16,6 @@ function formatDate(date) {
         day = '0' + day;
 
     return [year, month, day].join('-');
-}
-
-const shorten = text => {
-    if(text.length <= 23) return text;
-    return text.substr(0, 20) + '...';
 }
 
 class Cards extends Component{
@@ -68,10 +64,10 @@ class Cards extends Component{
         <div className="col-12 col-sm-6 col-md-4 col-lg-3">
             <div className="card project " hidden={!this.props.showCards}>
                 <div className="card-header">
-                    <h4 className="card-title" data-toggle="tooltip" title={this.props.title}>
-                        {shorten(this.props.title)}
-                        {/* &nbsp;&nbsp; <i hidden={!this.props.data_entry} className="fa fa-close ml-auto close-button" onClick={() => this.props.deleteProject(this.props.project._id, this.props.project.name)} /> */}
-                    </h4>
+                    <HTMLEllipsis
+                        unsafeHTML={`<h4 className="card-title" data-toggle="tooltip" title=${this.props.title}>${this.props.title}</h4>`}
+                        basedOn='letters' trimRight />
+                    {/* &nbsp;&nbsp; <i hidden={!this.props.data_entry} className="fa fa-close ml-auto close-button" onClick={() => this.props.deleteProject(this.props.project._id, this.props.project.name)} /> */}
                 </div>
                 <div className="card-body px-0 pb-0">
                     <div className="card-text px-0 container-fluid">
