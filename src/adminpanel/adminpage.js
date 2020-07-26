@@ -26,8 +26,10 @@ function Admin(props){
         <Link to="./addProject" className="col-sm-3"><button hidden={!props.data_entry}><img  src={AP}></img><h3>Add Project</h3></button></Link>
     </div>
     <br />
-    <div>
-        <Link to="./home"><button  className="col-sm-3"><img  src={dash}></img><h3>View Dashboard</h3></button></Link>
+    <div className="row">
+        <Link to="./switch" className="col-sm-3" ><button><img src={dash}></img><h3>View Dashboard</h3></button></Link>
+        <p className="col-sm-1"></p>
+        <Link to="./switch" className="col-sm-3" ><button><img src={dash}></img><h3>View Dashboard(Switch Route)</h3></button></Link>
     </div>
 <br/>
 <br/>

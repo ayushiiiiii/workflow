@@ -11,6 +11,7 @@
     padding: 0rem 0rem;
     background-color: rgba(0,0,0,.03);
     border-bottom: 1px solid rgba(0,0,0,.125);
+    height: 48px;
 }
 .card-bodyy{
     /*-ms-flex: 1 1 auto;*/

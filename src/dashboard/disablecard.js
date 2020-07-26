@@ -58,7 +58,7 @@ class  Disable extends Component{
         <div className="col-6 col-sm-4 col-md-3 col-lg-2">
             <div className="card cssss project text-center ">
                 <div className="card-head ">
-                    <h6 className="card-title">{this.props.task}</h6>
+                    <h5 className="card-title">{this.props.task}</h5>
                 </div>
                 <div className="card-bodyy bodyy">
 <center><table className="table-responsive table table-striped text-center ">

@@ -18,6 +18,7 @@ import Details from './adminpanel/profile';
 import Change from './adminpanel/change';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import SwitchComponent from './dashboard/switchcomponent';
 
 const MySwal = withReactContent(Swal);
 
@@ -459,6 +460,7 @@ class Main extends Component{
               <Route exact path='/details' component={() => <Details users={this.state.user} />} />
 			  <Route exact path='/home/:projectId/:taskId/comments' component={({match}) => <Com user={this.state.user} comments={this.state.user.type.comments} token={this.state.token} projectId={match.params.projectId} taskId={match.params.taskId} />} />
               {routes}
+              <Route exact path='/switch' component={() => <SwitchComponent data_entry={this.state.user.type.data_entry} logOut={this.logOut} editProject={this.editProject} getProjects={this.getProjects} token={this.state.token} projects={this.state.projects} isProjectsLoading={this.state.isProjectsLoading} goBack={this.props.history.goBack} file_access={this.state.user.type.file_access} editTask={this.editTask} addTask={this.addTask} />} />
               <Redirect to='/admin' />
           </Switch>
         </div>
