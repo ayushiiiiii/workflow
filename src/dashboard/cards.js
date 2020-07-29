@@ -97,7 +97,7 @@ class Cards extends Component{
 
                         
                     <div className="col-sm-6">
-                    <CircularProgressbar value={this.props.completion} text={`${this.props.completion}%`} />
+                    <CircularProgressbar value={this.props.completion} text={`${Math.round(this.props.completion*100)/100}%`} />
                     </div>
                     <div className="card-footer">
                     <Link to={"/home/"+this.props.project._id}><button className="btn btn-success">More details</button></Link>

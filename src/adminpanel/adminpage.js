@@ -27,7 +27,7 @@ function Admin(props){
     </div>
     <br />
     <div className="row">
-        <Link to="./switch" className="col-sm-3" ><button><img src={dash}></img><h3>View Dashboard</h3></button></Link>
+        <Link to="./home" className="col-sm-3" ><button><img src={dash}></img><h3>View Dashboard</h3></button></Link>
         <p className="col-sm-1"></p>
         <Link to="./switch" className="col-sm-3" ><button><img src={dash}></img><h3>View Dashboard(Switch Route)</h3></button></Link>
     </div>
